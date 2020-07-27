@@ -1,0 +1,32 @@
+:root {
+    --theme-blue: rgb(0, 54, 96);
+    --theme-gold: rgb(255, 200, 45);
+    --link-hover: #0088CC;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Lato, sans-serif;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.read-more {
+    color: var(--link-hover);
+    margin-top: 2px;
+}
+
+.date-and-author {
+    color: gray;
+    margin-top: .2rem;
+    margin-bottom: .6rem;
+    font-size: .875rem;
+}

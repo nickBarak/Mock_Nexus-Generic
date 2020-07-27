@@ -1,35 +1,106 @@
 import Link from 'next/link';
+import { convertDate } from '../Functions';
 
 function Headlines({ articles }) {
-    return (
+    return (<>
         <div className="headlines">
-            <ul>
+            <ul className="main-headline">
                 <li>
-                    <Link to={`/articles/${articles[0].id}`}>
-                        <img src={articles[0].thumbnail} alt="headline" />
+                    <Link href={`/articles/${articles[0].id}`}>
+                        <img src={articles[0].full_thumbnail} alt="headline" />
                     </Link>
-                    <div>{articles[0].category} | {articles[0].publish_date}</div>
-                    <Link to={`/articles/${articles[0].id}`}>{articles[0].title}</Link>
-                    <Link to={`/authors/${articles[0].author.id}`}>by {articles[0].author.name}</Link>
-                    <div>{articles[0].description}</div>
-                    <Link to={`/articles/${articles[0].id}`}>read more</Link>
+                    <div className="category-and-date"><span className="article-preview-category">{articles[0].category} |</span> {convertDate(articles[0].publish_date)}</div>
+                    <Link href={`/articles/${articles[0].id}`}><a className="article-preview-title">{articles[0].title}</a></Link>
+                    <div className="date-and-author">by <Link href={`/authors/${articles[0].author.id}`}><a className="article-preview-author">{articles[0].author.name}</a></Link></div>
+                    <div className="article-preview-description">{articles[0].description}</div>
+                    <Link href={`/articles/${articles[0].id}`}><a className="read-more">read more</a></Link>
                 </li>
                 <li>
                     <ul>
                         {articles.slice(1, 4).map((article, i) =>
                             <li key={i+1}>
-                                <div>{article.category} | {article.publish_date}</div>
-                                <Link to={`/articles/${article.id}`}>{article.title}</Link>
-                                <Link to={`/authors/${article.author.id}`}>by {article.author.name}</Link>
-                                <div>{article.description}</div>
-                                <Link to={`/articles/${article.id}`}>read more</Link>
+                                <div><span className="article-preview-category">{article.category} |</span> {convertDate(article.publish_date)}</div>
+                                <Link href={`/articles/${article.id}`}><a className="article-preview-title">{article.title}</a></Link>
+                                <div className="date-and-author">by <Link href={`/authors/${article.author.id}`}><a className="article-preview-author">{article.author.name}</a></Link></div>
+                                <div className="article-preview-description">{article.description}</div>
+                                <Link href={`/articles/${article.id}`}><a className="read-more">read more</a></Link>
                             </li>
                         )}
                     </ul>
                 </li>
             </ul>
         </div>
-    )
+
+        <style jsx>{`
+            .headlines {
+                margin-bottom: 3.5rem;
+            }
+            ul {
+                display: flex;
+            }
+
+            li ul {
+                flex-direction: column;
+            }
+
+            li {
+                margin: .5rem;
+                position: relative;
+                font-size: .9rem;
+            }
+
+            li div:nth-child(1) {
+                margin-bottom: 3px;
+            }
+
+            li ul li:nth-child(1)::before,
+            li ul li:nth-child(2)::before { 
+                content: '';
+                height: 1px;
+                width: 99%;
+                left: 0;
+                bottom: -.5rem;
+                background-color: #ddd;
+                position: absolute;
+            }
+
+            .category-and-date {
+                margin-top: 5px;
+                margin-bottom: 3px;
+            }
+
+            .article-preview-title {
+                color: black;
+                font-weight: bold;
+                font-size: 1.275rem;
+            }
+
+            .article-preview-title:hover,
+            .article-preview-author:hover {
+                color: var(--link-hover);
+            }
+
+            .article-preview-author {
+                color: gray;
+                font-style: italic;
+            }
+
+            .article-preview-category {
+                font-weight: bold;
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+
+            .date-and-author {
+                margin-top: 2px;
+                margin-bottom: 7px;
+            }
+
+            .article-preview-description {
+                margin-bottom: 2px;
+            }
+        `}</style>
+    </>)
 }
 
 export default Headlines

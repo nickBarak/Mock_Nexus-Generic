@@ -1,23 +1,25 @@
-import { queryDB } from "../../db";
-import ArticlePreview from '../../components/ArticlePreview';
+import { queryDB, getCategories } from "../../db";
+import ArticleDisplay from '../../components/ArticleDisplay';
+import Layout from "../../layouts";
 
-function Author({ author, articles }) {
-    return (
-        <ul>
-            {articles.slice(0, 10).map((article, i) =>
-                <li key={i}> <ArticlePreview article={article} /> </li>
-            )}
-        </ul>
-    )
+export async function getStaticPaths() {
+    let ids = await queryDB('SELECT id FROM authors'),
+        paths = ids.map(id => ({ params: { id: String(id.id) } }));
+
+    return { paths, fallback: false }
 }
 
 export async function getStaticProps({ params: { id } }) {
-    let res = await queryDB('SELECT * FROM authors WHERE id = $1', [id]),
-        author = await res.json();
-    let res = await queryDB('SELECT * FROM articles WHERE author = $1', [JSON.stringify({ id, name: author.name })]),
-        articles = await res.json();
+    let [author] = await queryDB('SELECT * FROM authors WHERE id = $1', [id]),
+        articles = await queryDB("SELECT * FROM articles WHERE author = $1 ORDER BY publish_date DESC", [JSON.stringify({ "id": Number(id), "name": author.name })]);
 
-    return { props: { author, articles } }
+    return { props: JSON.parse(JSON.stringify({ author: author.name, articles, categories: await getCategories(), footerData: {
+        page: 1,
+        highestPage: Math.ceil(articles.length / 15),
+        route: '/authors/' + id
+    } })) }
 }
 
-export default Author
+export default ({ author, articles, categories, footerData }) => <Layout categories={categories}>
+<ArticleDisplay type="author-page" heading={author} articles={articles} footerData={footerData} />
+</Layout>
