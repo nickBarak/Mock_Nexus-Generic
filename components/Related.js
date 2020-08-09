@@ -10,7 +10,7 @@ function Related({ articles }) {
                     <li key={i}>
                         <Link href={`/articles/${article.id}`}><a>{article.title}</a></Link>
                         <div>{convertDate(article.publish_date)}</div>
-                        <div>In "{convertDate(article.category)}"</div>
+                        <div>In "{article.category}"</div>
                     </li>
                 )}
             </ul>

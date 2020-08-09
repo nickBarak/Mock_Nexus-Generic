@@ -1,7 +1,7 @@
-import { queryDB } from '../../../db';
-import ArticlePreview from '../../../components/ArticlePreview';
+import { queryDB } from '../../../../db';
+import ArticlePreview from '../../../../components/ArticlePreview';
 import Link from 'next/link';
-import Footer from '../../../components/Footer';
+import Footer from '../../../../components/Footer';
 
 export async function getStaticPaths() {
     let articles = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
@@ -13,18 +13,19 @@ export async function getStaticPaths() {
 
 export async function getStaticProps() {
     let [articleIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
-        articles = await queryDB('SELECT * FROM articles WHERE id = ANY($1) ORDER BY publish_date DESC', [articleIDs.articles]);
+        articles = await queryDB(`SELECT * FROM articles WHERE id = ANY($1) ORDER BY publish_date DESC OFFSET ${(Number(page)-1)*11} FETCH NEXT 11 ROWS ONLY`, [articleIDs.articles]);
 
     return {
         props: JSON.parse(JSON.stringify({ articles, footerData: {
             page: 1,
-            highestPage: Math.ceil(articles.length / 15),
+            highestPage: Math.ceil(articleIDs.articles.length / 11),
             route: '/categories/labyrinth'
         } }))
     }
 }
 
-export default ({ articles, footerData }) => (<>
+function Labyrinth({ articles, footerData }) {
+    return (<>
     <img src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png" alt="labyrinth" style={{ width: '100%', height: '20rem', objectFit: 'fill' }} />
     <div className="labyrinth-nav" style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 1.25rem 1.25rem 1.25rem', backgroundColor: 'beige', position: 'relative' }}>
         <span>
@@ -56,3 +57,6 @@ export default ({ articles, footerData }) => (<>
         }
     `}</style>
 </>)
+}
+
+export default Labyrinth

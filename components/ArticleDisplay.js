@@ -1,11 +1,11 @@
 import ArticlePreview from './ArticlePreview';
 
-function ArticleDisplay({ type, heading, articles, page }) {
+function ArticleDisplay({ type, heading, articles }) {
     return (<>
         <div className={type} style={{ marginRight: '2rem', marginLeft: '1rem' }}>
             <div className="category-heading" style={{ fontSize: '2.5rem', textTransform: 'uppercase', marginTop: '.75rem' }}>{heading}</div>
             <ul>
-                {articles.slice(page * 15 - 15, page * 15 + 15).map((article, i) =>
+                {articles.map((article, i) =>
                     <li key={i}> <ArticlePreview article={article} imageLeft={!(i % 2)} /> </li>
                 )}
             </ul>

@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import Footer from '../components/Footer';
 import Head from 'next/head';
 
-function Layout({ categories, footerData, children }) {
+function Layout({ footerData, children }) {
     
     useEffect(_=> {
         window.addEventListener('scroll', _=> { document.getElementById('__next').children[2].children[0].style.display = 'flex' }, false);
@@ -19,7 +19,7 @@ function Layout({ categories, footerData, children }) {
             <span>Ad Space</span>
         </span></div>
         <div className="main">
-            <Header categories={categories} />
+            <Header />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ width: 'calc(100% - 18.75rem)' }}>{children}</div>
                 <div style={{  width: '18.25rem' }}><Sidebar /></div>

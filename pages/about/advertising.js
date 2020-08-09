@@ -1,14 +1,10 @@
 import Layout from '../../layouts';
 import Link from 'next/link';
-import { getCategories } from '../../db';
 import About from '../../components/About';
 
-export async function getStaticProps() {
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories() })) }
-}
-
-export default ({ categories }) =>
-    <Layout categories={categories}>
+function Advertising() {
+    return (
+    <Layout>
         <About heading="Advertising">
             <div>
                 Thank you for your interest in advertising with the <span style={{ fontStyle: 'italic' }}>Daily Nexus</span>. As you’ll see, it  pays to reach out to UCSB students, and no matter your budget, our student sales representatives can put together an effective advertising strategy for you.
@@ -106,3 +102,7 @@ export default ({ categories }) =>
             `}</style>
         </About>
     </Layout>
+    )
+}
+
+export default Advertising

@@ -1,14 +1,10 @@
 import Layout from '../../layouts';
 import Link from 'next/link';
-import { getCategories } from '../../db';
 import About from '../../components/About';
 
-export async function getStaticProps() {
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories() })) }
-}
-
-export default ({ categories }) =>
-    <Layout categories={categories}>
+function FAQ() {
+    return (
+    <Layout>
         <About heading="FAQ">
             <ul>
                 <li key="0">
@@ -127,3 +123,7 @@ export default ({ categories }) =>
             </ul>
         </About>
     </Layout>
+    )
+}
+
+export default FAQ

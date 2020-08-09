@@ -1,3 +1,5 @@
 import '../styles/style.css';
 
-export default ({ Component, pageProps }) => <Component {...pageProps} />
+function _App({ Component, pageProps }) { return ( <Component {...pageProps} /> ) }
+
+export default _App

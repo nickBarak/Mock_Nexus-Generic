@@ -15,14 +15,14 @@ function Footer({ footerData }) {
                     <ul>
                     {page > 1 && <>
                         <li style={{ alignSelf: 'center', paddingTop: '.1rem' }}><Link href={route}><a style={{ fontSize: '1rem' }}>« First</a></Link></li>
-                        <li style={{ alignSelf: 'center', paddingTop: '.1rem' }}><Link href={route + `/page/${page-1}`}><a style={{ fontSize: '1rem', margin: '0 .25rem 0 .5rem' }}>‹ Prev</a></Link></li>
+                        <li style={{ alignSelf: 'center', paddingTop: '.1rem' }}><Link href={page === 2 ? route : route + `/page/${page-1}`}><a style={{ fontSize: '1rem', margin: '0 .25rem 0 .5rem' }}>‹ Prev</a></Link></li>
                     </>}
                     </ul>
                 </li>
                 
                 <li>
                     <ul>
-                        {footerData &&
+                        {footerData && footerData.highestPage > 1 &&
                         pageNav.map((pageNum, i) => <li key={i}><Link href={route + ((pageNum === 1) ? '' : `/page/${pageNum}`)}><a style={{ margin: '0 .15rem' }}>{pageNum === page ? <strong style={{ color: 'black', fontSize: '1.3rem' }}>{pageNum}</strong> : pageNum}</a></Link></li>)}
                     </ul>
                 </li>

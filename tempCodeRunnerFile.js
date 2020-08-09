@@ -1,1 +1,0 @@
-let rxstr = str.toLowerCase().replace(/ /g, '-').replace(/[:'!@#$%^&*\(\)";{}\[\]\|~`<>\/\\]/g, '');

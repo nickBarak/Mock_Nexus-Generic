@@ -1,9 +1,10 @@
 import { config } from 'dotenv';
-import { Pool } from 'pg';
+import { Client, Pool } from 'pg';
 config();
 
 if (!pool) {
     var pool = new Pool({
+        max: 200,
         connectionString: process.env.DATABASE_URL,
         idleTimeoutMillis: 0
     });
@@ -12,12 +13,20 @@ if (!pool) {
         : console.log('Failed to connect to database');
 }
 
+// export async function queryDB(query, params=[]) {
+//     try {
+//         var client = new Client({ connectionString: process.env.DATABASE_URL }),
+//             { rows } = await client.query(query, params);
+//     } catch (e) { console.log(e) }
+//     finally { client && client.end() }
+//     return rows;
+// }
 export async function queryDB(query, params=[]) {
     try {
         var client = await pool.connect(),
             { rows } = await client.query(query, params);
     } catch (e) { console.log(e) }
-    finally { client.release() }
+    finally { client && client.release() }
     return rows;
 }
 
@@ -43,4 +52,16 @@ export async function getUser(email) {
     return user;
 }
 
-export default pool
+// function spawnPool() {
+//     if (!pool) {
+//         var pool = new Pool({
+//             max: 200,
+//             connectionString: process.env.DATABASE_URL,
+//             idleTimeoutMillis: 0
+//         });
+//         pool
+//             ? console.log('Connected to PostgreSQL')
+//             : console.log('Failed to connect to database');
+//     }
+//     return pool;
+// }

@@ -1,13 +1,9 @@
 import Layout from '../../layouts';
-import { getCategories } from '../../db';
 import About from '../../components/About';
 
-export async function getStaticProps() {
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories() })) }
-}
-
-export default ({ categories }) =>
-    <Layout categories={categories}>
+function ClassifiedAds() {
+    return (
+    <Layout>
         <About heading="Classified Ads">
             <div id="Partner_API_CampusAve" partnerid="24" partnerdomain="https://dailynexus.campusave.com/">
             <table id="campusave-api-main-container" width="590" cellspacing="0" cellpadding="0" border="0">
@@ -121,3 +117,7 @@ export default ({ categories }) =>
             <div id="Partner_API_CampusAve_BI"><a href="https://ucsb.uloop.com" target="_blank" rel="noopener noreferrer"><img src="https://i2.wp.com/dailynexus.campusave.com/images/powered-by-uloop3.gif?w=888&amp;ssl=1" alt="UCSB Classifieds in Santa Barbara, California" title="UCSB Classifieds in Santa Barbara, California" width="589" height="69"/></a></div>
         </About>
     </Layout>
+    )
+}
+
+export default ClassifiedAds

@@ -1,7 +1,7 @@
 import Nav from './Nav';
 import Link from 'next/link';
 
-function Header({ categories }) {
+function Header() {
     return (<>
         <div className="header">
             <div className="full-logo"><Link href="/"><a>MOCK <img className="logo" src="/img/nexus-logo.png" alt="logo" /> NEXUS </a></Link></div>
@@ -10,11 +10,11 @@ function Header({ categories }) {
                 <div>UNIVERSITY OF CALIFORNIA, SANTA BARBARA</div>
                 <span>
                     <Link href="https://facebook.com/dailynexus"><a><i className="fab fa-facebook-square"></i></a></Link>
-                    <Link href="https://twitter.com/dailynexus"><i className="fab fa-twitter"></i></Link>
-                    <Link href="https://instagram.com/dailynexus"><i className="fab fa-instagram"></i></Link>
+                    <Link href="https://twitter.com/dailynexus"><a><i className="fab fa-twitter"></i></a></Link>
+                    <Link href="https://instagram.com/dailynexus"><a><i className="fab fa-instagram"></i></a></Link>
                 </span>
             </div>
-            <Nav categories={categories} />
+            <Nav />
         </div>
         <style jsx>{`
             * {

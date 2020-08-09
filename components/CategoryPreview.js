@@ -6,8 +6,7 @@ function CategoryPreview({ category: { title, articles } }) {
         <div className="category-preview">
             <Link href={`/categories/${convertToPath(title)}`}><label>{title}</label></Link>
             <ul>
-                {/* three most recent articles in category, sort by publish_date*/}
-                {articles.slice(0, 3).map((article, i) =>
+                {articles.map((article, i) =>
                     <li key={i}>
                         <div style={{ fontWeight: 600, fontSize: '1.2rem' }}><Link href={`/articles/${article.id}`}><a className="article-preview-title">{article.title}</a></Link></div>
                         <div className="date-and-author">{convertDate(article.publish_date)} by <Link href={`/authors/${article.author.id}`}><a className="article-preview-author">{article.author.name}</a></Link></div>

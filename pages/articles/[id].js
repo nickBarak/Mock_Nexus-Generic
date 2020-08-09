@@ -2,12 +2,12 @@ import Link from 'next/link';
 import AboutTheAuthor from '../../components/AboutTheAuthor';
 import Related from '../../components/Related';
 import CommentSection from '../../components/CommentSection';
-import { queryDB, getCategories } from '../../db';
 import { convertDate } from '../../Functions';
+import { queryDB } from '../../db';
 import Layout from '../../layouts';
 import { useEffect } from 'react';
 
-function Article({ article, author, related, categories }) {
+function Article({ article, author, related }) {
 
     useEffect(_=> {
         let contentDiv = document.getElementsByClassName('single-post-content')[0];
@@ -87,7 +87,7 @@ function Article({ article, author, related, categories }) {
     }, []);
 
     return (<>
-        <Layout categories={categories}>
+        <Layout>
             <div className="article">
                 <div className="article-page-subcategory">{article.subcategory}</div>
                 <div className="article-page-details">
@@ -182,8 +182,7 @@ export async function getStaticProps({ params: { id }}) {
     let [article] = await queryDB('SELECT * FROM articles WHERE id = $1', [id]),
         related = await queryDB('SELECT * FROM articles WHERE id = ANY($1)', [article.related]),
         [author] = await queryDB('SELECT * FROM authors WHERE name = $1', [article.author.name]);
-
-    return { props: JSON.parse(JSON.stringify({ article, author, related, categories: await getCategories() })) }
+    return { props: JSON.parse(JSON.stringify({ article, author, related })) }
 }
 
 export default Article;

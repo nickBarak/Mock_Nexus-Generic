@@ -1,13 +1,9 @@
 import Layout from '../../layouts';
-import { getCategories } from '../../db';
 import About from '../../components/About';
 
-export async function getStaticProps() {
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories() })) }
-}
-
-export default ({ categories }) =>
-    <Layout categories={categories}>
+function AboutPage() {
+    return (
+    <Layout>
         <About heading="About">
             <div>
                 The <span style={{ fontStyle: 'italic' }}>Daily Nexus</span> had its start in the 1930s. Back then, the newspaper was called the <span style={{ fontStyle: 'italic' }}>Eagle</span>, and UC Santa Barbara was known as Santa Barbara State College. After the college joined the University of California system, its newspaper changed names various times, existing in former editions as the <span style={{ fontStyle: 'italic' }}>Roadrunner</span>, <span style={{ fontStyle: 'italic' }}>El Gaucho</span>, the <span style={{ fontStyle: 'italic' }}>University Post</span>, and the <span style={{ fontStyle: 'italic' }}>Daily Gaucho</span>. The <span style={{ fontStyle: 'italic' }}>Daily Nexus</span> received its name in 1970, following the infamous Bank of America burning that occurred in Isla Vista.
@@ -53,3 +49,7 @@ export default ({ categories }) =>
             </div>
         </About>
     </Layout>
+    )
+}
+
+export default AboutPage

@@ -1,6 +1,6 @@
-import { queryDB, getUser, insertUser } from '../../db';
 // import uuid from 'uuidv4';
 import { testEmail } from '../../Functions';
+import { queryDB, getUser, insertUser } from '../../db';
 
 export default async function(req, res) {
     let newUser,
@@ -17,16 +17,21 @@ export default async function(req, res) {
             await insertUser(name, email);
         }
         if (parent) {
-            let comments = await queryDB('SELECT comments FROM articles WHERE id = $1', [article_id]);
-            function editReplies(level) {
-                return level.map((comment, {replies}) =>
-                    replies.find(({id}) => id === parent)
-                        ? ({ ...comment, replies: [...replies.filter(({id}) => id !== parent), hydratedComment] })
-                        : replies.length
-                            ? editReplies(level)
-                            : comment);
+            let [comments] = await queryDB('SELECT comments FROM articles WHERE id = $1', [article_id]);
+            function addReply(level) {
+                return level.map(comment => {
+                    let { replies } = comment;
+                    return comment.id === parent
+                        ? replies.push({ name, email, ...hydratedComment })
+                        : replies.find(({id}) => id === parent)
+                            ? replies.find(({id}) => id === parent).replies.push({ name, email, ...hydratedComment })
+                            : replies.length
+                                ? addReply(replies)
+                                : 0;
+                });
             }
-            await queryDB('UPDATE articles SET comments = $1 WHERE id = $2', [editReplies(comments), article_id]);
+            addReply(comments.comments);
+            await queryDB('UPDATE articles SET comments = $1 WHERE id = $2', [comments.comments, article_id]);
         } else await queryDB('UPDATE articles SET comments = array_append(comments, $1) WHERE id = $2', [{name, email, ...hydratedComment}, article_id]);
         if (newUser) { res.json(3); res.end(); return }
         res.json(0);

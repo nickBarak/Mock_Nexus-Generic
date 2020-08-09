@@ -1,14 +1,11 @@
 import Layout from '../../layouts';
 import Link from 'next/link';
-import { getCategories } from '../../db';
 import About from '../../components/About';
 
-export async function getStaticProps() {
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories() })) }
-}
 
-export default ({ categories }) =>
-    <Layout categories={categories}>
+function Donate() {
+    return (
+    <Layout>
         <About heading="Donate">
             <Link href="https://giving.ucsb.edu/Funds/Give?id=67"><a style={{ cursor: 'pointer', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                 <img src="https://i1.wp.com/dailynexus.com/wp-content/uploads/2016/02/Office-Awards_by-Lorenzo-Basilio-1-1024x681.jpg?resize=800%2C532" alt="donate" />
@@ -86,3 +83,7 @@ export default ({ categories }) =>
             `}</style>
         </About>
     </Layout>
+    )
+}
+
+export default Donate

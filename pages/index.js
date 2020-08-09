@@ -1,6 +1,7 @@
 import Headlines from '../components/Headlines';
 import CategoryPreview from '../components/CategoryPreview';
-import { getCategories, queryDB } from '../db';
+import { queryDB } from '../db';
+import categories from '../data';
 import Layout from '../layouts';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -8,11 +9,14 @@ import { useEffect } from 'react';
 function App({ categories, headlines }) {
 
     useEffect(_=> {
-        alert('NOTICE:\n\nThis site is an imitation of that of the university newspaper at the University of California, Santa Barbara - the Daily Nexus - and exists solely to demonstrate the abilities of the creator with regard to software development. Express written permission /* has been received */ is being sought to host this mock site during the interview process and the site will be removed thereafter. Please support the Daily Nexus and the creators of the original site by visiting www.dailynexus.com.')
+        if (!sessionStorage.getItem('noticeSeen')) {
+            alert('NOTICE:\n\nThis site is an imitation of that of the university newspaper at the University of California, Santa Barbara - the Daily Nexus - and exists solely to demonstrate the abilities of the creator with regard to software development. Express written permission is being sought to host this mock site during the interview process and the site will be removed thereafter. Please support the Daily Nexus and the creators of the original site by visiting www.dailynexus.com.');
+            sessionStorage.setItem('noticeSeen', true);
+        }
     }, []);
 
     return (<>
-        <Layout categories={categories}>
+        <Layout>
             <div className="home">
                 <Link href="/articles/1843"><a className="banner">
                     <span>LIVE: Updates on Coronavirus in Santa Barbara County, on UCSB Operations</span>
@@ -61,8 +65,7 @@ function App({ categories, headlines }) {
 export async function getStaticProps() {
     let [headlineIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
         headlines = await queryDB("SELECT * FROM articles WHERE id = ANY($1)", [headlineIDs.articles]);
-
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories(), headlines })) }
+    return { props: JSON.parse(JSON.stringify({ categories, headlines })) }
 }
 
 export default App

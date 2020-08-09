@@ -1,13 +1,9 @@
 import Layout from '../../layouts';
 import About from '../../components/About';
-import { getCategories } from '../../db';
 
-export async function getStaticProps() {
-    return { props: JSON.parse(JSON.stringify({ categories: await getCategories() })) }
-}
-
-export default ({ categories }) =>
-        <Layout categories={categories}>
+function StaffContact() {
+    return (
+        <Layout>
             <About heading="Daily Nexus Staff">
     
                 <div className="contact-numbers">
@@ -632,3 +628,7 @@ export default ({ categories }) =>
   
             </About>
         </Layout>
+    )
+}
+
+export default StaffContact

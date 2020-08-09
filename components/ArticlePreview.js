@@ -17,7 +17,13 @@ function ArticlePreview({ article, imageLeft, labyrinth}) {
                 <div>{article.description}</div>
                 <Link href={`/articles/${article.id}`}><a className="read-more">read more</a></Link>
             </div>
-            {!imageLeft && <img src={article.full_thumbnail} alt="thumbnail" />}
+            {!imageLeft &&
+                <picture>
+                    <source srcSet={article.full_thumbnail} />
+                    <source srcSet="/img/nexus-fallback.webp" style={{ width: '20rem', height: '15rem' }} type="image/webp" />
+                    <img alt="thumbnail" />
+                </picture>
+            }
         </div>
 
         <style jsx>{`

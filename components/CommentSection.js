@@ -2,24 +2,28 @@ import 'isomorphic-unfetch';
 import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import CommentInputs from './CommentInputs';
-import { postComment } from '../Functions';
 
 function CommentSection({ comments, articleID, followers }) {
     const [commentMessage, setCommentMessage] = useState(null);
     const [following, setFollowing] = useState(false);
     
     useEffect(_=> {
+        console.log(sessionStorage.getItem('email'));
         setFollowing(followers.includes(sessionStorage.getItem('email')))
+        console.log(following);
     }, []);
     
     return (<>
         <div className="comment-section">
             <div>
-                <span>{comments.length}</span>
+                <span style={{ position: 'relative'}}>
+                    {comments.length}
+                    <span style={{width: 0, height: 0, borderStyle: 'solid', borderWidth: '8px 0 1px 12px', borderColor: '#666666 transparent transparent transparent', position: 'absolute', right: 0, bottom: '-8px' }} />
+                </span>
                 <span>Leave a Reply</span>
             </div>
             <strong style={{ color: commentMessage === 'New user created' ? 'green' : 'red', fontSize: '1.15rem' }}>{commentMessage}</strong>
-            <CommentInputs setMessage={setCommentMessage} articleID={articleID} following={following} />
+            <CommentInputs setMessage={setCommentMessage} articleID={articleID} following={following} firstComment={comments.length === 0} mainInput />
             <div style={{ display: 'flex', marginTop: '3rem', justifyContent: 'space-between', maxWidth: '55rem' }}>
                 <ul className="icons">
                     <li key="0" style={{ marginBottom: '.15rem', marginRight: 0 }}>
@@ -33,6 +37,7 @@ function CommentSection({ comments, articleID, followers }) {
                             let count = level => {
                                 level.forEach(({replies}) => commentCount++ < 0 || (replies.length && count(replies)))
                             }
+                            comments.forEach(({replies}) => count(replies));
                             return commentCount;
                         })()}</span>
                     </li>
@@ -40,22 +45,27 @@ function CommentSection({ comments, articleID, followers }) {
                         <i className="fas fa-rss" ></i>
                         <span style={{ marginLeft: '.5rem', fontSize: '1rem' }}>{followers.length}</span>
                     </li>
-                    <li key="3" style={{ marginLeft: '.65rem' }}><i className="fas fa-bolt" style={{ cursor: 'pointer' }}></i></li>
-                    <li key="4" style={{ marginLeft: '.65rem' }}><i className="fab fa-hotjar" style={{ cursor: 'pointer' }}></i></li>
+                    <li key="3" style={{ marginLeft: '.65rem' }}><i className="fas fa-bolt" style={{ cursor: 'pointer' }} onClick={_=> {
+                        window.scrollTo(window.scrollX, window.scrollY * 1.2);
+                    }}></i></li>
+                    <li key="4" style={{ marginLeft: '.65rem' }}><i className="fab fa-hotjar" style={{ cursor: 'pointer' }} onClick={_=> {
+                        window.scrollTo(window.scrollX, window.scrollY * 1.2);
+                    }}></i></li>
                 </ul>
                 <span className="comment-authors">
                     <i className="fas fa-user-circle"></i>
                     <span style={{ color: '#666' }}>{(_=> {
                         let checked = [];
                         let count = level => {
-                            level.forEach(({email, replies}) => checked.push(email) || count(replies));
+                            level.forEach(({email, replies}) => checked.push(email) && count(replies));
                         }
+                        count(comments);
                         return new Set(checked).size;
                     })()}</span>
                 </span>
             </div>
             <ul className="comments">
-                {comments.map((comment, i) => <li key={i}><Comment comment={comment} followers={followers} /></li>)}
+                {comments.map(comment => <li key={comment.id}><Comment comment={comment} followers={followers} articleID={articleID}  /></li>)}
             </ul>
         </div>
 
@@ -192,6 +202,11 @@ function CommentSection({ comments, articleID, followers }) {
                 content: '';
                 position: absolute;
                 top: -2rem;
+            }
+
+            .comments li {
+                display: block;
+                margin-bottom: 1.25rem;
             }
         `}</style>
     </>)

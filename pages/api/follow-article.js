@@ -1,5 +1,5 @@
-import { getUser, insertUser, queryDB } from '../../db';
 import { testEmail } from '../../Functions';
+import { queryDB, insertUser, getUser } from '../../db';
 
 export default async function(req, res) {
     let newUser,
@@ -14,7 +14,7 @@ export default async function(req, res) {
             await insertUser(name, email);
         }
         await queryDB(`UPDATE users SET following = array_${!following ? 'append' : 'remove'}(following, $1) WHERE email = $2`, [articleID, email]);
-        await queryDB(`UPDATE articles SET followers = array_${!following ? 'append' : 'remove'}(following, $1) WHERE id = $2`, [email, articleID]);
+        await queryDB(`UPDATE articles SET followers = array_${!following ? 'append' : 'remove'}(followers, $1) WHERE id = $2`, [email, articleID]);
         if (newUser) { res.json(3); res.end(); return }
         res.json(0);
         res.end();

@@ -1,21 +1,22 @@
 import Link from 'next/link';
 import { convertToPath } from '../Functions';
 
-function Nav({ categories }) {
+const categories = [{"title":"Artsweek","subcategories":["Feature","Film and TV","Literature","Music","Performing Art","Previews: What's Going On","Visual Art"]},{"title":"Labyrinth","link":"/categories/labyrinth"},{"title":"Multimedia","subcategories":["Comics","Photo","Video"]},{"title":"News","subcategories":["Campus","County","Crime","Feature","Isla Vista","Student Gov","UC News","UCSB COLA Movement"]},{"title":"Nexustentialism","subcategories":["Nexustentialism"]},{"title":"On the Menu","subcategories":["Coffee Column","First Bites","Meal Prep Mondays","On the Road","Recipes","The Beet"]},{"title":"Opinion","subcategories":["Argument in the Office","Ask AJ","Flesh Prison","Global Gauchos","Hyphenated American","Letters to the Editor","Living","Politics","Therapeutic Thoughts","Virtual Reality","Wednesday Hump"]},{"title":"Science & Tech","subcategories":["Health & Wellness"]},{"title":"Sports","subcategories":["Baseball","Basketball","Columns/Features","Cross Country","Golf","Soccer","Softball","Sports Blogs","Swim and Dive","Tennis","Track and Field","Volleyball","Water Polo"]}];
+
+function Nav() {
     const timeouts = [];
     
     return (<>
         <ul className="nav">
             {[
-                ...[{title: 'Labyrinth', link: '/categories/labyrinth' },
-                ...categories].sort((a, b) => ([a.title, b.title].sort()[0] === a.title) ? 0 : 1),
-                {title: 'About', subcategories: {
-                    Advertising: 'advertising',
-                    Classifieds: 'classified-ads',
-                    Donate: 'donate',
-                    FAQ: 'faq',
-                    "Staff/Contact": 'staff-contact'
-                }}
+                ...categories,
+                {title: 'About', subcategories: [
+                    {Advertising: 'advertising'},
+                    {Classifieds: 'classified-ads'},
+                    {Donate: 'donate'},
+                    {FAQ: 'faq'},
+                    {"Staff/Contact": 'staff-contact'}
+                ]}
             ].map((category, i) =>
                 <li key={i}>
                     {category.subcategories
@@ -39,8 +40,8 @@ function Nav({ categories }) {
                                 style.pointerEvents = 'none';
                             }, 0);
                         }}>
-                            {Object.keys(category.subcategories).sort().map((subcategory, j) =>
-                                <li key={j}><Link href={category.articles ? `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}` : `/about/${category.subcategories[subcategory]}`}><a className="subcategory-link">{subcategory}</a></Link></li>)}
+                            {category.subcategories.map((subcategory, j) =>
+                                <li key={j}><Link href={category.title !== 'About' ? category.title === 'Nexustentialism' ? `/categories/nexustentialism` : `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}` : `/about/${category.subcategories[subcategory]}`}><a className="subcategory-link">{category.title !== 'About' ? subcategory : Object.keys(subcategory)[0]}</a></Link></li>)}
                         </ul>
                         </>)
                         : <Link href={category.link}><a>{category.title}</a></Link>
