@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
 
-function ArticlePreview({ article, imageLeft, labyrinth}) {
+function ArticlePreview({ article, imageLeft, labyrinth }) {
     return (<>
         <div className="article-preview">
             {imageLeft &&

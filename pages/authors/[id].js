@@ -11,19 +11,19 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { id } }) {
     let [author] = await queryDB('SELECT * FROM authors WHERE id = $1', [id]),
-        articles = await queryDB("SELECT * FROM articles WHERE author = $1 ORDER BY publish_date DESC", [JSON.stringify({ "id": Number(id), "name": author.name })]);
+        articles = await queryDB("SELECT * FROM articles WHERE author = $1 ORDER BY publish_date DESC FETCH FIRST 15 ROWS ONLY", [JSON.stringify({ "id": Number(id), "name": author.name })]);
 
     return { props: JSON.parse(JSON.stringify({ author: author.name, articles, footerData: {
         page: 1,
-        highestPage: Math.ceil(articles.length / 15),
+        highestPage: Math.ceil(author.articles.length / 15),
         route: '/authors/' + id
     } })) }
 }
 
 function Author({ author, articles, footerData }) {
     return (
-        <Layout>
-            <ArticleDisplay type="author-page" heading={author} articles={articles} footerData={footerData} />
+        <Layout footerData={footerData}>
+            <ArticleDisplay type="author-page" heading={author} articles={articles} />
         </Layout>
     )
 }

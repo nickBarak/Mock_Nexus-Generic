@@ -23,6 +23,10 @@ a {
     text-decoration: none;
 }
 
+#__next {
+    transition: opacity 150ms ease-in;
+}
+
 .read-more {
     color: var(--link-hover);
     margin-top: 2px;

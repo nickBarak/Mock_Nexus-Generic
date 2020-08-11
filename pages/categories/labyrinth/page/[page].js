@@ -4,20 +4,20 @@ import Link from 'next/link';
 import Footer from '../../../../components/Footer';
 
 export async function getStaticPaths() {
-    let articles = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
-        paths = new Array(Math.ceil(articles.length/15)).fill(true).map((_, i) =>
+    let [articles] = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
+        paths = new Array(Math.ceil(articles.articles.length/11)).fill(true).map((_, i) =>
         ( { params: { page: String(i+1)} }));
 
     return { paths, fallback: false }
 }
 
-export async function getStaticProps() {
-    let [articleIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
-        articles = await queryDB(`SELECT * FROM articles WHERE id = ANY($1) ORDER BY publish_date DESC OFFSET ${(Number(page)-1)*11} FETCH NEXT 11 ROWS ONLY`, [articleIDs.articles]);
+export async function getStaticProps({ params: { page } }) {
+    let [articleIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
+        articles = await queryDB(`SELECT * FROM articles WHERE id = ANY($1) ORDER BY publish_date DESC OFFSET ${(Number(page)-1)*11} ROWS FETCH NEXT 11 ROWS ONLY`, [articleIDs.articles]);
 
     return {
         props: JSON.parse(JSON.stringify({ articles, footerData: {
-            page: 1,
+            page: Number(page),
             highestPage: Math.ceil(articleIDs.articles.length / 11),
             route: '/categories/labyrinth'
         } }))

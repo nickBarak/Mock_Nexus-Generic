@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { category } }) {
     let [articleIDs] = await queryDB('SELECT articles FROM categories WHERE title = $1', [convertFromPath(category)]),
         articles = await queryDB('SELECT * FROM articles WHERE id = ANY($1) ORDER BY publish_date DESC FETCH FIRST 15 ROWS ONLY', [articleIDs.articles]);
-    console.log(articleIDs.articles.length);
+
     return {
         props: JSON.parse(JSON.stringify({
             heading: convertFromPath(category),

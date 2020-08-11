@@ -18,7 +18,14 @@ export function convertToPath(string) {
 }
 
 export function convertFromPath(path) {
-    return path.split('-').map((word, i) => (i === 0 || !['the', 'on'].includes(word)) ? word[0].toUpperCase() + word.slice(1) : word).join(' ')
+    return path.split('-').map((word, i, ary) =>
+        word === 'previews' || word === 'columnsfeatures'
+            ? word === 'previews' ? 'Previews:' : 'Columns/Features'
+            : (i === 0 || i === ary.length - 1 || !['the', 'on', 'and', 'whats'].includes(word))
+                ? !['tv', 'aj', 'cola', 'ucsb', 'uc'].includes(word)
+                    ? word[0].toUpperCase() + word.slice(1)
+                    : word.toUpperCase()
+                : word === 'whats' ? 'What\'s' : word).join(' ')
 }
 
 export function testEmail(email) {

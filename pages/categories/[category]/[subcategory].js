@@ -25,7 +25,7 @@ export async function getStaticProps({ params: { category, subcategory } }) {
             articles,
             footerData: {
                 page: 1,
-                route: '/categories/' + subcategory,
+                route: '/categories/' + category + '/' + subcategory,
                 highestPage: Math.ceil(subcategories.subcategories[convertFromPath(subcategory)].length / 15)
             }
         }))

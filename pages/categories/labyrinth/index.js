@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Footer from '../../../components/Footer';
 
 export async function getStaticProps() {
-    let [articleIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
+    let [articleIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
         articles = await queryDB('SELECT * FROM articles WHERE id = ANY($1) ORDER BY publish_date DESC FETCH FIRST 11 ROWS ONLY', [articleIDs.articles]);
 
     return {

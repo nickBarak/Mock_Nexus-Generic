@@ -6,13 +6,13 @@ import { convertToPath, convertFromPath } from '../../../../../Functions';
 export async function getStaticPaths() {
     let categories = await queryDB("SELECT title, subcategories FROM categories WHERE title <> 'Labyrinth' AND title <> 'Headlines'"),
         paths = categories
-            .reduce((acc, category) => ([
+            .reduce((acc, category) => [
                 ...acc,
                 ...Object.entries(category.subcategories)
                     .map(([key, val]) => (new Array(Math.ceil(val.length/15)).fill(true).map((_, i) =>
                         ({ params: { category: convertToPath(category.title), subcategory: convertToPath(key), page: String(i+1) } })))
                     )
-            ]), []);
+            ], []).reduce((acc, cur) => [...acc, ...cur], []);
 
     return { paths, fallback: false }
 }
@@ -27,7 +27,7 @@ export async function getStaticProps({ params: { category, subcategory, page } }
             articles,
             footerData: {
                 page: Number(page),
-                route: '/categories/' + subcategory,
+                route: '/categories/' + category + '/' + subcategory,
                 highestPage: Math.ceil(subcategories.subcategories[convertFromPath(subcategory)].length / 15)
             }
         }))
