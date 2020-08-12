@@ -14,14 +14,14 @@ export function convertDate(date) {
 }
 
 export function convertToPath(string) {
-    return string.toLowerCase().replace(/ /g, '-').replace(/[:'!@#$%^&*\(\)";{}\[\]\|~`<>\/\\?\.,]/g, '')
+    return string.toLowerCase().replace(/ /g, '-').replace(/[:'!@#$%^*\(\)";{}\[\]\|~`<>\/\\?\.,]/g, '')
 }
 
 export function convertFromPath(path) {
     return path.split('-').map((word, i, ary) =>
         word === 'previews' || word === 'columnsfeatures'
             ? word === 'previews' ? 'Previews:' : 'Columns/Features'
-            : (i === 0 || i === ary.length - 1 || !['the', 'on', 'and', 'whats'].includes(word))
+            : (i === 0 || i === ary.length - 1 || !['the', 'on', 'to', 'in', 'and', 'whats'].includes(word))
                 ? !['tv', 'aj', 'cola', 'ucsb', 'uc'].includes(word)
                     ? word[0].toUpperCase() + word.slice(1)
                     : word.toUpperCase()
