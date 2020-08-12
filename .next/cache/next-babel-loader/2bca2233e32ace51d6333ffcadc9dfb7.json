@@ -1,0 +1,1 @@
+{"ast":null,"code":"import pool from './db';\nexport async function queryDB(query, params = []) {\n  try {\n    var client = await pool.connect(),\n        {\n      rows\n    } = await client.query(query, params);\n  } catch (e) {\n    console.log(e);\n  } finally {\n    client.release();\n  }\n\n  return rows;\n}","map":null,"metadata":{},"sourceType":"module"}

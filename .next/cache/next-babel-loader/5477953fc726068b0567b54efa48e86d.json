@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { Pool } from 'pg';\n\nif (!pool) {\n  var pool = new Pool({\n    connectionString: process.env.DATABASE_URL,\n    idleTimeoutMillis: 0\n  });\n  pool ? console.log('Connected to PostgreSQL') : console.log('Failed to connect to database');\n}\n\nexport default pool;","map":null,"metadata":{},"sourceType":"module"}
