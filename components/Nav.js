@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { convertToPath, convertDate } from '../Functions';
 import 'isomorphic-unfetch';
 import { useState } from 'react';
+import { client } from '../APIs';
 
 const categories = [{"title":"Artsweek","subcategories":["Feature","Film and TV","Literature","Music","Performing Art","Previews: What's Going On","Visual Art"]},{"title":"Labyrinth","link":"/categories/labyrinth"},{"title":"Multimedia","subcategories":["Comics","Photo","Video"]},{"title":"News","subcategories":["Campus","County","Crime","Feature","Isla Vista","Student Gov","UC News","UCSB COLA Movement"]},{"title":"Nexustentialism","link":"/categories/nexustentialism"},{"title":"On the Menu","subcategories":["Coffee Column","First Bites","Meal Prep Mondays","On the Road","Recipes","The Beet"]},{"title":"Opinion","subcategories":["Argument in the Office","Ask AJ","Flesh Prison","Global Gauchos","Hyphenated American","Letters to the Editor","Living","Politics","Therapeutic Thoughts","Virtual Reality","Wednesday Hump"]},{"title":"Science & Tech","subcategories":["Health & Wellness"]},{"title":"Sports","subcategories":["Baseball","Basketball","Columns/Features","Cross Country","Golf","Soccer","Softball",/*"Sports Blogs",*/"Swim and Dive","Tennis","Track and Field","Volleyball","Water Polo"]}];
 
@@ -67,7 +68,7 @@ function Nav() {
                     e.keyCode === 13 && (_=> {
                         let now = Date.now();
                         setLoadingSearchResults(true);
-                        fetch('http://localhost:3000/api/search?value=' + e.target.value)
+                        fetch(client + '/api/search?value=' + e.target.value)
                             .then(res => res.json())
                             .then(rows =>
                                 setSearchResults([
@@ -121,9 +122,9 @@ function Nav() {
                 {searchResults[sortBy].slice((modalPage-1)*10, modalPage*10).map((result, i) => 
                     <li key={i} style={{ marginBottom: '.5rem' }}>
                         <div style={{ width: '100%', textAlign: 'center' }}><Link href={'/articles/'+result.id}><a style={{ color: '#0000CC', fontSize: '1rem', fontFamily: 'Arial, sans-serif' }}>{result.title}</a></Link></div>
-                        <div style={{ color: '#008000', fontSize: '13px', fontFamily: 'Arial, sans-serif', margin: '.2rem 0'}}>{`http://localhost:3000/articles/${result.id}`}</div>
+                        <div style={{ color: '#008000', fontSize: '13px', fontFamily: 'Arial, sans-serif', margin: '.2rem 0'}}>{`/articles/${result.id}`}</div>
                         <div style={{ display: 'flex' }}>
-                            <Link href={`http://localhost:3000/articles/${result.id}`}><a><picture>
+                            <Link href={`/articles/${result.id}`}><a><picture>
                                 <source srcSet={result.mobile_thumbnail} />
                                 <source srcSet={'/img/nexus-fallback.webp'} type="image/webp" />
                                 <img alt="thumbnail"/>

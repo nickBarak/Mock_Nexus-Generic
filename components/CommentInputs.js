@@ -1,6 +1,7 @@
 import 'isomorphic-unfetch';
 import { useState, useEffect } from 'react';
 import { Simulate } from 'react-dom/test-utils';
+import { client } from '../URLs';
 
 function CommentInputs({ following, articleID, setMessage, parent, embedded, firstComment, mainInput }) {
     const [user, setUser] = useState(null);
@@ -15,7 +16,7 @@ function CommentInputs({ following, articleID, setMessage, parent, embedded, fir
         e.preventDefault();
         const [content, name, email] = [0, 1, 2].map(i => e.target.children[i].children[1].value);
         if (!content || !name || !email) { return setMessage('There is an empty field') }
-        let response = await fetch('http://localhost:3000/api/post-comment', {
+        let response = await fetch(client + '/api/post-comment', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -78,7 +79,7 @@ function CommentInputs({ following, articleID, setMessage, parent, embedded, fir
                         name =  user ? user.name
                             : e.currentTarget.parentElement.parentElement.parentElement.children[1].children[1].value;
                         if (email && name) {
-                            let response = await fetch('http://localhost:3000/api/follow-article', {
+                            let response = await fetch(client + '/api/follow-article', {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({ name, email, articleID, following })

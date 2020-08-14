@@ -9,9 +9,9 @@ function Header() {
                 <span>{new Date().toLocaleDateString('default', { weekday: 'long', month: 'long', year: 'numeric', day: 'numeric' })}</span>
                 <div>UNIVERSITY OF CALIFORNIA, SANTA BARBARA</div>
                 <span>
-                    <Link href="https://facebook.com/dailynexus"><a><i className="fab fa-facebook-square"></i></a></Link>
-                    <Link href="https://twitter.com/dailynexus"><a><i className="fab fa-twitter"></i></a></Link>
-                    <Link href="https://instagram.com/dailynexus"><a><i className="fab fa-instagram"></i></a></Link>
+                    <Link href="https://facebook.com/dailynexus"><a target="_blank" rel="noreferrer noopener"><i className="fab fa-facebook-square"></i></a></Link>
+                    <Link href="https://twitter.com/dailynexus"><a target="_blank" rel="noreferrer noopener"><i className="fab fa-twitter"></i></a></Link>
+                    <Link href="https://instagram.com/dailynexus"><a target="_blank" rel="noreferrer noopener"><i className="fab fa-instagram"></i></a></Link>
                 </span>
             </div>
             <Nav />

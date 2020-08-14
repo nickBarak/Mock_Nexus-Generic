@@ -2,6 +2,7 @@ import { convertDate, copyToClipboard } from "../Functions";
 import CommentInputs from './CommentInputs';
 import { useState, useEffect } from 'react';
 import 'isomorphic-unfetch';
+import { client } from '../URLs';
 
 function Comment({ comment: { picture, name, email, content, post_date, id, parent, replies }, articleID, followers, depth=0 }) {
     const [replyMessage, setReplyMessage] = useState(null);
@@ -35,7 +36,7 @@ function Comment({ comment: { picture, name, email, content, post_date, id, pare
                     <span>
                         <span style={{ color: '#999', fontSize: '.75rem' }}>
                             {email === currentUserEmail && <button onClick={e => {
-                                fetch('http://localhost:3000/api/delete-comment', {
+                                fetch(client + '/api/delete-comment', {
                                     method: 'DELETE',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ id, article_id: articleID, email: currentUserEmail })
