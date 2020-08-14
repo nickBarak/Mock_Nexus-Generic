@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { convertToPath, convertDate } from '../Functions';
 import 'isomorphic-unfetch';
 import { useState } from 'react';
-import { client } from '../APIs';
+import { client } from '../URLs';
 
 const categories = [{"title":"Artsweek","subcategories":["Feature","Film and TV","Literature","Music","Performing Art","Previews: What's Going On","Visual Art"]},{"title":"Labyrinth","link":"/categories/labyrinth"},{"title":"Multimedia","subcategories":["Comics","Photo","Video"]},{"title":"News","subcategories":["Campus","County","Crime","Feature","Isla Vista","Student Gov","UC News","UCSB COLA Movement"]},{"title":"Nexustentialism","link":"/categories/nexustentialism"},{"title":"On the Menu","subcategories":["Coffee Column","First Bites","Meal Prep Mondays","On the Road","Recipes","The Beet"]},{"title":"Opinion","subcategories":["Argument in the Office","Ask AJ","Flesh Prison","Global Gauchos","Hyphenated American","Letters to the Editor","Living","Politics","Therapeutic Thoughts","Virtual Reality","Wednesday Hump"]},{"title":"Science & Tech","subcategories":["Health & Wellness"]},{"title":"Sports","subcategories":["Baseball","Basketball","Columns/Features","Cross Country","Golf","Soccer","Softball",/*"Sports Blogs",*/"Swim and Dive","Tennis","Track and Field","Volleyball","Water Polo"]}];
 

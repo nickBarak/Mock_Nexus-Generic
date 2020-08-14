@@ -28,7 +28,6 @@ export default async function(req, res) {
                     OR LOWER(content) LIKE LOWER('%${req.query.value}%')`);
         const authorArticleIDs = await queryDB(`SELECT articles FROM authors WHERE LOWER(name) LIKE LOWER('%${req.body.value}%')`);
         const authorResults = await queryDB('SELECT * FROM articles WHERE id = ANY($1)', [authorArticleIDs]);
-        // console.log(JSON.stringify(results));
         res.json(results ? authorResults ? [...results, ...authorResults] : results : authorResults ? authorResults : []);
         res.end();
     } catch (e) { console.log(e) }
