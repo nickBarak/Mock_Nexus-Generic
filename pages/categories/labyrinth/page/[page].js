@@ -4,9 +4,9 @@ import Link from 'next/link';
 import Footer from '../../../../components/Footer';
 
 export async function getStaticPaths() {
-    let [articles] = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
-        paths = new Array(Math.ceil(articles.articles.length/11)).fill(true).map((_, i) =>
-        ( { params: { page: String(i+1)} }));
+    let articles = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
+        paths = new Array(Math.ceil(articles[0].articles.length/11)).fill(true).map((_, i) =>
+        ( { params: { page: String(i+1) } }));
 
     return { paths, fallback: false }
 }

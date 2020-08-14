@@ -29,10 +29,15 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/categories/[category]/[subcategory]": [
+    "/categories/labyrinth": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/categories/[category]/[subcategory].js"
+      "static/chunks/pages/categories/labyrinth.js"
+    ],
+    "/categories/labyrinth/page/[page]": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/categories/labyrinth/page/[page].js"
     ]
   },
   "ampFirstPages": []

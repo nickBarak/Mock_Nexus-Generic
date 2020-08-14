@@ -1,1 +1,0 @@
-{"ast":null,"code":"export default (function (_) {\n  return 'Hello World!';\n});","map":{"version":3,"sources":["C:/Users/nicho/code/portfolio/mock_nexus/pages/index.js"],"names":["_"],"mappings":"AAAA,gBAAe,UAAAA,CAAC;AAAA,SAAG,cAAH;AAAA,CAAhB","sourcesContent":["export default _=> 'Hello World!'"]},"metadata":{},"sourceType":"module"}

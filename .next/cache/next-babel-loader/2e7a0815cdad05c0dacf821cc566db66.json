@@ -1,1 +1,0 @@
-{"ast":null,"code":"import React from \"react\";\nvar __jsx = React.createElement;\nimport '../styles/style.css';\nexport default (({\n  Component,\n  pageProps\n}) => __jsx(Component, pageProps));","map":null,"metadata":{},"sourceType":"module"}
