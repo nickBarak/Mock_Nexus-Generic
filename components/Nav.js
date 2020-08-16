@@ -118,7 +118,7 @@ function Nav() {
                     </select>
                 </span>
             </div>
-            <ul style={{ position: 'relative', maxHeight: 'calc(100% - 2.25rem - 1.13px - 1.5rem - 2.25rem)', overflowY: 'auto' }}>
+            <ul style={{ position: 'relative', height: 'calc(100% - 2.25rem - 1.13px - 1.5rem - 2.25rem)', overflowY: 'auto' }}>
                 {searchResults[sortBy].slice((modalPage-1)*10, modalPage*10).map((result, i) => 
                     <li key={i} style={{ marginBottom: '.5rem' }}>
                         <div style={{ width: '100%', textAlign: 'center' }}><Link href={'/articles/'+result.id}><a style={{ color: '#0000CC', fontSize: '1rem', fontFamily: 'Arial, sans-serif' }}>{result.title}</a></Link></div>
