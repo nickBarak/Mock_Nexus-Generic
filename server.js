@@ -1,19 +1,19 @@
 const next = require('next');
 const express = require('express');
-import sslRedirect from 'heroku-ssl-redirect';
 
 const port = process.env.PORT || 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
 
-  server.use(sslRedirect());
-
-  server.all('*', (req, res) => {
-    return handle(req, res);
+  server.use(function (req, res, next) {
+    if (req.header('x-forwarded-proto') === 'http') {
+      res.redirect(301, 'https://' + req.hostname + req.url);
+      return
+    }
+    next()
   });
 
   server.listen(port, err => {
