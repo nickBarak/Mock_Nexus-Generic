@@ -21,6 +21,7 @@ function Labyrinth({ articles, footerData }) {
     return (<>
     <Head>
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"></link>
+        <link rel="shortcut icon" href="/favicon.ico"></link>
         <title>Mock Nexus</title>
     </Head>
     <img src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png" alt="labyrinth" style={{ width: '100%', height: '20rem', objectFit: 'fill' }} />
