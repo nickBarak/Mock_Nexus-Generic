@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { uuid } from 'uuidv4';
 
 const newsletterURL =
 	'https://dailynexus.us19.list-manage.com/subscribe?u=c7afb6c46dbbdcd7bb0bd8919&id=7220084bdc';
@@ -217,7 +218,7 @@ function Sidebar() {
 							);
 							return (
 								<li
-									key={i}
+									key={uuid()}
 									style={{
 										display: 'flex',
 										margin: '1rem 0',

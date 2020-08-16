@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { convertDate, convertToPath } from '../Functions';
+import { uuid } from 'uuidv4';
 
 /* Displays 3 most recent articles in category */
 function CategoryPreview({ category: { title, articles } }) {
@@ -10,7 +11,7 @@ function CategoryPreview({ category: { title, articles } }) {
 			</Link>
 			<ul>
 				{articles.map((article, i) => (
-					<li key={i}>
+					<li key={uuid()}>
 						<div style={{ fontWeight: 600, fontSize: '1.2rem' }}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">

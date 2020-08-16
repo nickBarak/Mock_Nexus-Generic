@@ -2,7 +2,6 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import { useEffect, useState } from 'react';
 import Footer from '../components/Footer';
-import Head from 'next/head';
 
 function Layout({ footerData, children }) {
 	const [showBottomAd, setShowBottomAd] = useState(true);
@@ -27,16 +26,6 @@ function Layout({ footerData, children }) {
 
 	return (
 		<>
-			<Head>
-				<script
-					src="https://kit.fontawesome.com/7cab195da1.js"
-					crossOrigin="anonymous"></script>
-				<link
-					href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-					rel="stylesheet"></link>
-				{/* <link rel="shortcut icon" href="/nexus-favicon.webp"></link> */}
-				<title>Mock Nexus</title>
-			</Head>
 			<div
 				style={{
 					backgroundColor: '#444',

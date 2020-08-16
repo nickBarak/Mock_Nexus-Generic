@@ -1,4 +1,5 @@
 import ArticlePreview from './ArticlePreview';
+import { uuid } from 'uuidv4';
 
 function ArticleDisplay({ type, heading, articles }) {
 	return (
@@ -18,7 +19,7 @@ function ArticleDisplay({ type, heading, articles }) {
 				<ul>
 					{articles.map((article, i) => (
 						/* Alternates which side of preview displays image */
-						<li key={i}>
+						<li key={uuid()}>
 							{' '}
 							<ArticlePreview
 								article={article}

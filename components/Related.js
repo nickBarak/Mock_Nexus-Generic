@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
+import { uuid } from 'uuidv4';
 
 function Related({ articles }) {
 	return (
@@ -10,7 +11,7 @@ function Related({ articles }) {
 				</div>
 				<ul>
 					{articles.map((article, i) => (
-						<li key={i}>
+						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
 								<a>{article.title}</a>
 							</Link>

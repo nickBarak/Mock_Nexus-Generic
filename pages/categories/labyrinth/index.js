@@ -3,6 +3,7 @@ import ArticlePreview from '../../../components/ArticlePreview';
 import Link from 'next/link';
 import Footer from '../../../components/Footer';
 import Head from 'next/head';
+import { uuid } from 'uuidv4';
 
 export async function getStaticProps() {
 	let [articleIDs] = await queryDB(
@@ -31,13 +32,6 @@ export async function getStaticProps() {
 function Labyrinth({ articles, footerData }) {
 	return (
 		<>
-			<Head>
-				<link
-					href="https://fonts.googleapis.com/css2?family=Lato&display=swap"
-					rel="stylesheet"></link>
-				{/* <link rel="shortcut icon" href="/nexus-favicon.webp"></link> */}
-				<title>Mock Nexus</title>
-			</Head>
 			<img
 				src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png"
 				alt="labyrinth"
@@ -80,7 +74,7 @@ function Labyrinth({ articles, footerData }) {
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
 				<ul style={{ width: '60%' }}>
 					{articles.slice(0, 11).map((article, i) => (
-						<li key={i}>
+						<li key={uuid()}>
 							<ArticlePreview
 								labyrinth
 								article={article}

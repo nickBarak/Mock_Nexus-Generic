@@ -4,6 +4,7 @@ import { queryDB } from '../db';
 import Layout from '../layouts';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { uuid } from 'uuidv4';
 
 function App({ categories, headlines }) {
 	useEffect(_ => {
@@ -41,7 +42,7 @@ function App({ categories, headlines }) {
 					</div>
 					<ul className="home-category-previews">
 						{categories.map((category, i) => (
-							<li key={i}>
+							<li key={uuid()}>
 								<CategoryPreview category={category} />
 							</li>
 						))}

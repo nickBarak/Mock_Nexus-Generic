@@ -3,6 +3,7 @@ import { convertToPath, convertDate } from '../Functions';
 import 'isomorphic-unfetch';
 import { useState } from 'react';
 import { client } from '../URLs';
+import { uuid } from 'uuidv4';
 
 const categories = [{"title":"Artsweek","subcategories":["Feature","Film and TV","Literature","Music","Performing Art","Previews: What's Going On","Visual Art"]},{"title":"Labyrinth","link":"/categories/labyrinth"},{"title":"Multimedia","subcategories":["Comics","Photo","Video"]},{"title":"News","subcategories":["Campus","County","Crime","Feature","Isla Vista","Student Gov","UC News","UCSB COLA Movement"]},{"title":"Nexustentialism","link":"/categories/nexustentialism"},{"title":"On the Menu","subcategories":["Coffee Column","First Bites","Meal Prep Mondays","On the Road","Recipes","The Beet"]},{"title":"Opinion","subcategories":["Argument in the Office","Ask AJ","Flesh Prison","Global Gauchos","Hyphenated American","Letters to the Editor","Living","Politics","Therapeutic Thoughts","Virtual Reality","Wednesday Hump"]},{"title":"Science & Tech","subcategories":["Health & Wellness"]},{"title":"Sports","subcategories":["Baseball","Basketball","Columns/Features","Cross Country","Golf","Soccer","Softball",/*"Sports Blogs",*/"Swim and Dive","Tennis","Track and Field","Volleyball","Water Polo"]}];
 
@@ -29,7 +30,7 @@ function Nav() {
                     {"Staff/Contact": 'staff-contact'}
                 ]}
             ].map((category, i) =>
-                <li key={i}>
+                <li key={uuid()}>
                     {category.subcategories
                         ? (<>
                         {/* Show subcategory list on hover over nav item. Timeouts used as mechanism to persist subcategory list while hovering over subcategory list items and not the category nav item */}
@@ -137,7 +138,7 @@ function Nav() {
             {/* Display 10 articles with scroll: auto */}
             <ul style={{ position: 'relative', height: 'calc(100% - 2.25rem - 1.13px - 1.5rem - 2.25rem)', overflowY: 'auto' }}>
                 {searchResults[sortBy].slice((modalPage-1)*10, modalPage*10).map((result, i) => 
-                    <li key={i} style={{ marginBottom: '.5rem' }}>
+                    <li key={uuid()} style={{ marginBottom: '.5rem' }}>
                         <div style={{ width: '100%', textAlign: 'center' }}><Link href={'/articles/'+result.id}><a style={{ color: '#0000CC', fontSize: '1rem', fontFamily: 'Arial, sans-serif' }}>{result.title}</a></Link></div>
                         <div style={{ color: '#008000', fontSize: '13px', fontFamily: 'Arial, sans-serif', margin: '.2rem 0'}}>{`/articles/${result.id}`}</div>
                         <div style={{ display: 'flex' }}>
@@ -164,7 +165,7 @@ function Nav() {
                 {new Array(Math.min(25, Math.ceil(searchResults[0].length/10)-25*modalPageSet)).fill(true).map((_, i) => {
                     let page = modalPageSet*25+i+1;
                     return (
-                        <li key={i} onClick={_=> setModalPage(page)} onMouseOver={e => { e.target.style.textDecoration = 'underline' }} onMouseOut={e => { e.target.style.textDecoration = 'none' }} style={{ color: modalPage === page ? '#666' : '#c0c0c0', margin: '0 .25rem', cursor: 'pointer', fontSize: modalPage === page ? '.95rem' : '.8rem', display: 'flex', alignItems: 'flex-end', fontFamily: 'Arial, sans-serif' }}>{page}</li>
+                        <li key={uuid()} onClick={_=> setModalPage(page)} onMouseOver={e => { e.target.style.textDecoration = 'underline' }} onMouseOut={e => { e.target.style.textDecoration = 'none' }} style={{ color: modalPage === page ? '#666' : '#c0c0c0', margin: '0 .25rem', cursor: 'pointer', fontSize: modalPage === page ? '.95rem' : '.8rem', display: 'flex', alignItems: 'flex-end', fontFamily: 'Arial, sans-serif' }}>{page}</li>
                     )}
                 )}
 

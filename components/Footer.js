@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Waypoint } from 'react-waypoint';
+import { uuid } from 'uuidv4';
 
 function Footer({ footerData, toggleShowBottomAdListener }) {
 	/* Defines pagination values (+/- max of 4 from current page) */
@@ -68,7 +69,7 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
 							{footerData &&
 								footerData.highestPage > 1 &&
 								pageNav.map((pageNum, i) => (
-									<li key={i}>
+									<li key={uuid()}>
 										<Link
 											href={
 												route +
@@ -145,7 +146,7 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
 						['FAQ', '/about/faq'],
 						['Advertising', '/about/advertising'],
 					].map(([title, route], i) => (
-						<li key={i}>
+						<li key={uuid()}>
 							<Link href={route}>
 								<a>{title}</a>
 							</Link>
