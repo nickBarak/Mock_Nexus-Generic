@@ -14,7 +14,7 @@ app.prepare().then(() => {
             'default-src': [SELF],
             'script-src': [SELF, INLINE, 'https://mocknexus.com'],
             'worker-src': [NONE],
-            'block-all-mixed-content': true
+            'block-all-mixed-content': false
         }
     }));
 
