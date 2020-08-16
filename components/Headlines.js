@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
 
+/* Displays 4 articles, first is emphasized */
 function Headlines({ articles }) {
     return (<>
         <div className="headlines">

@@ -8,6 +8,7 @@ if (!pool) {
         connectionString: process.env.DATABASE_URL,
         idleTimeoutMillis: 0
     });
+    /* Reports DB connection status */
     (async _=>{
         try {
             var client = await pool.connect();
@@ -19,6 +20,7 @@ if (!pool) {
     })();
 }
 
+/* Convenience for simple DB transactions */
 export async function queryDB(query, params=[]) {
     try {
         var client = await pool.connect(),
@@ -26,19 +28,6 @@ export async function queryDB(query, params=[]) {
     } catch (e) { console.log(e) }
     finally { client && client.release() }
     return rows;
-}
-
-export async function getCategories() {
-    let categories = await queryDB("SELECT * FROM categories WHERE title <> 'Headlines' AND title <> 'Labyrinth' ORDER BY title");
-
-    for (let category of categories) {
-        for (let id of category.articles) {
-            let hydratedArticle = await queryDB("SELECT * FROM articles WHERE id = $1", [id]);
-            category.articles.splice(category.articles.indexOf(id), 1, hydratedArticle[0]);
-        }
-    }
-
-    return categories.map(category => ({ ...category, articles: category.articles.sort(({publish_date: a}, {publish_date: b}) => b-a) }));
 }
 
 export async function insertUser(name, email) {

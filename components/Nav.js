@@ -20,6 +20,7 @@ function Nav() {
         <ul className="nav">
             {[
                 ...categories,
+                /* About subcategories don't convert to appropriate path so path is provided here */
                 {title: 'About', subcategories: [
                     {Advertising: 'advertising'},
                     {Classifieds: 'classified-ads'},
@@ -31,6 +32,7 @@ function Nav() {
                 <li key={i}>
                     {category.subcategories
                         ? (<>
+                        {/* Show subcategory list on hover over nav item. Timeouts used as mechanism to persist subcategory list while hovering over subcategory list items and not the category nav item */}
                         <Link href={`/categories/${category.title.toLowerCase().replace(/ /g, '-')}`}><a onMouseOver={e => {
                             timeouts[i] && clearTimeout(timeouts[i]);
                             let { style } = e.currentTarget.parentElement.children[1];
@@ -50,6 +52,7 @@ function Nav() {
                                 style.pointerEvents = 'none';
                             }, 0);
                         }}>
+                            {/* About subcategory items must be handled according to the unique structure of the subcategories property */}
                             {category.subcategories.map((subcategory, j) =>
                                 <li key={j}><Link href={category.title !== 'About' ? `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}` : `/about/${Object.values(subcategory)[0]}`}><a className="subcategory-link">{category.title !== 'About' ? subcategory : Object.keys(subcategory)[0]}</a></Link></li>)}
                         </ul>
@@ -58,6 +61,7 @@ function Nav() {
                     }
                 </li>)
             }
+            {/* Search tool. Click to open. Submit query with enter key. */}
             <li key="-2" style={{ position: 'relative', textTransform: 'none' }}>
                 <i className="search fas fa-search" onClick={e => {
                     let { style } = e.currentTarget.parentElement.children[1];
@@ -66,11 +70,13 @@ function Nav() {
                 <input type="text" placeholder="Looking for something?" style={{ display: 'none', position: 'absolute', right: '150%', top: '-15%', padding: '.2rem .4rem' }} onKeyDown={e => {
                     e.persist();
                     e.keyCode === 13 && (_=> {
+                        /* Track query time */
                         let now = Date.now();
                         setLoadingSearchResults(true);
                         fetch(client + '/api/search?value=' + e.target.value)
                             .then(res => res.json())
                             .then(rows =>
+                                /* First index for sorting by relevance, second index for sorting by date. Need separate values to avoid overwrite and only sort once */
                                 setSearchResults([
                                     rows,
                                     [...rows].sort(({publish_date: a}, {publish_date: b}) => new Date(b) - new Date(a))
@@ -79,6 +85,8 @@ function Nav() {
                                 || setQueryTime(((Date.now() - now) / 1000).toFixed(2))
                             )
                             .catch(e => console.log(e) || setSearchError('Error fetching results'));
+
+                        /* Lower background opacity, raise modal opacity, prevent scrolling background while allowing scrolling of modal. Bottom ad remains visible (if it was) */ 
                         let { style } = document.getElementsByClassName('search-results')[0];
                         document.getElementsByClassName('modal-open')[0].style.opacity = '.75';
                         document.getElementsByClassName('modal-open')[0].style.pointerEvents = 'auto';
@@ -91,8 +99,10 @@ function Nav() {
             </li>
         </ul>
 
+        {/* Leaves room for bottom ad */}
         <div className="search-results">
             <button className="search-results-button" onClick={e => {
+                /* Restore pre-modal-open conditions */
                 let { style } = document.getElementsByClassName('search-results')[0];
                 style.opacity = 0;
                 style.pointerEvents = 'none';
@@ -108,7 +118,9 @@ function Nav() {
                 e.target.parentElement.children[2].children[1].children[1].selectedIndex = 0;
             }}>x</button>
             <div className="search-results-header">
-                <span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>{!searchError ?
+                <span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>
+                {/* Show loading, query time or error */}
+                {!searchError ?
                     !loadingSearchResults
                         ? `${searchResults[0].length} result${searchResults[0].length === 1 ? '' : 's'} (${queryTime} second${queryTime === 1 ? '' : 's'})`
                         : 'Loading articles...'
@@ -121,6 +133,8 @@ function Nav() {
                     </select>
                 </span>
             </div>
+
+            {/* Display 10 articles with scroll: auto */}
             <ul style={{ position: 'relative', height: 'calc(100% - 2.25rem - 1.13px - 1.5rem - 2.25rem)', overflowY: 'auto' }}>
                 {searchResults[sortBy].slice((modalPage-1)*10, modalPage*10).map((result, i) => 
                     <li key={i} style={{ marginBottom: '.5rem' }}>
@@ -139,7 +153,11 @@ function Nav() {
                         </div>
                     </li>)}
             </ul>
+
+            {/* Modal pagination. Show max 25 page values (1 set) at once. */}
             <ul style={{ marginTop: '1.25rem', display: 'flex', width: '100%', overflowX: 'auto', fontFamily: 'Arial, sans-serif' }}>
+
+                {/* If not on first set, click to show previous set */}
                 {(modalPageSet > 0) &&
                     <li key="-1" onClick={_=> setModalPageSet(modalPageSet-1)} onMouseOver={e => { e.target.style.textDecoration = 'underline' }} onMouseOut={e => { e.target.style.textDecoration = 'none' }} style={{ color: '#c0c0c0', margin: '0 .25rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end', fontFamily: 'Arial, sans-serif' }}>...</li>
                 }
@@ -149,6 +167,8 @@ function Nav() {
                         <li key={i} onClick={_=> setModalPage(page)} onMouseOver={e => { e.target.style.textDecoration = 'underline' }} onMouseOut={e => { e.target.style.textDecoration = 'none' }} style={{ color: modalPage === page ? '#666' : '#c0c0c0', margin: '0 .25rem', cursor: 'pointer', fontSize: modalPage === page ? '.95rem' : '.8rem', display: 'flex', alignItems: 'flex-end', fontFamily: 'Arial, sans-serif' }}>{page}</li>
                     )}
                 )}
+
+                {/* If not on last set, click to advance */}
                 {(Math.ceil(searchResults[0].length/10)-25*modalPageSet > 25) &&
                     <li key="25" onClick={_=> setModalPageSet(modalPageSet+1)} onMouseOver={e => { e.target.style.textDecoration = 'underline' }} onMouseOut={e => { e.target.style.textDecoration = 'none' }} style={{ color: '#c0c0c0', margin: '0 .25rem', cursor: 'pointer', display: 'flex', alignItems: 'flex-end', fontFamily: 'Arial, sans-serif' }}>...</li>
                 }
@@ -225,6 +245,7 @@ function Nav() {
                 font-family: Arial, sans-serif;
                 font-size: .8rem;
                 width: 75vw;
+                ${/* Leave room for bottom ad */''}
                 height: calc(100vh - 3rem - 7rem - 1.75rem);
                 position: fixed;
                 top: 3rem;

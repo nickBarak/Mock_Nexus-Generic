@@ -27,6 +27,8 @@ export async function getStaticProps({ params: { category } }) {
     }
 }
 
+/* Very similar to /categories/[category]/[subcategory] and /authors/[id] routes */
+/* Shows previews for all articles in a category by most recent (15 per page) */
 function Category({ heading, articles, footerData }) {
     return (
         <Layout footerData={footerData}>

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
 
+/* Displays image on variable side */
 function ArticlePreview({ article, imageLeft, labyrinth }) {
     return (<>
         <div className="article-preview">
@@ -26,6 +27,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
             }
         </div>
 
+        {/* Labyrinth has slightly different formatting (thinner and always with image to left) */}
         <style jsx>{`
             .article-preview {
                 display: flex;

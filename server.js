@@ -4,6 +4,7 @@ const app = next({ dev });
 const express = require('express');
 const port = process.env.PORT || 3000;
 
+/* Redirects HTTP to HTTPS */
 app.prepare().then(_=> {
     const server = express();
     server.use((req, res, next) => {

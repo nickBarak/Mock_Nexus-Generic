@@ -1,7 +1,6 @@
 import Headlines from '../components/Headlines';
 import CategoryPreview from '../components/CategoryPreview';
 import { queryDB } from '../db';
-import categories from '../data';
 import Layout from '../layouts';
 import Link from 'next/link';
 import { useEffect } from 'react';
@@ -65,6 +64,14 @@ function App({ categories, headlines }) {
 export async function getStaticProps() {
     let [headlineIDs] = await queryDB("SELECT articles FROM categories WHERE title = 'Headlines'"),
         headlines = await queryDB("SELECT * FROM articles WHERE id = ANY($1)", [headlineIDs.articles]);
+
+    let categories = ['Artsweek', 'Multimedia', 'News', 'Nexustentialism', 'On the Menu', 'Opinion', 'Science & Tech', 'Sports'],
+        articles;
+    for (let i=0; i<categories.length; i++) {
+        articles = await queryDB(`SELECT * FROM articles WHERE category = '${categories[i]}' ORDER BY publish_date FETCH FIRST 3 ROWS ONLY`);
+        category.splice(i, 1, {category: category[i], articles: articles.rows});
+    }
+    
     return { props: JSON.parse(JSON.stringify({ categories, headlines })) }
 }
 

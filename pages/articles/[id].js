@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 
 function Article({ article, author, related }) {
 
+    /* Content styles must be added after render as article.content includes the HTML */
     useEffect(_=> {
         let contentDiv = document.getElementsByClassName('single-post-content')[0];
         [...contentDiv.getElementsByTagName('p'), ...contentDiv.getElementsByTagName('span')].forEach(p => {
@@ -17,7 +18,11 @@ function Article({ article, author, related }) {
             p.style.fontSize = '1.225rem';
             p.style.lineHeight = '150%';
         });
+
+        /* hide unwanted content */
         [document.getElementById('jp-relatedposts'), document.getElementsByClassName('saboxplugin-wrap')[0], document.getElementsByClassName('h5ab-print-button-container')[0]].forEach(el => { if (el) el.style.display = 'none' });
+        
+        /* Attempt to make any image collections look decent */
         document.getElementsByClassName('single-post-content')[0].style.fontFamily = 'Times New Roman, Georgia';
         [...document.getElementsByClassName('gallery-row')].forEach(gallery => {
             gallery.style.display = 'grid';
@@ -43,6 +48,7 @@ function Article({ article, author, related }) {
                 e.currentTarget.children[1].style.transform = 'scaleY(0)';
             });
         });
+        
         [...document.getElementsByClassName('sd-content')[0].children].forEach(ul => {
             ul.style.display = 'flex';
             ul.style.justifyContent = 'space-between';
@@ -94,6 +100,7 @@ function Article({ article, author, related }) {
                     <div className="article-page-title">{article.title}</div>
                     <div>{(_=> {
                         let date = new Date(article.publish_date);
+                        /* Supposed to show exact minute published but I think either this doesn't work or minute value is not available in article.publish_date */
                         let at = date.getHours() === 0
                             ? ''
                             : ` at ${date.getHours()}:${String(date.getMinutes()).length === 1 ? '0' : '' + date.getMinutes()}${date.getHours() < 12 ? date.getHours() + ' am' : 24 - date.getHours() + ' pm'}`
@@ -101,6 +108,8 @@ function Article({ article, author, related }) {
                     })()} by <Link href={`/authors/${author.id}`}><a className="article-page-author-name">{author.name}</a></Link></div>
                 </div>
                 <div className="article-page-content" dangerouslySetInnerHTML={{ __html: article.content }} />
+
+                {/* Don't show AboutTheAuthor if lacking info */}
                 {author.name && (author.biography !== 'Not available' || author.portrait !== 'Not available') && <AboutTheAuthor author={author} />}
                 <Related articles={related} />
                 <CommentSection comments={article.comments.sort(({post_date: a}, {post_date: b}) => a-b)} articleID={article.id} followers={article.followers} />

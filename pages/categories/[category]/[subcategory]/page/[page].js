@@ -5,6 +5,7 @@ import { convertToPath, convertFromPath } from '../../../../../Functions';
 
 export async function getStaticPaths() {
     let categories = await queryDB("SELECT title, subcategories FROM categories WHERE title <> 'Labyrinth' AND title <> 'Headlines'"),
+        /* Generates path for all subcategories of all categories and as many pages as is needed for each subcategory (15 articles per page) */
         paths = categories
             .reduce((acc, category) => [
                 ...acc,
@@ -34,6 +35,8 @@ export async function getStaticProps({ params: { category, subcategory, page } }
     }
 }
 
+/* Very similar to /categories/[category]/[subcategory] and /authors/[id] routes */
+/* Shows previews for all articles in a subcategory by most recent (15 per page) */
 function Subcategory({ heading, articles, footerData }) {
     return (
         <Layout footerData={footerData}>

@@ -20,6 +20,7 @@ export async function getStaticProps({ params: { id } }) {
     } })) }
 }
 
+/* Very similar to /categories/[category] and /categories/[category]/[subcategory] routes */
 function Author({ author, articles, footerData }) {
     return (
         <Layout footerData={footerData}>

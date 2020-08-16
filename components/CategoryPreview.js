@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { convertDate, convertToPath } from '../Functions';
 
+/* Displays 3 most recent articles in category */
 function CategoryPreview({ category: { title, articles } }) {
     return (
         <div className="category-preview">
@@ -31,6 +32,7 @@ function CategoryPreview({ category: { title, articles } }) {
                     position: relative;
                 }
 
+                ${/* right-side soft-border */''}
                 li:nth-child(1)::before {
                     content: '';
                     position: absolute;

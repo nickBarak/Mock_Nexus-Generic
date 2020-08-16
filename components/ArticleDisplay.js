@@ -6,6 +6,7 @@ function ArticleDisplay({ type, heading, articles }) {
             <div className="category-heading" style={{ fontSize: '2.5rem', textTransform: 'uppercase', marginTop: '.75rem' }}>{heading}</div>
             <ul>
                 {articles.map((article, i) =>
+                    /* Alternates which side of preview displays image */
                     <li key={i}> <ArticlePreview article={article} imageLeft={!(i % 2)} /> </li>
                 )}
             </ul>

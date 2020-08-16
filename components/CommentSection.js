@@ -7,10 +7,9 @@ function CommentSection({ comments, articleID, followers }) {
     const [commentMessage, setCommentMessage] = useState(null);
     const [following, setFollowing] = useState(false);
     
+    /* Has user signed in and are they following this article? */
     useEffect(_=> {
-        console.log(sessionStorage.getItem('email'));
         setFollowing(followers.includes(sessionStorage.getItem('email')))
-        console.log(following);
     }, []);
     
     return (<>

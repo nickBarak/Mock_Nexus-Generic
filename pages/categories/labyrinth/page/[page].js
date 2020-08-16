@@ -6,6 +6,7 @@ import Head from 'next/head';
 
 export async function getStaticPaths() {
     let [articles] = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
+        /* Generates path for as many pages as needed (11 articles per page) */
         paths = new Array(Math.ceil(articles.articles.length/11)).fill(true).map((_, i) =>
         ( { params: { page: String(i+1) } }));
 
@@ -29,7 +30,7 @@ function Labyrinth({ articles, footerData }) {
     return (<>
     <Head>
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"></link>
-        <link rel="shortcut icon" href="/nexus-favicon.webp"></link>
+        {/* <link rel="shortcut icon" href="/nexus-favicon.webp"></link> */}
         <title>Mock Nexus</title>
     </Head>
     <img src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png" alt="labyrinth" style={{ width: '100%', height: '20rem', objectFit: 'fill' }} />

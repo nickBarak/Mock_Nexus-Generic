@@ -17,11 +17,12 @@ export async function getStaticProps() {
     }
 }
 
+/* Differs from other categories (no layout, unique header and nav, custom article display, 11 articles per page) */
 function Labyrinth({ articles, footerData }) {
     return (<>
     <Head>
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"></link>
-        <link rel="shortcut icon" href="/nexus-favicon.webp"></link>
+        {/* <link rel="shortcut icon" href="/nexus-favicon.webp"></link> */}
         <title>Mock Nexus</title>
     </Head>
     <img src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png" alt="labyrinth" style={{ width: '100%', height: '20rem', objectFit: 'fill' }} />

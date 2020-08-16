@@ -27,6 +27,7 @@ function Comment({ comment: { picture, name, email, content, post_date, id, pare
                 </div>
                 <div>{content}</div>
                 <div className="row" style={{ justifySelf: 'flex-end' }}>
+                    {/* Toggle showing input box to reply to this comment */}
                     <button onClick={e => {
                         let { style } = e.currentTarget.parentElement.parentElement.children[4];
                         style.maxHeight = style.maxHeight === '100%' ? 0 : '100%';
@@ -41,10 +42,12 @@ function Comment({ comment: { picture, name, email, content, post_date, id, pare
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({ id, article_id: articleID, email: currentUserEmail })
                                 });
+                                /* maintain scroll position */
                                 document.location.reload();
                             }} style={{ color: 'white', backgroundColor: '#ff4848', border: 'none', marginRight: '.4rem' }} onMouseOver={e => { e.target.style.backgroundColor = '#ff2d2d' }} onMouseOut={e => { e.target.style.backgroundColor = '#ff4848' }}>Delete</button>}
                             <i className="far fa-clock" style={{ marginRight: '.325rem' }}></i>
                             {convertDate(post_date)}
+                            {/* Toggle showing replies to this comment */}
                             {replies.length ? <i style={{ color: '#00B37F', marginLeft: '.325rem', cursor: 'pointer', transition: 'transform 300ms ease-out' }} className="fas fa-chevron-up" onClick={e => {
                                 let { style } = e.currentTarget.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.children[1];
                                 style.maxHeight = style.maxHeight && style.maxHeight === '0px' ? '100%' : 0;
@@ -70,6 +73,7 @@ function Comment({ comment: { picture, name, email, content, post_date, id, pare
             .comment {
                 display: flex;
                 height: 100%;
+                ${/* Every reply shorter than parent (up to 6) */''}
                 ${!depth
                     ? 'margin-bottom: .85rem'
                     : depth === 1

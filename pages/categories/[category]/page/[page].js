@@ -5,6 +5,7 @@ import { convertToPath, convertFromPath } from '../../../../Functions';
 
 export async function getStaticPaths() {
     let categories = await queryDB("SELECT title, articles FROM categories WHERE title <> 'Labyrinth' AND title <> 'Headlines'"),
+        /* Generates path for as many pages as needed (15 articles per page) */
         paths = categories.map(({title, articles}) =>
             (new Array(Math.ceil(articles.length/15)).fill(true).map((_, i) =>
                 ({ params: { category: convertToPath(title), page: String(i+1) } })
@@ -32,6 +33,8 @@ export async function getStaticProps({ params: { category, page } }) {
     }
 }
 
+/* Very similar to /categories/[category]/[subcategory] and /authors/[id] routes */
+/* Shows previews for all articles in a category by most recent (15 per page) */
 function Category({ heading, articles, footerData }) {
     return (
         <Layout footerData={footerData}>

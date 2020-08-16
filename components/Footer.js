@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Waypoint } from 'react-waypoint';
 
 function Footer({ footerData, toggleShowBottomAdListener }) {
+
+    /* Defines pagination values (+/- max of 4 from current page) */
     if (footerData) {
         var { page, highestPage, route } = footerData,
             pageNav = [];
@@ -10,9 +12,11 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
         }
     }
     return (
+        /* Hides bottom ad if overlapping footer */
         <Waypoint onEnter={toggleShowBottomAdListener} onLeave={toggleShowBottomAdListener}>
             <div className="footer">
                 <ul>
+                    {/* If not on first page */}
                     <li>
                         <ul>
                         {page > 1 && <>
@@ -29,6 +33,7 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
                         </ul>
                     </li>
                     
+                    {/* If not on last page */}
                     <li>
                         <ul>
                             {page < highestPage && <>

@@ -8,14 +8,19 @@ function CommentInputs({ following, articleID, setMessage, parent, embedded, fir
 
     useEffect(_=> {
         sessionStorage.getItem('email') && setUser({ name: sessionStorage.getItem('name'), email: sessionStorage.getItem('email') });
-        console.log(user);
     }, []);
 
     async function postComment(e, setMessage, article_id, parent=null) {
         e.persist();
         e.preventDefault();
         const [content, name, email] = [0, 1, 2].map(i => e.target.children[i].children[1].value);
-        if (!content || !name || !email) { return setMessage('There is an empty field') }
+        if (!content) return;
+        if ((!name && email) || (name && !email)) { return setMessage('There is an empty field') }
+        if (!name && !email) {
+            /* post is anonymous */
+            name = 'anonymous';
+            email = 'an@nymous.who';
+        }
         let response = await fetch(client + '/api/post-comment', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -48,11 +53,13 @@ function CommentInputs({ following, articleID, setMessage, parent, embedded, fir
                 console.log(status);
         }
         msg && setMessage(msg);
-        if (!status || status === 3) {
+        if (email !== 'an@nymous.who' && (!status || status === 3)) {
             sessionStorage.setItem('email', email);
             sessionStorage.setItem('name', name);
         }
         e.target.reset();
+
+        /* maintain scroll position */
         document.location.reload();
     }
 

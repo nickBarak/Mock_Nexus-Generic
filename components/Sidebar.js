@@ -28,6 +28,7 @@ function Sidebar() {
                 <div className="comic-of-the-week"><img src="/img/comic-of-the-week.webp" alt="comic" /></div>
             </li>
             <li key="3"> <Link href={newsletterURL}><button className="newsletter-button">Subscribe to Our Newsletter</button></Link> </li>
+            {/* Sometimes doesn't show for unknown reason */}
             <li key="4">
                 <div style={{ height: '34.5rem', overflowY: 'scroll' }}>
                     <a className="twitter-timeline" href="https://twitter.com/dailynexus?ref_src=twsrc%5Etfw">Tweets by dailynexus</a>
