@@ -2,74 +2,80 @@ import Link from 'next/link';
 import { convertDate } from '../Functions';
 
 function Related({ articles }) {
-    return (<>
-        <div className="related">
-            <div><span>Related</span></div>
-            <ul>
-                {articles.map((article, i) =>
-                    <li key={i}>
-                        <Link href={`/articles/${article.id}`}><a>{article.title}</a></Link>
-                        <div>{convertDate(article.publish_date)}</div>
-                        <div>In "{article.category}"</div>
-                    </li>
-                )}
-            </ul>
-        </div>
+	return (
+		<>
+			<div className="related">
+				<div>
+					<span>Related</span>
+				</div>
+				<ul>
+					{articles.map((article, i) => (
+						<li key={i}>
+							<Link href={`/articles/${article.id}`}>
+								<a>{article.title}</a>
+							</Link>
+							<div>{convertDate(article.publish_date)}</div>
+							<div>In "{article.category}"</div>
+						</li>
+					))}
+				</ul>
+			</div>
 
-        <style jsx>{`
-            .related {
-                margin: 3rem 0;
-            }
+			<style jsx>{`
+				.related {
+					margin: 3rem 0;
+				}
 
-            .related > div:nth-child(1) {
-                margin-bottom: .8rem;
-            }
+				.related > div:nth-child(1) {
+					margin-bottom: 0.8rem;
+				}
 
-            .related > div:nth-child(1) > span {
-                position: relative;
-                font-size: .8rem;
-                font-weight: 600;
-            }
+				.related > div:nth-child(1) > span {
+					position: relative;
+					font-size: 0.8rem;
+					font-weight: 600;
+				}
 
-            .related > div:nth-child(1) > span::before {
-                content: '';
-                background-color: lightgray;
-                height: 1px;
-                position: absolute;
-                width: 100%;
-                top: -80%;
-            }
+				.related > div:nth-child(1) > span::before {
+					content: '';
+					background-color: lightgray;
+					height: 1px;
+					position: absolute;
+					width: 100%;
+					top: -80%;
+				}
 
-            ul {
-                display: flex;
-            }
+				ul {
+					display: flex;
+				}
 
-            li {
-                display: flex;
-                flex-direction: column;
-                width: 25%;
-                margin-right: 1.75rem;
-            }
+				li {
+					display: flex;
+					flex-direction: column;
+					width: 25%;
+					margin-right: 1.75rem;
+				}
 
-            li > div {
-                color: gray;
-                font-family: Georgia, serif;
-                margin-bottom: 0 .15rem;
-                font-size: .9rem;
-            }
+				li > div {
+					color: gray;
+					font-family: Georgia, serif;
+					margin-bottom: 0 0.15rem;
+					font-size: 0.9rem;
+				}
 
-            a {
-                color: var(--link-hover);
-                font-family: Georgia, serif;
-                margin-bottom: .25rem;
-                font-size: .965rem;
-            }
+				a {
+					color: var(--link-hover);
+					font-family: Georgia, serif;
+					margin-bottom: 0.25rem;
+					font-size: 0.965rem;
+				}
 
-            a:hover {
-                text-decoration: underline;
-            }
-        `}</style>
-    </>)
+				a:hover {
+					text-decoration: underline;
+				}
+			`}</style>
+		</>
+	);
 }
 
-export default Related
+export default Related;
