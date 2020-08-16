@@ -6,6 +6,6 @@ const express = require('express');
 
 app.prepare().then(_=> {
     const server = express();
-    !dev && server.use( (req, res) => (req.protocol === 'http') && res.redirect('https://www.mocknexus.com') );
+    !dev && server.use( (req, res) => console.log(req.protocol) );
     server.listen(port, _=> console.log('Listening on port', port))
 });
