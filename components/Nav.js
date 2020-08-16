@@ -107,9 +107,12 @@ function Nav() {
                 setQueryTime(0);
                 e.target.parentElement.children[2].children[1].children[1].selectedIndex = 0;
             }}>x</button>
-            <div style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchError}</div>
             <div className="search-results-header">
-                {!searchError && <span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>{!loadingSearchResults ? `${searchResults[0].length} result${searchResults[0].length === 1 ? '' : 's'} (${queryTime} second${queryTime === 1 ? '' : 's'})` : 'Loading articles...'}</span>}
+                <span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>{!searchError ?
+                    !loadingSearchResults
+                        ? `${searchResults[0].length} result${searchResults[0].length === 1 ? '' : 's'} (${queryTime} second${queryTime === 1 ? '' : 's'})`
+                        : 'Loading articles...'
+                    : <span style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchError}</span>}</span>
                 <span>
                     <span style={{ fontSize: '.85rem', marginRight: '.25rem' }}>Sort by: </span>
                     <select onChange={e => console.log(e.target.selectedIndex) || setSortBy(e.target.selectedIndex)} style={{ fontFamily: 'Arial, sans-serif' }}>
