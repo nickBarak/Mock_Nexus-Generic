@@ -1,3 +1,3 @@
-export const client = 'localhost:3000';
+export const client = 'https://www.mocknexus.com';
 
 export default { client }
