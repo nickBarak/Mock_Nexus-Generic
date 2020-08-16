@@ -23,7 +23,7 @@ function Layout({ footerData, children }) {
         <Head>
             <script src="https://kit.fontawesome.com/7cab195da1.js" crossOrigin="anonymous"></script>
             <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"></link>
-            <link rel="shortcut icon" href="/favicon.ico"></link>
+            <link rel="shortcut icon" href="/nexus-favicon.webp"></link>
             <title>Mock Nexus</title>
         </Head>
         <div style={{ backgroundColor: '#444', color: '#fff', height: '6rem', display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
