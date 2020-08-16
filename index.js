@@ -4,8 +4,10 @@ const app = next({ dev });
 const port = process.env.PORT || 3000;
 const express = require('express');
 
+/* Redirect HTTP to HTTPS */
 app.prepare().then(_=> {
+    app.enable('trust proxy');
     const server = express();
-    !dev && server.use( (req, res) => res.send(req.protocol) );
+    !dev && server.use( (req, res) => !req.secure && res.redirect('https://www.mocknexus.com') );
     server.listen(port, _=> console.log('Listening on port', port))
 });
