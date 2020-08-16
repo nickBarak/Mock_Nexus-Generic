@@ -1,3 +1,3 @@
-export const client = 'https://mock-nexus.herokuapp.com';
+export const client = 'localhost:3000';
 
 export default { client }

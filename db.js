@@ -1,5 +1,5 @@
 import { config } from 'dotenv';
-import { Client, Pool } from 'pg';
+import { Pool } from 'pg';
 config();
 
 if (!pool) {
@@ -8,19 +8,17 @@ if (!pool) {
         connectionString: process.env.DATABASE_URL,
         idleTimeoutMillis: 0
     });
-    pool
-        ? console.log('Connected to PostgreSQL')
-        : console.log('Failed to connect to database');
+    (async _=>{
+        try {
+            var client = await pool.connect();
+            client
+                ? console.log('Connected to PostgreSQL')
+                : console.log('Failed to connect to database');
+        } catch (e) { console.log(e) }
+        finally { client && client.release() }
+    })();
 }
 
-// export async function queryDB(query, params=[]) {
-//     try {
-//         var client = new Client({ connectionString: process.env.DATABASE_URL }),
-//             { rows } = await client.query(query, params);
-//     } catch (e) { console.log(e) }
-//     finally { client && client.end() }
-//     return rows;
-// }
 export async function queryDB(query, params=[]) {
     try {
         var client = await pool.connect(),
@@ -51,17 +49,3 @@ export async function getUser(email) {
    let [user] = await queryDB('SELECT * FROM users WHERE email = $1', [email]);
     return user;
 }
-
-// function spawnPool() {
-//     if (!pool) {
-//         var pool = new Pool({
-//             max: 200,
-//             connectionString: process.env.DATABASE_URL,
-//             idleTimeoutMillis: 0
-//         });
-//         pool
-//             ? console.log('Connected to PostgreSQL')
-//             : console.log('Failed to connect to database');
-//     }
-//     return pool;
-// }

@@ -109,7 +109,7 @@ function Nav() {
             }}>x</button>
             <div style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchError}</div>
             <div className="search-results-header">
-                <span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>{!loadingSearchResults ? `${searchResults[0].length} result${searchResults[0].length === 1 ? '' : 's'} (${queryTime} second${queryTime === 1 ? '' : 's'})` : 'Loading articles...'}</span>
+                {!searchError && <span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>{!loadingSearchResults ? `${searchResults[0].length} result${searchResults[0].length === 1 ? '' : 's'} (${queryTime} second${queryTime === 1 ? '' : 's'})` : 'Loading articles...'}</span>}
                 <span>
                     <span style={{ fontSize: '.85rem', marginRight: '.25rem' }}>Sort by: </span>
                     <select onChange={e => console.log(e.target.selectedIndex) || setSortBy(e.target.selectedIndex)} style={{ fontFamily: 'Arial, sans-serif' }}>
