@@ -23,6 +23,7 @@ function Layout({ footerData, children }) {
         <Head>
             <script src="https://kit.fontawesome.com/7cab195da1.js" crossOrigin="anonymous"></script>
             <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"></link>
+            <title>Mock Nexus</title>
         </Head>
         <div style={{ backgroundColor: '#444', color: '#fff', height: '6rem', display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
             <span style={{ border: '2px dotted white', width: '45rem', height: '5.35rem', display: 'flex', justifyContent: 'center', alignItems: 'center', borderBottom: 'none' }}>

@@ -2,6 +2,7 @@ import { queryDB } from '../../../../db';
 import ArticlePreview from '../../../../components/ArticlePreview';
 import Link from 'next/link';
 import Footer from '../../../../components/Footer';
+import Head from 'next/head';
 
 export async function getStaticPaths() {
     let [articles] = await queryDB("SELECT articles FROM categories WHERE title = 'Labyrinth'"),
@@ -26,6 +27,10 @@ export async function getStaticProps({ params: { page } }) {
 
 function Labyrinth({ articles, footerData }) {
     return (<>
+    <Head>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"></link>
+        <title>Mock Nexus</title>
+    </Head>
     <img src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png" alt="labyrinth" style={{ width: '100%', height: '20rem', objectFit: 'fill' }} />
     <div className="labyrinth-nav" style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem 1.25rem 1.25rem 1.25rem', backgroundColor: 'beige', position: 'relative' }}>
         <span>
