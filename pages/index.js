@@ -101,9 +101,10 @@ export async function getStaticProps() {
 		articles = await queryDB(
 			`SELECT * FROM articles WHERE category = '${categories[i]}' ORDER BY publish_date FETCH FIRST 3 ROWS ONLY`
 		);
+
 		categories.splice(i, 1, {
-			category: categories[i],
-			articles: articles.rows,
+			title: categories[i],
+			articles
 		});
 	}
 
