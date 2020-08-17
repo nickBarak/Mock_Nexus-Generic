@@ -4,6 +4,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const express = require('express');
 const port = process.env.PORT || 3000;
+const { parse } = require('url');
 
 /* Redirect HTTP to HTTPS */
 app.prepare().then(_=> {
