@@ -7,12 +7,6 @@ const port = process.env.PORT || 3000;
 /* Redirects HTTP to HTTPS */
 app.prepare().then(_=> {
     const server = express();
-    server.use((req, res, next) => {
-        if (req.protocol === 'http') {
-            res.redirect(301, 'https://www.mocknexus.com');
-            return
-        } else next();
-    });
-
+    server.use( (req, res) => req.protocol !== 'https' && res.redirect(301, 'https://www.mocknexus.com') );
     server.listen(port, console.log('Listening on port', port));
 });
