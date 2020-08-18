@@ -100,7 +100,7 @@ export async function getStaticProps() {
 		articles;
 	for (let i = 0; i < categories.length; i++) {
 		articles = await queryDB(
-			`SELECT * FROM articles WHERE category = '${categories[i]}' ORDER BY publish_date FETCH FIRST 3 ROWS ONLY`
+			`SELECT * FROM articles WHERE category = '${categories[i]}' ORDER BY publish_date DESC FETCH FIRST 3 ROWS ONLY`
 		);
 
 		categories.splice(i, 1, {

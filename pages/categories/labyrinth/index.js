@@ -71,7 +71,7 @@ function Labyrinth({ articles, footerData }) {
 					</Link>
 				</span>
 			</div>
-			<div style={{ display: 'flex', justifyContent: 'center' }}>
+			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<ul style={{ width: '60%' }}>
 					{articles.slice(0, 11).map((article, i) => (
 						<li key={uuid()}>

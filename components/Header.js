@@ -14,7 +14,7 @@ function Header() {
 								src="/img/nexus-logo.png"
 								alt="logo"
 							/>{' '}
-							NEXUS{' '}
+							NEXUS
 						</a>
 					</Link>
 				</div>

@@ -122,12 +122,6 @@ function CategoryPreview({ category: { title, articles } }) {
 					font-style: italic;
 				}
 
-				img {
-					height: 6.25rem;
-					width: 7.75rem;
-					object-fit: cover;
-				}
-
 				a:hover {
 					color: var(--link-hover);
 				}

@@ -57,10 +57,10 @@ function Layout({ footerData, children }) {
 						display: 'flex',
 						justifyContent: 'space-between',
 					}}>
-					<div style={{ width: 'calc(100% - 18.75rem)' }}>
+					<div>
 						{children}
 					</div>
-					<div style={{ width: '18.25rem' }}>
+					<div className="sidebar-container">
 						<Sidebar />
 					</div>
 				</div>

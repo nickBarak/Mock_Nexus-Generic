@@ -186,7 +186,6 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
 
 					ul:nth-child(1) a {
 						color: var(--link-hover);
-						font-size: 1.1rem;
 					}
 
 					ul:nth-child(2) {

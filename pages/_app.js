@@ -1,10 +1,11 @@
 /* Universal styles */
-import '../styles/style.css';
+import '../styles/index.css';
 import Head from 'next/head';
 
 function _App({ Component, pageProps }) {
     return (<>
         <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <script
                 src="https://kit.fontawesome.com/7cab195da1.js"
                 crossOrigin="anonymous" />

@@ -11,7 +11,6 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						<source srcSet={article.full_thumbnail} />
 						<source
 							srcSet="/img/nexus-fallback.webp"
-							style={{ width: '20rem', height: '15rem' }}
 							type="image/webp"
 						/>
 						<img alt="thumbnail" />
@@ -20,7 +19,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 				<div className="article-preview-words">
 					<div>
 						<Link href={`/articles/${article.id}`}>
-							<a className="article-preview-title">
+							<a className={`article-preview-title${labyrinth ? ' labyrinth-title' : ''}`}>
 								{article.title}
 							</a>
 						</Link>
@@ -43,7 +42,6 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						<source srcSet={article.full_thumbnail} />
 						<source
 							srcSet="/img/nexus-fallback.webp"
-							style={{ width: '20rem', height: '15rem' }}
 							type="image/webp"
 						/>
 						<img alt="thumbnail" />
@@ -80,9 +78,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 
 				.article-preview-title {
 					color: black;
-					font-size: 1.75rem;
 					font-weight: 600;
-					${labyrinth ? 'font-size: 1.5rem;' : ''}
 				}
 
 				.article-preview-author {

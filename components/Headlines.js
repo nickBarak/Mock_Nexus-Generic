@@ -6,7 +6,7 @@ function Headlines({ articles }) {
 	return (
 		<>
 			<div className="headlines">
-				<ul className="main-headline">
+				<ul>
 					<li>
 						<Link href={`/articles/${articles[0].id}`}>
 							<img
@@ -81,6 +81,7 @@ function Headlines({ articles }) {
 				.headlines {
 					margin-bottom: 3.5rem;
 				}
+
 				ul {
 					display: flex;
 				}
@@ -144,6 +145,12 @@ function Headlines({ articles }) {
 
 				.article-preview-description {
 					margin-bottom: 2px;
+				}
+
+				ul li:nth-child(1) {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-start;
 				}
 			`}</style>
 		</>

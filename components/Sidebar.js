@@ -18,15 +18,7 @@ function Sidebar() {
 		<>
 			<ul className="sidebar">
 				<li key="0">
-					<div
-						style={{
-							color: 'white',
-							backgroundColor: '#444',
-							display: 'flex',
-							justifyContent: 'center',
-							alignItems: 'center',
-							height: '14rem',
-						}}>
+					<div>
 						Ad Space
 					</div>
 				</li>
@@ -36,7 +28,7 @@ function Sidebar() {
 						border: '2px solid #555',
 						margin: '.5rem 0 .75rem 0',
 					}}>
-					<img src="/img/covid-chart.png" alt="covid chart" />
+					<img src="/img/covid-chart.png" alt="covid chart" style={{ width: '95%' }} />
 				</li>
 				<li key="2">
 					<div className="comic-of-the-week-title">
@@ -277,13 +269,12 @@ function Sidebar() {
 				.comic-of-the-week img {
 					object-fit: cover;
 					width: 100%;
-					height: 14rem;
+					height: 100%;
 					position: relative;
 				}
 
 				.comic-of-the-week {
 					position: relative;
-					height: 14rem;
 					cursor: pointer;
 				}
 

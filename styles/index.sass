@@ -1,0 +1,190 @@
+$theme-blue: rgb(0, 54, 96)
+$theme-gold: rgb(255, 200, 45)
+$link-hover: #0088CC
+    
+html
+    scroll-behavior: smooth
+    --theme-blue: #{$theme-blue}
+    --theme-gold: #{$theme-gold}
+    --link-hover: #{$link-hover}
+
+* 
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+    font-family: Lato, sans-serif
+
+li 
+    list-style: none
+
+a 
+    text-decoration: none
+
+#__next 
+    transition: opacity 150ms ease-in
+
+.read-more 
+    color: $link-hover
+    margin-top: 2px
+
+.date-and-author 
+    color: gray
+    margin-top: .2rem
+    margin-bottom: .6rem
+    font-size: .875rem
+
+.sidebar-container 
+    width: 18.25rem
+
+.headlines img
+    object-fit: scale-up
+    object-position: bottom left
+    height: 65%
+    max-width: 100%
+    align-self: flex-start
+    justify-self: flex-start
+
+.article-preview
+    img
+        height: 15rem
+        width: 21.5rem
+    picture
+        align-self: center
+    .article-preview-title
+        font-size: 1.75rem
+    .labyrinth-title
+        font-size: 1.5rem
+
+.sidebar li:nth-child(1) div
+    color: white
+    background-color: #444
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 14rem
+
+.comic-of-the-week
+    height: 14rem
+
+.footer ul:nth-child(1) a
+    font-size: 1.1rem
+
+.category-preview img
+    height: 6.25rem
+    width: 7.75rem
+    object-fit: cover
+
+@media screen and (max-width: 1250px)
+    html
+        font-size: 92.5%
+
+    .nav a
+        font-size: .85rem
+    
+    .header
+        .logo 
+            width: 5rem
+            height: 6rem
+            transform: translateY(1.75rem)
+    
+    .headlines img
+        height: 47.5%
+    
+    .category-preview img
+        height: 5.75rem
+        width: 7.25rem
+
+    
+@media screen and (max-width: 1025px)
+    html
+        font-size: 85%
+
+    .nav a
+        font-size: .775rem
+
+    .sidebar-container 
+        width: 15rem
+
+    .sidebar img
+        width: 15rem
+        height: 15rem
+
+    .article-preview img
+        width: 19rem
+        height: 13rem
+
+    .category-preview img
+        height: 5.25rem
+        width: 6.75rem
+
+@media screen and (max-width: 800px)
+    html
+        font-size: 77.5%
+
+    .nav a
+        font-size: .7rem
+
+    .sidebar-container
+        width: 10rem
+
+    .sidebar
+        img
+            width: 10rem
+            height: 10rem
+        li:nth-child(1) div
+            height: 10rem
+        .comic-of-the-week
+            height: 10rem
+
+    .article-preview
+        img
+            width: 15.5rem
+            height: 12rem
+        .article-preview-title
+            font-size: 1.3rem
+        .labryinth-title
+            font-size: 1.3rem
+
+    .category-preview img
+        height: 4.75rem
+        width: 6.25rem
+
+    
+@media screen and (max-width: 650px)
+    html
+        font-size: 72.5%
+
+    .nav a
+        font-size: .6rem
+
+    .article-preview
+        img
+            width: 12.5rem
+            height: 10rem
+        .article-preview-title,
+        .labyrinth-title
+            font-size: 1.05rem
+
+    .footer
+        a
+            font-size: .9rem
+        ul:nth-child(1) a
+            font-size: 1rem
+
+    .category-preview img
+        height: 4.25rem
+        width: 5.75rem
+
+@media screen and (max-width: 500px)
+    html
+        font-size: 70%
+
+    .nav a
+        font-size: .5rem
+
+@media screen and (max-width: 350px)
+    html
+        font-size: 50%
+
+    .nav a
+        font-size: .4rem
