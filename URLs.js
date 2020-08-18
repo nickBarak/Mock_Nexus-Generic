@@ -1,4 +1,4 @@
-export const client = (process.NODE_ENV === 'production')
+export const client = (process.env.NODE_ENV === 'production')
     ? 'https://www.mocknexus.com'
     : 'http://localhost:3000';
 
