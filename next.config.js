@@ -4,7 +4,6 @@ if (process.env.NODE_ENV === 'development') {
   
 module.exports = {
     env: {
-        NODE_ENV: process.env.NODE_ENV,
         DATABASE_URL: process.env.DATABASE_URL
     }
 }
