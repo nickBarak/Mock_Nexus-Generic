@@ -27,26 +27,28 @@ function CategoryPreview({ category: { title, articles } }) {
 								</a>
 							</Link>
 						</div>
-						<div style={{ display: 'flex' }}>
-							<picture>
-								<source srcSet={article.full_thumbnail} />
-								<source
-									srcSet="/img/nexus-fallback.webp"
-									type="image/webp"
-								/>
-								<img alt="thumbnail" />
-							</picture>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									marginLeft: '.4rem',
-									fontSize: '.9rem',
-								}}>
-								<span>{article.description}</span>
-								<Link href={`/articles/${article.id}`}>
-									<a className="read-more">read more</a>
-								</Link>
+						<div className="category-preview-details">
+							<div style={{ display: 'flex' }}>
+								<picture>
+									<source srcSet={article.full_thumbnail} />
+									<source
+										srcSet="/img/nexus-fallback.webp"
+										type="image/webp"
+									/>
+									<img alt="thumbnail" />
+								</picture>
+								<div
+									style={{
+										display: 'flex',
+										flexDirection: 'column',
+										marginLeft: '.4rem',
+										fontSize: '.9rem',
+									}}>
+									<span>{article.description}</span>
+									<Link href={`/articles/${article.id}`}>
+										<a className="read-more">read more</a>
+									</Link>
+								</div>
 							</div>
 						</div>
 					</li>
@@ -64,7 +66,6 @@ function CategoryPreview({ category: { title, articles } }) {
 					content: '';
 					position: absolute;
 					height: 515px;
-					width: 1px;
 					background-color: #ddd;
 					right: -0.4rem;
 					top: 0.5rem;

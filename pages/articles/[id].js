@@ -74,6 +74,13 @@ function Article({ article, author, related }) {
 				ul.style.marginTop = '.5rem';
 			}
 		);
+		
+		[document.getElementsByClassName('article-page-content')[0],
+		contentDiv,
+		...contentDiv.getElementsByClassName('wp-caption'),
+		...contentDiv.getElementsByTagName('a'),
+		...contentDiv.getElementsByTagName('img')].forEach(el => { el.style.maxWidth = '100%' });
+		[...contentDiv.getElementsByTagName('img')].forEach(img => { img.style.objectFit = 'cover' });
 		[...document.getElementsByClassName('share-icon')].forEach(icon => {
 			let [site] = [...icon.classList].filter(
 					className =>
@@ -194,6 +201,7 @@ function Article({ article, author, related }) {
 			<style jsx>{`
 				.article {
 					margin: 0.15rem 1rem;
+					max-width: calc(100% - 2rem);
 				}
 
 				.article-page-subcategory {
@@ -238,6 +246,17 @@ function Article({ article, author, related }) {
 
 				.article-page-details {
 					margin: 2.5rem 0 3.5rem 0;
+					position: relative;
+				}
+
+				.article-page-details::after {
+					content: '';
+					height: 1px;
+					width: 100%;
+					background-color: #eee;
+					position: absolute;
+					bottom: -7.5%;
+					left: 0;
 				}
 
 				.article-page-details > div:nth-child(2),

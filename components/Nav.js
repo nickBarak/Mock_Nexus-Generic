@@ -4,8 +4,7 @@ import 'isomorphic-unfetch';
 import { useState } from 'react';
 import { client } from '../URLs';
 import { uuid } from 'uuidv4';
-
-const categories = [{"title":"Artsweek","subcategories":["Feature","Film and TV","Literature","Music","Performing Art","Previews: What's Going On","Visual Art"]},{"title":"Labyrinth","link":"/categories/labyrinth"},{"title":"Multimedia","subcategories":["Comics","Photo","Video"]},{"title":"News","subcategories":["Campus","County","Crime","Feature","Isla Vista","Student Gov","UC News","UCSB COLA Movement"]},{"title":"Nexustentialism","link":"/categories/nexustentialism"},{"title":"On the Menu","subcategories":["Coffee Column","First Bites","Meal Prep Mondays","On the Road","Recipes","The Beet"]},{"title":"Opinion","subcategories":["Argument in the Office","Ask AJ","Flesh Prison","Global Gauchos","Hyphenated American","Letters to the Editor","Living","Politics","Therapeutic Thoughts","Virtual Reality","Wednesday Hump"]},{"title":"Science & Tech","subcategories":["Health & Wellness"]},{"title":"Sports","subcategories":["Baseball","Basketball","Columns/Features","Cross Country","Golf","Soccer","Softball",/*"Sports Blogs",*/"Swim and Dive","Tennis","Track and Field","Volleyball","Water Polo"]}];
+import categories from '../data/categories';
 
 function Nav() {
     const [searchResults, setSearchResults] = useState([[], []]);
@@ -128,7 +127,11 @@ function Nav() {
                     : <span style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchError}</span>}</span>
                 <span>
                     <span style={{ fontSize: '.85rem', marginRight: '.25rem' }}>Sort by: </span>
-                    <select onChange={e => console.log(e.target.selectedIndex) || setSortBy(e.target.selectedIndex)} style={{ fontFamily: 'Arial, sans-serif' }}>
+                    <select onChange={e => {
+                        setSortBy(e.target.selectedIndex);
+                        setModalPage(1);
+                        setModalPageSet(0);
+                    }} style={{ fontFamily: 'Arial, sans-serif' }}>
                         <option key="0">Relevance</option>
                         <option key="1">Date</option>
                     </select>

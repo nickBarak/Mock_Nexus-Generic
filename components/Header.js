@@ -1,4 +1,5 @@
 import Nav from './Nav';
+import MobileNav from './MobileNav';
 import Link from 'next/link';
 
 function Header() {
@@ -48,6 +49,30 @@ function Header() {
 				</div>
 				<Nav />
 			</div>
+
+			<div className="header-mobile">
+				<MobileNav />
+				<span className="full-logo">
+					<Link href="/">
+						<a>
+							MOCK
+							<img
+								className="logo"
+								src="/img/nexus-logo.png"
+								alt="logo"
+							/>
+							NEXUS
+						</a>
+					</Link>
+				</span>
+				<span className="hamburger-nav">
+					<span style={{ position: 'absolute', bottom: '-12px', left: 0, height: '28px', width: '32px', cursor: 'pointer' }} onTouchEnd={e => { }} onClick={_=> {
+						document.getElementsByClassName('nav-mobile')[0].style.transform = 'translateX(0)';
+						document.getElementById('__next').children[2].children[0].style.display = 'none';
+					}} />
+				</span>
+			</div>
+
 			<style jsx>{`
 				* {
 					font-family: Lato, sans-serif;
@@ -65,7 +90,7 @@ function Header() {
 
 				.full-logo a {
 					font-size: 4.5rem;
-					font-family: Times New Roman;
+					font-family: Times New Roman, Georgia;
 					color: black;
 				}
 
@@ -119,6 +144,61 @@ function Header() {
 
 				i:hover {
 					color: black;
+				}
+
+				.header-mobile {
+					width: 99%;
+					justify-content: space-around;
+					align-items: center;
+				}
+
+				.header-mobile .full-logo {
+					width: 80%;
+					text-align: left;
+					display: flex;
+					align-items: flex-start;
+				}
+
+				.header-mobile .full-logo a {
+					font-size: 2.5rem;
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 0 .55rem;
+					margin-top: .65rem;
+				}
+
+				.header-mobile .logo {
+					width: 3.5rem;
+					height: 4.25rem;
+					transform: translateY(-.175rem);
+				}
+
+				.hamburger-nav {
+					height: 4px;
+					width: 32px;
+					border-radius: 15px;
+					background-color: black;
+					position: relative;
+				}
+
+				.hamburger-nav::before,
+				.hamburger-nav::after {
+					content: '';
+					width: 100%;
+					border-radius: 15px;
+					height: 4px;
+					background-color: black;
+					position: absolute;
+				}
+
+				.hamburger-nav::before {
+					top: -8px;
+				}
+
+				.hamburger-nav::after {
+					bottom: -8px;
+					left: 0;
 				}
 			`}</style>
 		</>

@@ -1,7 +1,7 @@
 /* Applies consistent format for About pages */
 function About({ heading, children }) {
 	return (
-		<div style={{ margin: '1rem 1rem 0 1rem' }}>
+		<div className="about" style={{ margin: '1rem 1rem 0 1rem' }}>
 			<div
 				style={{
 					color: 'var(--link-hover)',

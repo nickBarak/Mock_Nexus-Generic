@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
+import { uuid } from 'uuidv4';
 
 /* Displays 4 articles, first is emphasized */
 function Headlines({ articles }) {
@@ -7,7 +8,7 @@ function Headlines({ articles }) {
 		<>
 			<div className="headlines">
 				<ul>
-					<li>
+					<li key={uuid()}>
 						<Link href={`/articles/${articles[0].id}`}>
 							<img
 								src={articles[0].full_thumbnail}
@@ -40,10 +41,10 @@ function Headlines({ articles }) {
 							<a className="read-more">read more</a>
 						</Link>
 					</li>
-					<li>
+					<li key={uuid()}>
 						<ul>
 							{articles.slice(1, 4).map((article, i) => (
-								<li key={i + 1}>
+								<li key={uuid()}>
 									<div>
 										<span className="article-preview-category">
 											{article.category} |
@@ -77,8 +78,59 @@ function Headlines({ articles }) {
 				</ul>
 			</div>
 
+			<div className="headlines-mobile">
+				<ul>
+					<li key={uuid()}>
+						<Link href={``}>
+							<img
+								src={articles[0].mobile_thumbnail}
+								alt="headline"
+								style={{ width: '99%', marginBottom: '.5rem' }}
+							/>
+						</Link>
+						<Link href={`/articles/${articles[0].id}`}>
+							<a className="article-preview-title">
+								{articles[0].title}
+							</a>
+						</Link>
+						<div className="date-and-author">
+							{convertDate(articles[0].publish_date)} by{' '}
+							<Link href={`/authors/${articles[0].author.id}`}>
+								<a className="article-preview-author">
+									{articles[0].author.name}
+								</a>
+							</Link>
+						</div>
+						<div className="article-preview-description">
+							{articles[0].description}
+						</div>
+						<Link href={`/articles/${articles[0].id}`}>
+							<a className="read-more">read more</a>
+						</Link>
+					</li>
+					{articles.slice(1, 4).map((article, i) => (
+						<li key={uuid()}>
+							<Link href={`/articles/${article.id}`}>
+								<a className="article-preview-title">
+									{article.title}
+								</a>
+							</Link>
+							<div className="date-and-author">
+								{convertDate(article.publish_date)} by{' '}
+								<Link
+									href={`/authors/${article.author.id}`}>
+									<a className="article-preview-author">
+										{article.author.name}
+									</a>
+								</Link>
+							</div>
+						</li>
+					))}
+				</ul>
+			</div>
+
 			<style jsx>{`
-				.headlines {
+				.headlines, .headlines-mobile {
 					margin-bottom: 3.5rem;
 				}
 
@@ -86,7 +138,8 @@ function Headlines({ articles }) {
 					display: flex;
 				}
 
-				li ul {
+				li ul,
+				.headlines-mobile ul {
 					flex-direction: column;
 				}
 
@@ -101,8 +154,11 @@ function Headlines({ articles }) {
 				}
 
 				li ul li:nth-child(1)::before,
-				li ul li:nth-child(2)::before {
-					content: '';
+				li ul li:nth-child(2)::before,
+				.headlines-mobile ul li:nth-child(1)::before,
+				.headlines-mobile ul li:nth-child(2)::before,
+				.headlines-mobile ul li:nth-child(3)::before {
+				content: '';
 					height: 1px;
 					width: 99%;
 					left: 0;

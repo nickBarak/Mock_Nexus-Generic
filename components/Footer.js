@@ -199,6 +199,8 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
 					ul:nth-child(2) li {
 						margin: 0 1.25rem;
 						font-size: 1.2rem;
+						align-self: center;
+						white-space: nowrap;
 					}
 				`}</style>
 			</div>

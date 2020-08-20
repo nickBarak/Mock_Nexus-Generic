@@ -57,7 +57,7 @@ function Layout({ footerData, children }) {
 						display: 'flex',
 						justifyContent: 'space-between',
 					}}>
-					<div>
+					<div className="main-children">
 						{children}
 					</div>
 					<div className="sidebar-container">
@@ -82,7 +82,7 @@ function Layout({ footerData, children }) {
 						position: 'fixed',
 						bottom: 0,
 						width: '45rem',
-						zIndex: 10,
+						zIndex: 11,
 						display: 'none',
 					}}>
 					<span>Ad Space</span>

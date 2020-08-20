@@ -32,11 +32,10 @@ function App({ categories, headlines }) {
 						</a>
 					</Link>
 					<Headlines articles={headlines} />
-					<div
+					<div className="home-by-category"
 						style={{
 							fontSize: '1.5rem',
 							fontWeight: 'bold',
-							marginLeft: '1rem',
 						}}>
 						By Category
 					</div>
@@ -52,10 +51,8 @@ function App({ categories, headlines }) {
 			<style jsx global>{`
 				.home-category-previews {
 					display: grid;
-					grid-template-columns: 1fr 1fr;
 					row-gap: 4rem;
 					column-gap: 0.5rem;
-					margin: 2rem 3rem;
 				}
 
 				.banner {
