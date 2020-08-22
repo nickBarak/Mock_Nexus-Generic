@@ -1,7 +1,7 @@
 import ArticlePreview from './ArticlePreview';
 import { uuid } from 'uuidv4';
 
-function ArticleDisplay({ type, heading, articles, searchData, searchData: { loadingSearchResults, queryTime, resultCount, searchError, setSortBy } }) {
+function ArticleDisplay({ type, heading, articles, searchData }) {
 	return (
 		<>
 			<div
@@ -21,15 +21,15 @@ function ArticleDisplay({ type, heading, articles, searchData, searchData: { loa
 					<div className="search-results-header" style={{ marginTop: '.8rem' }}>
 						<span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>
 						{/* Show loading, query time or error */}
-						{!searchError ?
-							!loadingSearchResults
-								? `${resultCount} result${resultCount === 1 ? '' : 's'} (${queryTime} second${queryTime === 1 ? '' : 's'})`
+						{!searchData.searchError ?
+							!searchData.loadingSearchResults
+								? `${searchData.resultCount} result${searchData.resultCount === 1 ? '' : 's'} (${searchData.queryTime} second${searchData.queryTime === 1 ? '' : 's'})`
 								: 'Loading articles...'
-							: <span style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchError}</span>}</span>
+							: <span style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchData.searchError}</span>}</span>
 						<span>
 							<span style={{ fontSize: '.85rem', marginRight: '.25rem' }}>Sort by: </span>
 							<select className="search-results-select" onChange={e => {
-								setSortBy(e.target.selectedIndex);
+								searchData.setSortBy(e.target.selectedIndex);
 							}} style={{ fontFamily: 'Arial, sans-serif' }}>
 								<option key="0">Relevance</option>
 								<option key="1">Date</option>
