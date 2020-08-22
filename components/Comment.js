@@ -24,7 +24,6 @@ function Comment({
 			<div className="comment">
 				<span
 					style={{
-						width: '6rem',
 						maxWidth: '6rem',
 						fontSize: '.775rem',
 						display: 'flex',
@@ -33,6 +32,7 @@ function Comment({
 						marginRight: '1rem',
 					}}>
 					<img
+						className={`${parent ? 'comment-child-img' : 'comment-img'}`}
 						src={
 							picture ||
 							'https://secure.gravatar.com/avatar/004ce453a2b46792c3e04146555a35b3?s=64&d=mm&r=g'
@@ -43,6 +43,7 @@ function Comment({
 						style={{
 							color: '#00B38F',
 							fontSize: '13px',
+							textAlign: 'center',
 							maxWidth: '5rem',
 							wordWrap: 'break-word',
 							overflowWrap: 'break-word',
@@ -82,7 +83,7 @@ function Comment({
 							Reply
 						</button>
 						<span>
-							<span style={{ color: '#999', fontSize: '.75rem' }}>
+							<span style={{ color: '#999', fontSize: '.75rem', display: 'flex', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
 								{email === currentUserEmail && (
 									<button
 										onClick={e => {
@@ -100,9 +101,10 @@ function Comment({
 														email: currentUserEmail,
 													}),
 												}
-											);
-											/* maintain scroll position */
-											document.location.reload();
+											).then(_=>
+												/* maintain scroll position */
+												document.location.reload()
+											).catch(e => console.log(e));
 										}}
 										style={{
 											color: 'white',
@@ -228,8 +230,6 @@ function Comment({
 
 				img {
 					object-fit: fill;
-					height: ${parent ? '3rem' : '5rem'};
-					width: ${parent ? '3rem' : '5rem'};
 					box-shadow: 0 0 2px 2px #d8d8d8;
 					margin-bottom: 0.5rem;
 				}

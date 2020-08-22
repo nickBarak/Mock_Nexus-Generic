@@ -191,14 +191,12 @@ function Footer({ footerData, toggleShowBottomAdListener }) {
 					ul:nth-child(2) {
 						border: 1px solid #ddd;
 						padding: 0.5rem 0.075rem;
-						display: flex;
 						justify-content: space-around;
 						margin: 0.75rem 0 0.85rem 0;
 					}
 
 					ul:nth-child(2) li {
 						margin: 0 1.25rem;
-						font-size: 1.2rem;
 						align-self: center;
 						white-space: nowrap;
 					}

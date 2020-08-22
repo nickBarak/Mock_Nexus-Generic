@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/categories/[category]/[subcategory]/page/[page]": [
+    "/search/[value]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/categories/[category]/[subcategory]/page/[page].js"
+      "static/chunks/pages/search/[value].js"
     ]
   },
   "ampFirstPages": []

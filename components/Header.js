@@ -90,7 +90,7 @@ function Header() {
 
 				.full-logo a {
 					font-size: 4.5rem;
-					font-family: Times New Roman, Georgia;
+					font-family: Times New Roman, Georgia, Serif;
 					color: black;
 				}
 
@@ -160,7 +160,7 @@ function Header() {
 				}
 
 				.header-mobile .full-logo a {
-					font-size: 2.5rem;
+					font-size: 1.75rem;
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
@@ -169,14 +169,14 @@ function Header() {
 				}
 
 				.header-mobile .logo {
-					width: 3.5rem;
-					height: 4.25rem;
-					transform: translateY(-.175rem);
+					width: 2.5rem;
+					height: 3rem;
+					transform: translateY(-.155rem);
 				}
 
 				.hamburger-nav {
-					height: 4px;
-					width: 32px;
+					height: 3px;
+					width: 27px;
 					border-radius: 15px;
 					background-color: black;
 					position: relative;
@@ -187,7 +187,7 @@ function Header() {
 					content: '';
 					width: 100%;
 					border-radius: 15px;
-					height: 4px;
+					height: 3px;
 					background-color: black;
 					position: absolute;
 				}

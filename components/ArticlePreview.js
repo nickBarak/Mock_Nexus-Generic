@@ -92,7 +92,6 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 				.article-preview-mobile {
 					margin: 2.5rem 0;
 					position: relative;
-					display: flex;
 					flex-direction: column;
 				}
 
@@ -129,7 +128,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 					display: flex;
 					flex-direction: column;
 					margin: 0 0.75rem;
-					width: ${labyrinth ? '60%' : '80%'};
+					width: ${labyrinth ? '100%' : '80%'};
 				}
 
 				.article-prevew .artilce-preview-words {

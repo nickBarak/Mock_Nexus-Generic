@@ -22,11 +22,11 @@ function CommentInputs({
 			});
 	}, []);
 
-	async function postComment(e, setMessage, article_id, parent = null) {
+	async function postComment(e, formEl, setMessage, article_id, parent = null) {
 		e.persist();
 		e.preventDefault();
-		const [content, name, email] = [0, 1, 2].map(
-			i => e.target.children[i].children[1].value
+		let [content, name, email] = ['content', 'name', 'email'].map((el, i) =>
+			sessionStorage.getItem(el) || formEl.children[i].children[1].value
 		);
 		if (!content) return;
 		if ((!name && email) || (name && !email)) {
@@ -73,10 +73,94 @@ function CommentInputs({
 			sessionStorage.setItem('email', email);
 			sessionStorage.setItem('name', name);
 		}
-		e.target.reset();
+		formEl.reset();
 
 		/* maintain scroll position */
 		document.location.reload();
+	}
+
+	async function followArticle(e) {
+		e.persist();
+		e.preventDefault();
+		const form =
+			e.currentTarget.parentElement
+				.parentElement.parentElement;
+		let email = user
+				? user.email
+				: e.currentTarget.parentElement
+						.parentElement.children[1]
+						.value,
+			name = user
+				? user.name
+				: e.currentTarget.parentElement
+						.parentElement.parentElement
+						.children[1].children[1]
+						.value;
+		if (email && name) {
+			let response = await fetch(
+					client + '/api/follow-article',
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type':
+								'application/json',
+						},
+						body: JSON.stringify({
+							name,
+							email,
+							articleID,
+							following,
+						}),
+					}
+				),
+				status = await response.json(),
+				msg;
+			switch (status) {
+				default:
+					console.log(status);
+					msg = 'Error Following Article';
+					break;
+				case 0:
+					setMessage('');
+					break;
+				case 1:
+					msg = 'Invalid email address';
+					break;
+				case 2:
+					msg =
+						'This email is registered with a different name';
+					break;
+				case 3:
+					msg = 'New user created';
+			}
+			msg && setMessage(msg);
+			if (!status || status === 3) {
+				if (
+					!sessionStorage.getItem('email')
+				) {
+					sessionStorage.setItem(
+						'email',
+						email
+					);
+					sessionStorage.setItem(
+						'name',
+						name
+					);
+				}
+				alert(
+					`Imagine your email being ${
+						following
+							? 'unsubscribed from'
+							: 'subscribed to'
+					} this article\'s comment activity`
+				);
+				form.reset();
+				document.location.reload();
+			}
+		} else
+			alert(
+				'Enter your name and email in the boxes to the left to follow this article'
+			);
 	}
 
 	return (
@@ -88,10 +172,9 @@ function CommentInputs({
 					marginTop: '1rem',
 					maxWidth: '55rem',
 				}}
-				onSubmit={e => postComment(e, setMessage, articleID, parent)}>
-				<div style={{ position: 'relative' }}>
+				onSubmit={e => postComment(e, e.currentTarget, setMessage, articleID, parent)}>
+				<div style={{ position: 'relative' }} className="input-large-container">
 					<img
-						className="input-large-img"
 						src="https://secure.gravatar.com/avatar/?s=40&d=mm&r=g"
 						alt="user"
 					/>
@@ -114,10 +197,11 @@ function CommentInputs({
 						placeholder="Name*"
 					/>
 				</div>
+
 				<div
+					className="input-email-container"
 					style={{
 						position: 'relative',
-						display: 'flex',
 						justifyContent: 'space-between',
 					}}>
 					<i className="fas fa-at input-icon"></i>
@@ -139,90 +223,8 @@ function CommentInputs({
 								onKeyDown={e =>
 									e.keyCode === 13 && Simulate.click(e.target)
 								}
-								onClick={async e => {
-									e.persist();
-									e.preventDefault();
-									const form =
-										e.currentTarget.parentElement
-											.parentElement.parentElement;
-									let email = user
-											? user.email
-											: e.currentTarget.parentElement
-													.parentElement.children[1]
-													.value,
-										name = user
-											? user.name
-											: e.currentTarget.parentElement
-													.parentElement.parentElement
-													.children[1].children[1]
-													.value;
-									if (email && name) {
-										let response = await fetch(
-												client + '/api/follow-article',
-												{
-													method: 'POST',
-													headers: {
-														'Content-Type':
-															'application/json',
-													},
-													body: JSON.stringify({
-														name,
-														email,
-														articleID,
-														following,
-													}),
-												}
-											),
-											status = await response.json(),
-											msg;
-										console.log(status);
-										switch (status) {
-											default:
-												console.log(status);
-												msg = 'Error Following Article';
-												break;
-											case 0:
-												setMessage('');
-												break;
-											case 1:
-												msg = 'Invalid email address';
-												break;
-											case 2:
-												msg =
-													'This email is registered with a different name';
-												break;
-											case 3:
-												msg = 'New user created';
-										}
-										msg && setMessage(msg);
-										if (!status || status === 3) {
-											if (
-												!sessionStorage.getItem('email')
-											) {
-												sessionStorage.setItem(
-													'email',
-													email
-												);
-												sessionStorage.setItem(
-													'name',
-													name
-												);
-											}
-											alert(
-												`Imagine your email being ${
-													following
-														? 'unsubscribed from'
-														: 'subscribed to'
-												} this article\'s comment activity`
-											);
-											form.reset();
-											document.location.reload();
-										}
-									} else
-										alert(
-											'Enter your name and email in the boxes to the left to follow this article'
-										);
-								}}
+								onClick={followArticle}
+								onTouchStart={followArticle}
 								style={{
 									display: 'flex',
 									justifyContent: 'center',
@@ -247,7 +249,7 @@ function CommentInputs({
 									}}></i>
 							</span>
 						)}
-						<button className="post-comment-button">
+						<button className="post-comment-button" onTouchStart={e => postComment(e, e.currentTarget.parentElement.parentElement.parentElement, setMessage, articleID, parent)}>
 							Post Comment
 						</button>
 					</span>
@@ -257,10 +259,9 @@ function CommentInputs({
 					.post-comment-button {
 						background-color: #555;
 						color: white;
-						font-size: 0.925rem;
-						padding: 0.5rem 1.25rem;
 						cursor: pointer;
 						border: none;
+						z-index: 2
 					}
 
 					.post-comment-button:hover,
@@ -274,12 +275,15 @@ function CommentInputs({
 						border: 1px solid #ddd;
 						color: #888;
 						font-family: monospace;
-						width: 100%;
 						margin-bottom: 0.6rem;
 						font-size: ${embedded ? '1rem' : '1.15rem'};
 					}
 
-					.input-large-img {
+					.input-large-container input {
+						width: 100%;
+					}
+
+					.input-large-container img {
 						position: absolute;
 						top: 1rem;
 						left: 1rem;
@@ -289,7 +293,6 @@ function CommentInputs({
 					.input-small {
 						font-size: 0.9rem;
 						padding: 0.5rem 1.9rem;
-						width: 50%;
 						font-family: Lato;
 					}
 

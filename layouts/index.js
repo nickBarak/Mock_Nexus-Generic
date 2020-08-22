@@ -30,7 +30,6 @@ function Layout({ footerData, children }) {
 				style={{
 					backgroundColor: '#444',
 					color: '#fff',
-					height: '6rem',
 					display: 'flex',
 					justifyContent: 'center',
 					alignItems: 'flex-end',
@@ -39,8 +38,6 @@ function Layout({ footerData, children }) {
 				<span
 					style={{
 						border: '2px dotted white',
-						width: '45rem',
-						height: '5.35rem',
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
@@ -76,12 +73,10 @@ function Layout({ footerData, children }) {
 					style={{
 						backgroundColor: '#444',
 						color: '#fff',
-						height: '7rem',
 						justifyContent: 'center',
 						alignItems: 'center',
 						position: 'fixed',
 						bottom: 0,
-						width: '45rem',
 						zIndex: 11,
 						display: 'none',
 					}}>

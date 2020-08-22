@@ -2,12 +2,15 @@ import categories from '../data/categories';
 import { uuid } from 'uuidv4';
 import Link from 'next/link';
 import { convertToPath } from '../Functions';
+import { useRouter } from 'next/router';
 
 function MobileNav() {
+    const router = useRouter();
+
     return (<>
         <div className="nav-mobile">
             <div style={{ position: 'relative', fontSize: '1.75rem', borderBottom: '1px solid #333', fontWeight: 'bold', padding: '1.5rem .8rem' }}>
-                <Link href="/"><a onClick={e => { e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)' }}>The Daily Nexus</a></Link>
+                <Link href="/"><a onClick={e => { e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)' }}>The Mock Nexus</a></Link>
                 <span className="nav-mobile-button"
                     onClick={e => {
                         e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)';
@@ -57,7 +60,15 @@ function MobileNav() {
                     : <Link href={category.link}><a>{category.title}</a></Link>
                 }</li>)
                 })
-            }</ul>
+            }
+                <li key="-1" style={{ flexDirection: 'row' }}>
+                    <i className="fas fa-search" style={{ transform: 'translateY(3px)' }} onClick={e => e.target.parentElement.children[1].children[0].value && router.push('/search/'+convertToPath(e.target.parentElement.children[1].children[0].value))}></i>
+                    <form style={{ width: '70%' }} onSubmit={e => {
+                        e.preventDefault();
+                        router.push('/search/'+convertToPath(e.target.children[0].value));
+                    }}> <input placeholder="Looking for something?" style={{ height: '1.65rem', width: '100%', padding: '.3rem .3rem', marginLeft: '.75rem' }} /> </form>
+                </li>
+            </ul>
         </div>
 
         <style jsx>{`

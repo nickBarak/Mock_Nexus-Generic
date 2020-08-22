@@ -48,7 +48,7 @@ function Labyrinth({ articles, footerData }) {
 			<img
 				src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png"
 				alt="labyrinth"
-				style={{ width: '100%', height: '20rem', objectFit: 'fill' }}
+				style={{ width: '100%', height: '20rem', objectFit: 'fill', backgroundColor: 'beige' }}
 			/>
 			<div
 				className="labyrinth-nav"

@@ -127,7 +127,7 @@ function Nav() {
                     : <span style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchError}</span>}</span>
                 <span>
                     <span style={{ fontSize: '.85rem', marginRight: '.25rem' }}>Sort by: </span>
-                    <select onChange={e => {
+                    <select className="search-results-select" onChange={e => {
                         setSortBy(e.target.selectedIndex);
                         setModalPage(1);
                         setModalPageSet(0);
@@ -283,31 +283,6 @@ function Nav() {
                 right: 5px;
             }
 
-            .search-results select {
-                background-color: whiteSmoke;
-                background-image: linear-gradient(top, whiteSmoke, #f1f1f1);
-                border: 1px solid rgba(0, 0, 0, 0.1);
-                border-radius: 2px;
-                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-                color: #444;
-                cursor: default;
-                font-size: 11px;
-                font-weight: bold;
-                height: 27px;
-                line-height: 27px;
-                max-width: 90%;
-                min-width: 54px;
-                outline: 0;
-                padding: 0 28px 0 6px;
-                position: relative;
-                text-align: center;
-            }
-
-            .search-results option {
-                color: #777;
-                font-family: Arial, sans-serif;
-            }
-
             .modal-open {
                 position: fixed;
                 background-color: #fff;
@@ -319,26 +294,6 @@ function Nav() {
                 pointer-events: none;
                 z-index: 9;
                 transition: opacity 150ms ease-in;
-            }
-
-            .search-results-header {
-                position: relative;
-                margin-bottom: 1.5rem;
-                display: flex;
-                justify-content: space-between;
-                color: #676767;
-                fontSize: 13px;
-                padding: 4px;
-            }
-
-            .search-results-header::after {
-                content: '';
-                background-color: #e8e8e8;
-                width: 100%;
-                height: 1px;
-                position: absolute;
-                left: 0;
-                bottom: -.7rem;
             }
         `}</style>
     </div>)

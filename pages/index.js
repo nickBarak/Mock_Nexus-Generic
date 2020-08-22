@@ -59,7 +59,6 @@ function App({ categories, headlines }) {
 					display: flex;
 					flex-direction: column;
 					padding: 0.75rem;
-					font-size: 2rem;
 					color: white;
 					background-color: var(--theme-blue);
 					text-align: center;

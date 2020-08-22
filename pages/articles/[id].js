@@ -200,7 +200,6 @@ function Article({ article, author, related }) {
 
 			<style jsx>{`
 				.article {
-					margin: 0.15rem 1rem;
 					max-width: calc(100% - 2rem);
 				}
 
