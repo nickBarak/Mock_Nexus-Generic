@@ -249,7 +249,9 @@ function CommentInputs({
 									}}></i>
 							</span>
 						)}
-						<button className="post-comment-button" onTouchStart={e => postComment(e, e.currentTarget.parentElement.parentElement.parentElement, setMessage, articleID, parent)}>
+						<button className="post-comment-button" onTouchStart={e =>
+							postComment(e, e.currentTarget.parentElement.parentElement.parentElement, setMessage, articleID, parent)
+						}>
 							Post Comment
 						</button>
 					</span>
