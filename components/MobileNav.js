@@ -10,11 +10,19 @@ function MobileNav() {
     return (<>
         <div className="nav-mobile">
             <div style={{ position: 'relative', fontSize: '1.75rem', borderBottom: '1px solid #333', fontWeight: 'bold', padding: '1.5rem .8rem' }}>
-                <Link href="/"><a onClick={e => { e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)' }}>The Mock Nexus</a></Link>
+                <Link href="/"><a onClick={e => {
+                    e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)';
+                }}>The Mock Nexus</a></Link>
                 <span className="nav-mobile-button"
                     onClick={e => {
                         e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)';
-						document.getElementById('__next').children[2].children[0].style.display = 'flex';
+                        document.getElementById('__next').children[2].children[0].style.display = 'flex';
+                        [...e.currentTarget.parentElement.parentElement.children[1].children].forEach(child => {
+                            if (child.children.length && child.children[0].children.length) {
+                                child.children[1].style.maxHeight = '0px';
+                                child.children[0].children[1].children[0].style.transform = 'rotateX(0)';
+                            }
+                        });
                     }}></span>
             </div>
 
@@ -47,13 +55,13 @@ function MobileNav() {
                                 e.currentTarget.parentElement.parentElement.children[1].style.maxHeight = (e.currentTarget.parentElement.parentElement.children[1].style.maxHeight === '0px') ? isAbout ? '8rem' : category.maxHeight : '0px';
                             }}><i className="fas fa-caret-down" style={{ transition: 'transform 150ms ease-in', color: 'white', fontSize: '2rem' }}></i></span>}
                         </div>
-                            <ul style={{ overflow: 'hidden', maxHeight: 0, transformOrigin: 'top', transition: 'max-height 350ms ease-in-out' }}>
-                                {category.subcategories.map(subcategory =>
-                                    <li key={uuid()}>
-                                        <Link href={isAbout ? `/about/${Object.values(subcategory)[0]}` : `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}`}>
-                                            <a style={{ fontSize: '1rem' }}>{isAbout ? Object.keys(subcategory)[0] : subcategory}</a>
-                                        </Link>
-                                    </li>
+                        <ul style={{ overflow: 'hidden', maxHeight: 0, transformOrigin: 'top', transition: 'max-height 350ms ease-in-out' }}>
+                            {category.subcategories.map(subcategory =>
+                                <li key={uuid()}>
+                                    <Link href={isAbout ? `/about/${Object.values(subcategory)[0]}` : `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}`}>
+                                        <a style={{ fontSize: '1rem' }}>{isAbout ? Object.keys(subcategory)[0] : subcategory}</a>
+                                    </Link>
+                                </li>
                             )}
                         </ul>
                         </>

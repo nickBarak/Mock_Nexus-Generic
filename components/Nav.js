@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { convertToPath, convertDate } from '../Functions';
 import 'isomorphic-unfetch';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { client } from '../URLs';
 import { uuid } from 'uuidv4';
 import categories from '../data/categories';
@@ -15,6 +15,37 @@ function Nav() {
     const [modalPage, setModalPage] = useState(1);
     const [modalPageSet, setModalPageSet] = useState(0);
     const timeouts = [];
+
+    useEffect(_=> {
+        [...document.getElementsByClassName('nav-link-mobile')].forEach(link => {
+            link.addEventListener('touchstart', showSubcategories);
+        });
+    }, []);
+
+    function showSubcategories(e) {
+        e.currentTarget.style.color = 'var(--link-hover)';
+        timeouts[Number(e.currentTarget.value)] && clearTimeout(timeouts[Number(e.currentTarget.value)]);
+        let { style } = e.currentTarget.parentElement.children[2];
+        style.opacity = 1;
+        style.pointerEvents = 'auto';
+        if (e.currentTarget.className.split(' ').includes('nav-link-mobile')) {
+            e.currentTarget.removeEventListener('touchstart', showSubcategories);
+            e.currentTarget.addEventListener('touchstart', hideSubcategories);
+        }
+    }
+
+    function hideSubcategories(e) {
+        e.currentTarget.style.color = 'black';
+        let { style } = e.currentTarget.parentElement.children[2];
+        timeouts[Number(e.currentTarget.value)] = setTimeout(_=> {
+            style.opacity = 0;
+            style.pointerEvents = 'none';
+        }, 0);
+        if (e.currentTarget.className.split(' ').includes('nav-link-mobile')) {
+            e.currentTarget.removeEventListener('touchstart', hideSubcategories);
+            e.currentTarget.addEventListener('touchstart', showSubcategories);
+        }
+    }
     
     return (<div>
         <ul className="nav">
@@ -33,18 +64,12 @@ function Nav() {
                     {category.subcategories
                         ? (<>
                         {/* Show subcategory list on hover over nav item. Timeouts used as mechanism to persist subcategory list while hovering over subcategory list items and not the category nav item */}
-                        <Link href={`/categories/${category.title.toLowerCase().replace(/ /g, '-')}`}><a onMouseOver={e => {
-                            timeouts[i] && clearTimeout(timeouts[i]);
-                            let { style } = e.currentTarget.parentElement.children[1];
-                            style.opacity = 1;
-                            style.pointerEvents = 'auto';
-                        }} onMouseOut={e => {
-                            let { style } = e.currentTarget.parentElement.children[1];
-                            timeouts[i] = setTimeout(_=> {
-                                style.opacity = 0;
-                                style.pointerEvents = 'none';
-                            }, 0);
-                        }}>{category.title}</a></Link>
+                        <Link href={`/categories/${category.title.toLowerCase().replace(/ /g, '-')}`}>
+                            <>
+                            <a className="nav-link-full" value={i} onMouseOver={showSubcategories} onMouseOut={hideSubcategories}>{category.title}</a>
+                            <a className="nav-link-mobile" value={i}>{category.title}</a>
+                            </>
+                        </Link>
                         <ul className="nav-subcategories" onMouseMove={_=> timeouts[i] && clearTimeout(timeouts[i])} onMouseOut={e => {
                             let { style } = e.currentTarget;
                             timeouts[i] = setTimeout(_=> {

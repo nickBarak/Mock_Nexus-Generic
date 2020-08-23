@@ -242,6 +242,10 @@ a {
   margin: 0.15rem 1rem;
 }
 
+.nav-link-mobile {
+  display: none;
+}
+
 @media screen and (max-width: 1250px) {
   .nav a {
     font-size: .85rem;
@@ -318,6 +322,12 @@ a {
   .category-preview img {
     height: 4.75rem;
     width: 6.25rem;
+  }
+  .nav-link-mobile {
+    display: inline;
+  }
+  .nav-link-full {
+    display: none;
   }
 }
 
