@@ -194,6 +194,7 @@ function Article({ article, author, related }) {
 						)}
 						articleID={article.id}
 						followers={article.followers}
+						articleTitle={article.title}
 					/>
 				</div>
 			</Layout>

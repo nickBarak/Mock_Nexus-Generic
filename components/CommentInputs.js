@@ -11,6 +11,7 @@ function CommentInputs({
 	embedded,
 	firstComment,
 	mainInput,
+	articleTitle,
 }) {
 	const [user, setUser] = useState(null);
 
@@ -109,6 +110,8 @@ function CommentInputs({
 							name,
 							email,
 							articleID,
+							articleTitle,
+							articleURL: client + '/articles/' + articleID,
 							following,
 						}),
 					}
@@ -148,7 +151,7 @@ function CommentInputs({
 					);
 				}
 				alert(
-					`Imagine your email being ${
+					`Your email has been ${
 						following
 							? 'unsubscribed from'
 							: 'subscribed to'
@@ -159,7 +162,7 @@ function CommentInputs({
 			}
 		} else
 			alert(
-				'Enter your name and email in the boxes to the left to follow this article'
+				`Enter your name and email in the boxes to the left or above to follow this article`
 			);
 	}
 
@@ -278,7 +281,7 @@ function CommentInputs({
 						color: #888;
 						font-family: monospace;
 						margin-bottom: 0.6rem;
-						font-size: ${embedded ? '1rem' : '1.15rem'};
+						font-size: ${embedded ? '.85rem' : '1.05rem'};
 					}
 
 					.input-large-container input {

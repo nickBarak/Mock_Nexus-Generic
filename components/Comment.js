@@ -5,7 +5,7 @@ import 'isomorphic-unfetch';
 import { client } from '../URLs';
 
 function Comment({
-	comment: { picture, name, email, content, post_date, id, parent, replies },
+	comment: { picture, name, email, content, post_date, id, parent, replies, articleTitle },
 	articleID,
 	followers,
 	depth = 0,
@@ -187,6 +187,7 @@ function Comment({
 							setMessage={setReplyMessage}
 							articleID={articleID}
 							parent={id}
+							articleTitle={articleTitle}
 							embedded
 						/>
 					</div>
@@ -200,6 +201,7 @@ function Comment({
 							comment={reply}
 							followers={followers}
 							articleID={articleID}
+							articleTitle={articleTitle}
 							depth={depth + 1}
 						/>
 					</li>

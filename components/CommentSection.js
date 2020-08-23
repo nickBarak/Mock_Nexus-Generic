@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import CommentInputs from './CommentInputs';
 
-function CommentSection({ comments, articleID, followers }) {
+function CommentSection({ comments, articleID, followers, articleTitle }) {
 	const [commentMessage, setCommentMessage] = useState(null);
 	const [following, setFollowing] = useState(false);
 
@@ -49,6 +49,7 @@ function CommentSection({ comments, articleID, followers }) {
 					articleID={articleID}
 					following={following}
 					firstComment={comments.length === 0}
+					articleTitle={articleTitle}
 					mainInput
 				/>
 				<div
@@ -160,6 +161,7 @@ function CommentSection({ comments, articleID, followers }) {
 								comment={comment}
 								followers={followers}
 								articleID={articleID}
+								articleTitle={articleTitle}
 							/>
 						</li>
 					))}

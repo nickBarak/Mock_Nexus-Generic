@@ -4,5 +4,5 @@
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
   "/articles/[id]": "pages/articles/[id].js",
-  "/api/follow-article": "pages/api/follow-article.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
 }

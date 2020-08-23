@@ -1,9 +1,10 @@
 import { testEmail } from '../../Functions';
 import { queryDB, insertUser, getUser } from '../../db';
+import nodemailer from 'nodemailer';
 
 export default async function (req, res) {
 	let newUser,
-		{ name, email, articleID, following } = req.body;
+		{ name, email, articleID, following, articleTitle, articleURL } = req.body;
 	if (!testEmail(email)) {
 		res.json(1);
 		res.end();
@@ -33,6 +34,24 @@ export default async function (req, res) {
 			}(followers, $1) WHERE id = $2`,
 			[email, articleID]
 		);
+		
+		const transporter = nodemailer.createTransport({
+			service: 'gmail',
+			auth: {
+				user: process.env.EMAIL_ADDRESS,
+				pass: process.env.EMAIL_PASSWORD
+			}
+		});
+
+		const mailOptions = {
+			from: process.env.EMAIL_ADDRESS,
+			to: email,
+			subject: 'Mock Nexus Following Update',
+			text: `You are ${!following ? 'now' : 'no longer'} following "${articleTitle}" at ${articleURL}`
+		}
+
+		transporter.sendMail(mailOptions, (e, info) => e ? console.log(e) : console.log('Email sent:', info.response));
+
 		if (newUser) {
 			res.json(3);
 			res.end();
