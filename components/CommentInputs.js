@@ -24,6 +24,7 @@ function CommentInputs({
 	}, []);
 
 	async function postComment(e, formEl, setMessage, article_id, parent = null) {
+		alert('Readying API request...');
 		e.persist();
 		e.preventDefault();
 		let [content, name, email] = ['content', 'name', 'email'].map((el, i) =>
@@ -38,6 +39,7 @@ function CommentInputs({
 			name = 'anonymous';
 			email = 'an@nymous.who';
 		}
+		alert('Request ready. Sending...');
 		let response = await fetch(client + '/api/post-comment', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -53,6 +55,7 @@ function CommentInputs({
 
 		let status = await response.json(),
 			msg;
+		alert('Request received.\nStatus: '+status);
 		switch (status) {
 			case 0:
 				setMessage('');
@@ -81,6 +84,7 @@ function CommentInputs({
 	}
 
 	async function followArticle(e) {
+		alert('Readying API request...');
 		e.persist();
 		e.preventDefault();
 		const form =
@@ -98,6 +102,7 @@ function CommentInputs({
 						.children[1].children[1]
 						.value;
 		if (email && name) {
+			alert('Request ready. Sending...');
 			let response = await fetch(
 					client + '/api/follow-article',
 					{
@@ -118,6 +123,7 @@ function CommentInputs({
 				),
 				status = await response.json(),
 				msg;
+			alert('Request received.\nStatus: '+status);
 			switch (status) {
 				default:
 					console.log(status);

@@ -68,6 +68,7 @@ function Comment({
 					<div className="row" style={{ justifySelf: 'flex-end' }}>
 						{/* Toggle showing input box to reply to this comment */}
 						<button
+							style={{ whiteSpace: 'nowrap' }}
 							onClick={e => {
 								let {
 									style,
