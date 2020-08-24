@@ -213,7 +213,7 @@ a {
 .search-results-select {
   background-color: whiteSmoke;
   background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1));
-  background-image: linear-gradient(top, whiteSmoke, #f1f1f1);
+  background-image: linear-gradient(to bottom, whiteSmoke, #f1f1f1);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -271,7 +271,8 @@ a {
   display: none;
 }
 
-.about img {
+.about img,
+.article img {
   max-width: 100%;
   -o-object-fit: scale-up;
      object-fit: scale-up;
@@ -324,27 +325,52 @@ a {
     height: 5.25rem;
     min-width: 6.75rem;
   }
+  .main-children {
+    width: calc(100% - 12.5rem);
+  }
+  .sidebar-container {
+    width: 13rem;
+  }
+  .sidebar img {
+    width: 13rem;
+    height: 13rem;
+  }
+  .sidebar > li:nth-child(1) div {
+    height: 13rem;
+  }
+  .sidebar .comic-of-the-week {
+    height: 13rem;
+  }
+  .sidebar .newsletter-button,
+  .sidebar .facebook-button,
+  .sidebar .comic-of-the-week::before {
+    font-size: 1.25rem;
+  }
+  .home-category-previews {
+    margin: 1.5rem 0;
+  }
+  .home-by-category {
+    margin-left: .3rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .headlines {
+    display: none;
+  }
+  .headlines-mobile,
+  .category-preview li:nth-child(1) .category-preview-details {
+    display: block;
+  }
+  .home-category-previews {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
 }
 
 @media screen and (max-width: 800px) {
   .nav a {
     font-size: .6rem;
-  }
-  .sidebar-container {
-    width: 10rem;
-  }
-  .main-children {
-    width: calc(100% - 10rem);
-  }
-  .sidebar img {
-    width: 10rem;
-    height: 10rem;
-  }
-  .sidebar > li:nth-child(1) div {
-    height: 10rem;
-  }
-  .sidebar .comic-of-the-week {
-    height: 10rem;
   }
   .article-preview-mobile .article-preview-title {
     font-size: 1.3rem;
@@ -371,16 +397,21 @@ a {
   .article-preview-mobile {
     display: block;
   }
-  .newsletter-button,
-  .facebook-button,
-  .comic-of-the-week::before {
-    font-size: 1rem;
-  }
   .banner {
     font-size: 1.5rem;
   }
   .banner-read-more {
     font-size: 1.25rem;
+  }
+  .home-category-previews {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+  }
+  .category-preview li:nth-child(1)::before {
+    width: 0;
+  }
+  .main > div:nth-child(1) > div:nth:child(1) {
+    width: 98%;
   }
 }
 
@@ -390,16 +421,11 @@ a {
   }
   .sidebar-container,
   .header,
-  .headlines,
   .category-preview-details {
     display: none;
   }
   .main-children {
     width: 100%;
-  }
-  .headlines-mobile,
-  .category-preview li:nth-child(1) .category-preview-details {
-    display: block;
   }
   .header-mobile {
     display: -webkit-box;
@@ -409,20 +435,6 @@ a {
         -ms-flex-align: center;
             align-items: center;
     white-space: nowrap;
-  }
-  .home-category-previews {
-    -ms-grid-columns: 1fr;
-        grid-template-columns: 1fr;
-    margin: 1.5rem 0;
-  }
-  .category-preview li:nth-child(1)::before {
-    width: 0;
-  }
-  .home-by-category {
-    margin-left: .3rem;
-  }
-  .main > div:nth-child(1) > div:nth:child(1) {
-    width: 98%;
   }
   .about img,
   .article img {

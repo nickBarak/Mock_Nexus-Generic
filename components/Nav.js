@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { convertToPath, convertDate } from '../Functions';
 import 'isomorphic-unfetch';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { client } from '../URLs';
 import { uuid } from 'uuidv4';
 import categories from '../data/categories';
@@ -14,21 +14,26 @@ function Nav() {
     const [loadingSearchResults, setLoadingSearchResults] = useState(false);
     const [modalPage, setModalPage] = useState(1);
     const [modalPageSet, setModalPageSet] = useState(0);
-    const timeouts = {};
+    const timeouts = useRef({});
 
     useEffect(_=> {
         [...document.getElementsByClassName('nav-link-mobile')].forEach(link => {
             link.addEventListener('click', showSubcategories);
         });
+        document.getElementsByClassName('search')[0].addEventListener('mouseover', e => { e.target.style.color = 'var(--link-hover)' });
+        document.getElementsByClassName('search')[0].addEventListener('mouseout', setColorToBlack);
     }, []);
+
+    const setColorToBlack = e => { e.target.style.color = 'black' };
 
     function showSubcategories(e) {
         e.currentTarget.style.color = 'var(--link-hover)';
-        timeouts[e.currentTarget.value] && clearTimeout(timeouts[e.currentTarget.value]);
+        timeouts.current[e.currentTarget.name] && clearTimeout(timeouts.current[e.currentTarget.name]);
         let { style } = e.currentTarget.parentElement.children[2];
         style.opacity = 1;
         style.pointerEvents = 'auto';
         if (e.currentTarget.className.split(' ').includes('nav-link-mobile')) {
+            e.currentTarget.removeEventListener('mouseout', setColorToBlack);
             e.currentTarget.removeEventListener('click', showSubcategories);
             e.currentTarget.addEventListener('click', hideSubcategories);
         }
@@ -37,11 +42,12 @@ function Nav() {
     function hideSubcategories(e) {
         e.currentTarget.style.color = 'black';
         let { style } = e.currentTarget.parentElement.children[2];
-        timeouts[e.currentTarget.value] = setTimeout(_=> {
+        timeouts.current[e.currentTarget.name] = setTimeout(_=> {
             style.opacity = 0;
             style.pointerEvents = 'none';
         }, 0);
         if (e.currentTarget.className.split(' ').includes('nav-link-mobile')) {
+            e.currentTarget.addEventListener('mouseout', setColorToBlack);
             e.currentTarget.removeEventListener('click', hideSubcategories);
             e.currentTarget.addEventListener('click', showSubcategories);
         }
@@ -66,13 +72,13 @@ function Nav() {
                         {/* Show subcategory list on hover over nav item. Timeouts used as mechanism to persist subcategory list while hovering over subcategory list items and not the category nav item */}
                         <Link href={`/categories/${category.title.toLowerCase().replace(/ /g, '-')}`}>
                             <>
-                            <a className="nav-link-full" value={category.title} onMouseOver={showSubcategories} onMouseOut={hideSubcategories}>{category.title}</a>
-                            <a className="nav-link-mobile" value={category.title}>{category.title}</a>
+                            <a className="nav-link-full" name={category.title} onMouseOver={showSubcategories} onMouseOut={hideSubcategories}>{category.title}</a>
+                            <a className="nav-link-mobile" name={category.title}>{category.title}</a>
                             </>
                         </Link>
-                        <ul className="nav-subcategories" onMouseMove={_=> timeouts[category.title] && clearTimeout(timeouts[category.title])} onMouseOut={e => {
+                        <ul className="nav-subcategories" onMouseMove={_=> timeouts.current[category.title] && clearTimeout(timeouts.current[category.title])} onMouseOut={e => {
                             let { style } = e.currentTarget;
-                            timeouts[category.title] = setTimeout(_=> {
+                            timeouts.current[category.title] = setTimeout(_=> {
                                 style.opacity = 0;
                                 style.pointerEvents = 'none';
                             }, 0);
@@ -89,8 +95,18 @@ function Nav() {
             {/* Search tool. Click to open. Submit query with enter key. */}
             <li key="-2" style={{ position: 'relative', textTransform: 'none' }}>
                 <i className="search fas fa-search" onClick={e => {
-                    let { style } = e.currentTarget.parentElement.children[1];
-                    style.display = (style.display === 'none') ? 'block' : 'none'
+                    let icon = e.currentTarget,
+                        { style } = icon.parentElement.children[1],
+                        open = (style.display !== 'none');
+                    if (open) {
+                        style.display = 'none';
+                        icon.style.color = 'black';
+                        icon.addEventListener('mouseout', setColorToBlack);
+                    } else {
+                        style.display = 'block';
+                        icon.style.color = 'var(--link-hover)';
+                        icon.removeEventListener('mouseout', setColorToBlack);
+                    }
                 }}></i>
                 <input type="text" placeholder="Looking for something?" style={{ display: 'none', position: 'absolute', right: '150%', top: '-15%', padding: '.2rem .4rem' }} onKeyDown={e => {
                     e.persist();
@@ -271,6 +287,10 @@ function Nav() {
                 cursor: pointer;
             }
 
+            .search:hover {
+                color: var(--link-hover);
+            }
+
             .search-results {
                 font-family: Arial, sans-serif;
                 font-size: .8rem;
@@ -320,6 +340,11 @@ function Nav() {
                 pointer-events: none;
                 z-index: 9;
                 transition: opacity 150ms ease-in;
+            }
+
+            .nav-link-full,
+            .nav-link-mobile {
+                z-index: 3;
             }
         `}</style>
     </div>)

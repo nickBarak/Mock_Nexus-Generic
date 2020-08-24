@@ -152,7 +152,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 				}
 
 				.article-preview img:hover {
-					transform: scale(1.3);
+					transform: scale(1.2);
 				}
 			`}</style>
 		</>

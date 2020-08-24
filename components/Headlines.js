@@ -65,12 +65,6 @@ function Headlines({ articles }) {
 											</a>
 										</Link>
 									</div>
-									<div className="article-preview-description">
-										{article.description}
-									</div>
-									<Link href={`/articles/${article.id}`}>
-										<a className="read-more">read more</a>
-									</Link>
 								</li>
 							))}
 						</ul>
@@ -122,6 +116,14 @@ function Headlines({ articles }) {
 									<a className="article-preview-author">
 										{article.author.name}
 									</a>
+								</Link>
+							</div>
+							<div className="category-preview-details">
+								<div className="article-preview-description">
+									{article.description}
+								</div>
+								<Link href={`/articles/${article.id}`}>
+									<a className="read-more">read more</a>
 								</Link>
 							</div>
 						</li>
