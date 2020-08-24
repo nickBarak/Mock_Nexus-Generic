@@ -3,7 +3,14 @@ import Link from 'next/link';
 function AboutTheAuthor({ author }) {
 	return (
 		<div className="about-the-author">
-			<img src={author.portrait} alt="author" />
+			<picture>
+				<source srcSet={author.portrait} />
+				<source
+					srcSet="/img/nexus-fallback.webp"
+					type="image/webp"
+				/>
+				<Link href={'/authors/' + author.id}><img alt="author" /></Link>
+			</picture>
 			<div>
 				<div>
 					<Link href={`/authors/${author.id}`}>
@@ -18,10 +25,15 @@ function AboutTheAuthor({ author }) {
 					margin: 2rem 0;
 				}
 
+				picture {
+					margin: 0 1.4rem 0 1.5rem;
+					min-width: 6.5rem;
+				}
+
 				img {
-					width: 6, 5rem;
+					object-fit: contain;
 					height: 6.5rem;
-					margin: 0 1.4rem 0 2.5rem;
+					cursor: pointer;
 				}
 
 				.about-the-author > div {

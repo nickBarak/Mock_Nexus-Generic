@@ -575,7 +575,6 @@ function StaffContact() {
                     border: 1px solid black;
                     padding: 1rem 0 0 1rem; 
                     line-height: 1.5rem;
-                    height: 7rem;
                 }
 
                 .staff {

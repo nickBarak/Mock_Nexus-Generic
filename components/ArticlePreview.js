@@ -6,15 +6,15 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 	return (
 		<>
 			<div className="article-preview">
-				{imageLeft && (
+				{imageLeft && (<span style={{ overflow: 'hidden' }}>
 					<picture>
 						<source srcSet={article.full_thumbnail} />
 						<source
 							srcSet="/img/nexus-fallback.webp"
 							type="image/webp"
 						/>
-						<img alt="thumbnail" />
-					</picture>
+						<Link href={`/articles/${article.id}`}><img alt="thumbnail" /></Link>
+					</picture></span>
 				)}
 				<div className="article-preview-words">
 					<div>
@@ -37,27 +37,27 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						<a className="read-more">read more</a>
 					</Link>
 				</div>
-				{!imageLeft && (
+				{!imageLeft && (<span style={{ overflow: 'hidden' }}>
 					<picture>
 						<source srcSet={article.full_thumbnail} />
 						<source
 							srcSet="/img/nexus-fallback.webp"
 							type="image/webp"
 						/>
-						<img alt="thumbnail" />
-					</picture>
+						<Link href={`/articles/${article.id}`}><img alt="thumbnail" /></Link>
+					</picture></span>
 				)}
 			</div>
 
 			<div className="article-preview-mobile">
-				<picture>
-					<source srcSet={article.mobile_thumbnail}/>
-					<source
-						srcSet="/img/nexus-fallback.webp"
-						type="image/webp"
-					/>
-					<img alt="thumbnail" style={{ maxWidth: '100%' }}/>
-				</picture>
+					<picture>
+						<source srcSet={article.mobile_thumbnail}/>
+						<source
+							srcSet="/img/nexus-fallback.webp"
+							type="image/webp"
+						/>
+						<Link href={`/articles/${article.id}`}><img alt="thumbnail" style={{ maxWidth: '100%' }}/></Link>
+					</picture>
 				<div className="article-preview-words">
 					<div>
 						<Link href={`/articles/${article.id}`}>
@@ -93,15 +93,12 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 					margin: 2.5rem 0;
 					position: relative;
 					flex-direction: column;
+					align-items: center;
 				}
 
 				.article-preview-mobile .article-preview-words {
 					margin-top: .4rem;
 					margin-left: 0;
-				}
-
-				.article-preview-mobile .article-preview-title {
-					font-size: 1.5rem;
 				}
 
 				.article-preview-mobile::after {
@@ -147,6 +144,15 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 
 				a:hover {
 					color: var(--link-hover);
+				}
+
+				img {
+					cursor: pointer;
+					transition: transform 100ms ease-out;
+				}
+
+				.article-preview img:hover {
+					transform: scale(1.3);
 				}
 			`}</style>
 		</>

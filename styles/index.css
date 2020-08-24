@@ -56,6 +56,7 @@ a {
   -ms-flex-item-align: start;
       align-self: flex-start;
   justify-self: flex-start;
+  cursor: pointer;
 }
 
 .article-preview img {
@@ -75,6 +76,15 @@ a {
 
 .article-preview .labyrinth-title {
   font-size: 1.5rem;
+}
+
+.article-preview .article-preview-title {
+  font-size: 1.3rem;
+}
+
+.article-preview img {
+  width: 13rem;
+  height: 10rem;
 }
 
 .sidebar > li:nth-child(1) div {
@@ -114,9 +124,9 @@ a {
   width: 1px;
 }
 
-.category-preview img {
+.category-preview .category-preview-img {
   height: 6.25rem;
-  width: 7.75rem;
+  min-width: 7.75rem;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -127,6 +137,16 @@ a {
   display: none;
 }
 
+.headlines-mobile img,
+.header-mobile img,
+.article-preview-mobile img {
+  width: 100%;
+  max-height: 22rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  cursor: pointer;
+}
+
 .article-preview {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -135,6 +155,11 @@ a {
 
 .banner {
   font-size: 2rem;
+}
+
+.banner-read-more {
+  font-size: 1.5rem;
+  margin-top: 2px;
 }
 
 #__next > div:nth-child(1) {
@@ -188,7 +213,7 @@ a {
 .search-results-select {
   background-color: whiteSmoke;
   background-image: -webkit-gradient(linear, left top, left bottom, from(whiteSmoke), to(#f1f1f1));
-  background-image: linear-gradient('to bottom', whiteSmoke, #f1f1f1);
+  background-image: linear-gradient(top, whiteSmoke, #f1f1f1);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
@@ -246,6 +271,22 @@ a {
   display: none;
 }
 
+.about img {
+  max-width: 100%;
+  -o-object-fit: scale-up;
+     object-fit: scale-up;
+}
+
+.contact-number-group {
+  height: 7rem;
+}
+
+.newsletter-button,
+.facebook-button,
+.comic-of-the-week::before {
+  font-size: 1.3rem;
+}
+
 @media screen and (max-width: 1250px) {
   .nav a {
     font-size: .85rem;
@@ -259,15 +300,15 @@ a {
   .headlines img {
     height: 47.5%;
   }
-  .category-preview img {
+  .category-preview-img {
     height: 5.75rem;
-    width: 7.25rem;
+    min-width: 7.25rem;
   }
 }
 
 @media screen and (max-width: 1025px) {
   .nav a {
-    font-size: .775rem;
+    font-size: .75rem;
   }
   .sidebar-container {
     width: 15rem;
@@ -279,19 +320,15 @@ a {
     width: 15rem;
     height: 15rem;
   }
-  .article-preview img {
-    width: 19rem;
-    height: 13rem;
-  }
-  .category-preview img {
+  .category-preview-img {
     height: 5.25rem;
-    width: 6.75rem;
+    min-width: 6.75rem;
   }
 }
 
 @media screen and (max-width: 800px) {
   .nav a {
-    font-size: .7rem;
+    font-size: .6rem;
   }
   .sidebar-container {
     width: 10rem;
@@ -309,25 +346,41 @@ a {
   .sidebar .comic-of-the-week {
     height: 10rem;
   }
-  .article-preview img {
-    width: 15.5rem;
-    height: 12rem;
-  }
-  .article-preview .article-preview-title {
+  .article-preview-mobile .article-preview-title {
     font-size: 1.3rem;
   }
-  .article-preview .labryinth-title {
+  .article-preview-mobile .labryinth-title {
     font-size: 1.3rem;
   }
-  .category-preview img {
+  .category-preview-img {
     height: 4.75rem;
-    width: 6.25rem;
+    min-width: 6.25rem;
   }
   .nav-link-mobile {
     display: inline;
   }
   .nav-link-full {
     display: none;
+  }
+  .contact-number-group {
+    height: 11rem;
+  }
+  .article-preview {
+    display: none;
+  }
+  .article-preview-mobile {
+    display: block;
+  }
+  .newsletter-button,
+  .facebook-button,
+  .comic-of-the-week::before {
+    font-size: 1rem;
+  }
+  .banner {
+    font-size: 1.5rem;
+  }
+  .banner-read-more {
+    font-size: 1.25rem;
   }
 }
 
@@ -338,16 +391,14 @@ a {
   .sidebar-container,
   .header,
   .headlines,
-  .category-preview-details,
-  .article-preview {
+  .category-preview-details {
     display: none;
   }
   .main-children {
     width: 100%;
   }
   .headlines-mobile,
-  .category-preview li:nth-child(1) .category-preview-details,
-  .article-preview-mobile {
+  .category-preview li:nth-child(1) .category-preview-details {
     display: block;
   }
   .header-mobile {
@@ -378,7 +429,10 @@ a {
     max-width: 98%;
   }
   .banner {
-    font-size: 1.75rem;
+    font-size: 1.275rem;
+  }
+  .banner-read-more {
+    font-size: 1rem;
   }
   #__next > div:nth-child(1) {
     height: 4.5rem;
@@ -418,6 +472,9 @@ a {
   }
   .article {
     margin: 0.15rem .5rem;
+  }
+  .article-preview-mobile .article-preview-title {
+    font-size: 1.2rem;
   }
 }
 /*# sourceMappingURL=index.css.map */

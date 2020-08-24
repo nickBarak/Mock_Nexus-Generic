@@ -65,11 +65,6 @@ function App({ categories, headlines }) {
 					margin-bottom: 0.5rem;
 					margin-right: 0.5rem;
 				}
-
-				.banner-read-more {
-					font-size: 1.5rem;
-					margin-top: 2px;
-				}
 			`}</style>
 		</>
 	);

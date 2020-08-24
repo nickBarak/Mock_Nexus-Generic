@@ -162,7 +162,7 @@ function CommentInputs({
 			}
 		} else
 			alert(
-				`Enter your name and email in the boxes to the left or above to follow this article`
+				`Enter your name and email in the corresponding boxes to follow this article`
 			);
 	}
 
@@ -233,6 +233,9 @@ function CommentInputs({
 									justifyContent: 'center',
 									alignItems: 'center',
 									textAlign: 'center',
+									height: '2rem',
+									width: '2rem',
+									marginRight: '.85rem',
 								}}>
 								<i
 									className={`fas ${
@@ -243,10 +246,9 @@ function CommentInputs({
 										justifyContent: 'center',
 										alignItems: 'center',
 										backgroundColor: '#eee',
-										width: '2rem',
-										height: '2rem',
+										width: '1.9rem',
+										height: '1.9rem',
 										color: '#999',
-										marginRight: '.85rem',
 										border: '1px solid #ddd',
 										cursor: 'pointer',
 									}}></i>
@@ -275,13 +277,12 @@ function CommentInputs({
 					}
 
 					input {
-						padding: 1.7rem;
-						padding-left: 5rem;
+						padding: 1.7rem .75rem 1.7rem 5rem;
 						border: 1px solid #ddd;
 						color: #888;
 						font-family: monospace;
 						margin-bottom: 0.6rem;
-						font-size: ${embedded ? '.85rem' : '1.05rem'};
+						font-size: ${embedded ? '.9rem' : '1rem'};
 					}
 
 					.input-large-container input {

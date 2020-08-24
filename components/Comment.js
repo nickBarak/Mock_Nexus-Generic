@@ -125,7 +125,7 @@ function Comment({
 								)}
 								<i
 									className="far fa-clock"
-									style={{ marginRight: '.325rem' }}></i>
+									style={{ marginRight: '.325rem', transform: 'translateY(1px)' }}></i>
 								{convertDate(post_date)}
 								{/* Toggle showing replies to this comment */}
 								{replies.length ? (

@@ -81,7 +81,7 @@ function Headlines({ articles }) {
 			<div className="headlines-mobile">
 				<ul>
 					<li key={uuid()}>
-						<Link href={``}>
+						<Link href={`/articles/${articles[0].id}`}>
 							<img
 								src={articles[0].mobile_thumbnail}
 								alt="headline"

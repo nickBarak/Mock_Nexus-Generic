@@ -34,23 +34,23 @@ function Search() {
                 .then(res => res.json())
                 .then(rows => {
                     /* First index for sorting by relevance, second index for sorting by date. Need separate values to avoid overwrite and only sort once */
-                    setSearchResults([
+                    const rowsByRelevanceAndDate = [
                         rows,
                         [...rows].sort(({publish_date: a}, {publish_date: b}) => new Date(b) - new Date(a))
-                    ])
+                    ],
+                        queryDuration = ((Date.now() - now) / 1000).toFixed(2);
+                    setSearchResults(rowsByRelevanceAndDate);
                     setLoadingSearchResults(false);
-                    setQueryTime(((Date.now() - now) / 1000).toFixed(2));
+                    setQueryTime(queryDuration);
                     setFooterData({
                         page: 1,
                         highestPage: rows ? Math.ceil(rows.length/15) : 1,
                         route: '/search/'+router.query.value
                     });
-                    setTimeout(_=>
-                        sessionStorage.setItem('s__EA__Rc_H_' + router.query.value, JSON.stringify({
-                            ssQueryTime: queryTime,
-                            ssSearchResults: searchResults
-                        })),
-                    500);
+                    sessionStorage.setItem('s__EA__Rc_H_' + router.query.value, JSON.stringify({
+                        ssQueryTime: queryDuration,
+                        ssSearchResults: rowsByRelevanceAndDate
+                    }));
                 })
                 .catch(e => console.log(e) || setSearchError('Error fetching results'));
         }

@@ -36,9 +36,9 @@ function Sidebar() {
 					</div>
 					<hr />
 					<br />
-					<div className="comic-of-the-week">
+					<Link href={`/articles/8081`}><div className="comic-of-the-week">
 						<img src="/img/comic-of-the-week.webp" alt="comic" />
-					</div>
+					</div></Link>
 				</li>
 				<li key="3">
 					{' '}
@@ -285,7 +285,6 @@ function Sidebar() {
 					bottom: 0;
 					left: 0;
 					content: 'College Nostalgia';
-					font-size: 1.3rem;
 					color: white;
 					background-color: rgba(0, 0, 0, 0.5);
 					display: flex;
@@ -298,7 +297,6 @@ function Sidebar() {
 					background-color: var(--theme-gold);
 					color: white;
 					width: 92.5%;
-					font-size: 1.3rem;
 					border-radius: 4px;
 					border: none;
 					padding: 0.75rem;
@@ -316,7 +314,6 @@ function Sidebar() {
 				.facebook-button {
 					background-color: #445aa4;
 					width: 95%;
-					font-size: 1.3rem;
 					cursor: pointer;
 					margin: 1.5rem 0.5rem 3rem 0.5rem;
 					box-shadow: none;

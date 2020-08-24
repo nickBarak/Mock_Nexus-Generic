@@ -29,14 +29,16 @@ function CategoryPreview({ category: { title, articles } }) {
 						</div>
 						<div className="category-preview-details">
 							<div style={{ display: 'flex' }}>
-								<picture>
-									<source srcSet={article.full_thumbnail} />
-									<source
-										srcSet="/img/nexus-fallback.webp"
-										type="image/webp"
-									/>
-									<img alt="thumbnail" />
-								</picture>
+								<span className="category-preview-img" style={{ overflow: 'hidden' }}>
+									<picture>
+										<source srcSet={article.full_thumbnail} />
+										<source
+											srcSet="/img/nexus-fallback.webp"
+											type="image/webp"
+										/>
+										<Link href={`/articles/${article.id}`}><img className="category-preview-img" alt="thumbnail" /></Link>
+									</picture>
+								</span>
 								<div
 									style={{
 										display: 'flex',
@@ -94,6 +96,7 @@ function CategoryPreview({ category: { title, articles } }) {
 					padding: 4px 0;
 					display: block;
 					font-weight: 600;
+					cursor: pointer;
 				}
 
 				label::before,
@@ -125,6 +128,15 @@ function CategoryPreview({ category: { title, articles } }) {
 
 				a:hover {
 					color: var(--link-hover);
+				}
+
+				img {
+					cursor: pointer;
+					transition: transform 100ms ease-out;
+				}
+
+				img:hover {
+					transform: scale(1.175);
 				}
 			`}</style>
 		</div>

@@ -14,36 +14,36 @@ function Nav() {
     const [loadingSearchResults, setLoadingSearchResults] = useState(false);
     const [modalPage, setModalPage] = useState(1);
     const [modalPageSet, setModalPageSet] = useState(0);
-    const timeouts = [];
+    const timeouts = {};
 
     useEffect(_=> {
         [...document.getElementsByClassName('nav-link-mobile')].forEach(link => {
-            link.addEventListener('touchstart', showSubcategories);
+            link.addEventListener('click', showSubcategories);
         });
     }, []);
 
     function showSubcategories(e) {
         e.currentTarget.style.color = 'var(--link-hover)';
-        timeouts[Number(e.currentTarget.value)] && clearTimeout(timeouts[Number(e.currentTarget.value)]);
+        timeouts[e.currentTarget.value] && clearTimeout(timeouts[e.currentTarget.value]);
         let { style } = e.currentTarget.parentElement.children[2];
         style.opacity = 1;
         style.pointerEvents = 'auto';
         if (e.currentTarget.className.split(' ').includes('nav-link-mobile')) {
-            e.currentTarget.removeEventListener('touchstart', showSubcategories);
-            e.currentTarget.addEventListener('touchstart', hideSubcategories);
+            e.currentTarget.removeEventListener('click', showSubcategories);
+            e.currentTarget.addEventListener('click', hideSubcategories);
         }
     }
 
     function hideSubcategories(e) {
         e.currentTarget.style.color = 'black';
         let { style } = e.currentTarget.parentElement.children[2];
-        timeouts[Number(e.currentTarget.value)] = setTimeout(_=> {
+        timeouts[e.currentTarget.value] = setTimeout(_=> {
             style.opacity = 0;
             style.pointerEvents = 'none';
         }, 0);
         if (e.currentTarget.className.split(' ').includes('nav-link-mobile')) {
-            e.currentTarget.removeEventListener('touchstart', hideSubcategories);
-            e.currentTarget.addEventListener('touchstart', showSubcategories);
+            e.currentTarget.removeEventListener('click', hideSubcategories);
+            e.currentTarget.addEventListener('click', showSubcategories);
         }
     }
     
@@ -66,13 +66,13 @@ function Nav() {
                         {/* Show subcategory list on hover over nav item. Timeouts used as mechanism to persist subcategory list while hovering over subcategory list items and not the category nav item */}
                         <Link href={`/categories/${category.title.toLowerCase().replace(/ /g, '-')}`}>
                             <>
-                            <a className="nav-link-full" value={i} onMouseOver={showSubcategories} onMouseOut={hideSubcategories}>{category.title}</a>
-                            <a className="nav-link-mobile" value={i}>{category.title}</a>
+                            <a className="nav-link-full" value={category.title} onMouseOver={showSubcategories} onMouseOut={hideSubcategories}>{category.title}</a>
+                            <a className="nav-link-mobile" value={category.title}>{category.title}</a>
                             </>
                         </Link>
-                        <ul className="nav-subcategories" onMouseMove={_=> timeouts[i] && clearTimeout(timeouts[i])} onMouseOut={e => {
+                        <ul className="nav-subcategories" onMouseMove={_=> timeouts[category.title] && clearTimeout(timeouts[category.title])} onMouseOut={e => {
                             let { style } = e.currentTarget;
-                            timeouts[i] = setTimeout(_=> {
+                            timeouts[category.title] = setTimeout(_=> {
                                 style.opacity = 0;
                                 style.pointerEvents = 'none';
                             }, 0);
@@ -168,7 +168,7 @@ function Nav() {
                 {searchResults[sortBy].slice((modalPage-1)*10, modalPage*10).map((result, i) => 
                     <li key={uuid()} style={{ marginBottom: '.5rem' }}>
                         <div style={{ width: '100%', textAlign: 'center' }}><Link href={'/articles/'+result.id}><a style={{ color: '#0000CC', fontSize: '1rem', fontFamily: 'Arial, sans-serif' }}>{result.title}</a></Link></div>
-                        <div style={{ color: '#008000', fontSize: '13px', fontFamily: 'Arial, sans-serif', margin: '.2rem 0'}}>{`/articles/${result.id}`}</div>
+                        <div style={{ color: '#008000', fontSize: '13px', fontFamily: 'Arial, sans-serif', margin: '.2rem 0'}}>{`${client}/articles/${result.id}`}</div>
                         <div style={{ display: 'flex' }}>
                             <Link href={`/articles/${result.id}`}><a><picture>
                                 <source srcSet={result.mobile_thumbnail} />
@@ -226,6 +226,7 @@ function Nav() {
             a {
                 color: black;
                 font-family: Lato, sans-serif;
+                cursor: pointer;
             }
 
             a:hover {
