@@ -1,8 +1,11 @@
 import Nav from './Nav';
 import MobileNav from './MobileNav';
 import Link from 'next/link';
+import { useState } from 'react';
 
 function Header() {
+	const [scrollY, setScrollY] = useState(0);
+
 	return (
 		<>
 			<div className="header">
@@ -51,7 +54,7 @@ function Header() {
 			</div>
 
 			<div className="header-mobile">
-				<MobileNav />
+				<MobileNav scrollY={scrollY} />
 				<span className="full-logo">
 					<Link href="/">
 						<a>
@@ -66,7 +69,10 @@ function Header() {
 					</Link>
 				</span>
 				<span className="hamburger-nav">
-					<span style={{ position: 'absolute', bottom: '-12px', left: 0, height: '28px', width: '32px', cursor: 'pointer' }} onTouchEnd={e => { }} onClick={_=> {
+					<span style={{ position: 'absolute', bottom: '-12px', left: 0, height: '28px', width: '32px', cursor: 'pointer' }} onClick={_=> {
+						setScrollY(window.scrollY);
+						window.scrollTo(0, 0);
+						document.getElementsByClassName('header-mobile')[0].style.position = 'absolute';
 						document.getElementsByClassName('nav-mobile')[0].style.transform = 'translateX(0)';
 						document.getElementById('__next').children[2].children[0].style.display = 'none';
 					}} />
@@ -147,9 +153,18 @@ function Header() {
 				}
 
 				.header-mobile {
-					width: 99%;
+					width: calc(100% + 2rem);
+					transform: translateX(-1rem);
+					border-bottom: 1px solid black;
 					justify-content: space-around;
 					align-items: center;
+					position: sticky;
+					position: -webkit-sticky;
+					background-color: white;
+					top: 0;
+					z-index: 50;
+					margin-bottom: .75rem;
+					padding: 0 .45rem;
 				}
 
 				.header-mobile .full-logo {

@@ -1,6 +1,8 @@
 import { testEmail } from '../../Functions';
 import { queryDB, insertUser, getUser } from '../../db';
 import nodemailer from 'nodemailer';
+import { config } from 'dotenv';
+config();
 
 export default async function (req, res) {
 	let newUser,

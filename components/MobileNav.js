@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { convertToPath } from '../Functions';
 import { useRouter } from 'next/router';
 
-function MobileNav() {
+function MobileNav({ scrollY }) {
     const router = useRouter();
 
     return (<>
@@ -15,6 +15,8 @@ function MobileNav() {
                 }}>The Mock Nexus</a></Link>
                 <span className="nav-mobile-button"
                     onClick={e => {
+                        document.getElementsByClassName('header-mobile')[0].style.position = 'sticky';
+                        window.scrollTo(0, scrollY);
                         e.target.parentElement.parentElement.style.transform = 'translateX(-100vw)';
                         document.getElementById('__next').children[2].children[0].style.display = 'flex';
                         [...e.currentTarget.parentElement.parentElement.children[1].children].forEach(child => {
@@ -88,8 +90,8 @@ function MobileNav() {
                 position: absolute;
                 top: 0;
                 left: 0;
-                right: 0;
-                transform: translateX(-100%);
+                right: 1.75rem;
+                transform: translateX(-120%);
                 transition: transform 180ms ease-out;
                 z-index: 20;
             }

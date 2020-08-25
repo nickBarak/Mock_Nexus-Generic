@@ -19,7 +19,7 @@ function ArticleDisplay({ type, heading, articles, searchData }) {
 
 				{searchData &&
 					<div className="search-results-header" style={{ marginTop: '.8rem' }}>
-						<span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.85rem' }}>
+						<span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.8rem' }}>
 						{/* Show loading, query time or error */}
 						{!searchData.searchError ?
 							!searchData.loadingSearchResults

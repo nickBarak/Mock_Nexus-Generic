@@ -26,7 +26,7 @@ function AboutTheAuthor({ author }) {
 				}
 
 				picture {
-					margin: 0 1.4rem 0 1.5rem;
+					margin-right: 1.25rem;
 					min-width: 6.5rem;
 				}
 
