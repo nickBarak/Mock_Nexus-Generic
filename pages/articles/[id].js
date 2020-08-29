@@ -5,9 +5,25 @@ import CommentSection from '../../components/CommentSection';
 import { convertDate } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 function Article({ article, author, related }) {
+	const [comments, setComments] = useState(article.comments);
+	const [followers, setFollowers] = useState(article.followers);
+	const [fetchArticleError, setFetchArticleError] = useState(null);
+
+	useEffect(_=> {
+		/* Other data pre-rendered, this data dynamic */
+		fetch('/api/get-article-data?id='+article.id)
+			.then(res => res.json())
+			.then(({ comments, followers }) => {
+				setComments(comments);
+				setFollowers(followers);
+				setFetchArticleError(null);
+			})
+			.catch(e => setFetchArticleError(e) || console.log(e));
+	}, []);
+
 	/* Content styles must be added after render as article.content includes the HTML */
 	useEffect(_ => {
 		let contentDiv = document.getElementsByClassName(
@@ -189,12 +205,13 @@ function Article({ article, author, related }) {
 						)}
 					<Related articles={related} />
 					<CommentSection
-						comments={article.comments.sort(
+						comments={comments.sort(
 							({ post_date: a }, { post_date: b }) => a - b
 						)}
 						articleID={article.id}
-						followers={article.followers}
+						followers={followers}
 						articleTitle={article.title}
+						fetchArticleError={fetchArticleError}
 					/>
 				</div>
 			</Layout>

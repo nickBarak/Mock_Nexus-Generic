@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import CommentInputs from './CommentInputs';
 
-function CommentSection({ comments, articleID, followers, articleTitle }) {
-	const [commentMessage, setCommentMessage] = useState(null);
+function CommentSection({ comments, articleID, followers, articleTitle, fetchArticleError }) {
+	const [commentMessage, setCommentMessage] = useState(fetchArticleError);
 	const [following, setFollowing] = useState(false);
 
 	/* Has user signed in and are they following this article? */
 	useEffect(_ => {
+		JSON.stringify(following);
 		setFollowing(followers.includes(sessionStorage.getItem('email')));
 	}, []);
 

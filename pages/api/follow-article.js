@@ -8,22 +8,25 @@ export default async function (req, res) {
 	let newUser,
 		{ name, email, articleID, following, articleTitle, articleURL } = req.body;
 	if (!testEmail(email)) {
-		res.json(1);
-		res.end();
+		res.json(1).end();
 		return;
 	}
 	try {
 		let user = await getUser(email);
 		if (user) {
 			if (user.name !== name) {
-				res.json(2);
-				res.end();
+				res.json(2).end();
 				return;
 			}
 		} else {
 			newUser = true;
 			await insertUser(name, email);
 		}
+		const emailRegistered = await queryDB(`SELECT followers FROM articles WHERE id = $1`, [articleID]);
+		if ((following && !emailRegistered) || (!following && emailRegistered)) {
+			return res.json().end()
+		}
+
 		await queryDB(
 			`UPDATE users SET following = array_${
 				!following ? 'append' : 'remove'
@@ -55,12 +58,10 @@ export default async function (req, res) {
 		transporter.sendMail(mailOptions, (e, info) => e ? console.log(e) : console.log('Email sent:', info.response));
 
 		if (newUser) {
-			res.json(3);
-			res.end();
+			res.json(3).end();
 			return;
 		}
-		res.json(0);
-		res.end();
+		res.json(0).end();
 	} catch (e) {
 		console.log(e);
 	}
