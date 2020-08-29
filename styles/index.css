@@ -288,6 +288,18 @@ a {
   font-size: 1.3rem;
 }
 
+.donate-banner {
+  position: absolute;
+  bottom: 6rem;
+  background-color: khaki;
+  color: black;
+  border: 3px solid black;
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 1.25rem .75rem 1.5rem .75rem;
+  font-family: Times New Roman;
+}
+
 @media screen and (max-width: 1250px) {
   .nav a {
     font-size: .85rem;
@@ -412,6 +424,10 @@ a {
   }
   .main > div:nth-child(1) > div:nth:child(1) {
     width: 98%;
+  }
+  .donate-banner {
+    bottom: 3.45rem;
+    font-size: 1.25rem;
   }
 }
 

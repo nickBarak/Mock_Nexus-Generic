@@ -14,7 +14,7 @@ function Article({ article, author, related }) {
 
 	useEffect(_=> {
 		/* Other data pre-rendered, this data dynamic */
-		fetch('/api/get-article-data?id='+article.id)
+		fetch('/api/fetch-article-data?id='+article.id)
 			.then(res => res.json())
 			.then(({ comments, followers }) => {
 				setComments(comments);
@@ -197,12 +197,7 @@ function Article({ article, author, related }) {
 						dangerouslySetInnerHTML={{ __html: article.content }}
 					/>
 
-					{/* Don't show AboutTheAuthor if lacking info */}
-					{author.name &&
-						(author.biography !== 'Not available' ||
-							author.portrait !== 'Not available') && (
-							<AboutTheAuthor author={author} />
-						)}
+					<AboutTheAuthor author={author} />
 					<Related articles={related} />
 					<CommentSection
 						comments={comments.sort(

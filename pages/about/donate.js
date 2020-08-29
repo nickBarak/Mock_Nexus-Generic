@@ -18,18 +18,7 @@ function Donate() {
 							src="https://i1.wp.com/dailynexus.com/wp-content/uploads/2016/02/Office-Awards_by-Lorenzo-Basilio-1-1024x681.jpg?resize=800%2C532"
 							alt="donate"
 						/>
-						<span
-							style={{
-								position: 'absolute',
-								bottom: '6rem',
-								backgroundColor: 'khaki',
-								color: 'black',
-								border: '3px solid black',
-								fontWeight: 'bold',
-								fontSize: '2rem',
-								padding: '1.25rem .75rem 1.5rem .75rem',
-								fontFamily: 'Times New Roman',
-							}}>
+						<span className="donate-banner">
 							CLICK HERE TO DONATE
 						</span>
 					</a>
