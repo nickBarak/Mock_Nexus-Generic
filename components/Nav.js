@@ -84,8 +84,8 @@ function Nav() {
                             }, 0);
                         }}>
                             {/* About subcategory items must be handled according to the unique structure of the subcategories property */}
-                            {category.subcategories.map((subcategory, j) =>
-                                <li key={j}><Link href={category.title !== 'About' ? `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}` : `/about/${Object.values(subcategory)[0]}`}><a className="subcategory-link">{category.title !== 'About' ? subcategory : Object.keys(subcategory)[0]}</a></Link></li>)}
+                            {category.subcategories.map(subcategory =>
+                                <li key={uuid()}><Link href={category.title !== 'About' ? `/categories/${convertToPath(category.title)}/${convertToPath(subcategory)}` : `/about/${Object.values(subcategory)[0]}`}><a className="subcategory-link">{category.title !== 'About' ? subcategory : Object.keys(subcategory)[0]}</a></Link></li>)}
                         </ul>
                         </>)
                         : <Link href={category.link}><a>{category.title}</a></Link>

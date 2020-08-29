@@ -1,6 +1,7 @@
 // import uuid from 'uuidv4';
 import { testEmail } from '../../Functions';
 import { queryDB, getUser, insertUser } from '../../db';
+import { uuid } from 'uuidv4';
 
 export default async function (req, res) {
 	let newUser,
@@ -16,7 +17,7 @@ export default async function (req, res) {
 		post_date,
 		parent,
 		replies: [],
-		id: Math.random(),
+		id: uuid()
 	};
 	try {
 		let user = await getUser(email);
@@ -46,16 +47,16 @@ export default async function (req, res) {
 					return comment.id === parent
 						? replies.push({ name, email, ...hydratedComment })
 						: replies.find(({ id }) => id === parent)
-						? replies
-								.find(({ id }) => id === parent)
-								.replies.push({
-									name,
-									email,
-									...hydratedComment,
-								})
-						: replies.length
-						? addReply(replies)
-						: 0;
+							? replies
+									.find(({ id }) => id === parent)
+									.replies.push({
+										name,
+										email,
+										...hydratedComment,
+									})
+							: replies.length
+								? addReply(replies)
+								: 0;
 				});
 			}
 			addReply(comments.comments);

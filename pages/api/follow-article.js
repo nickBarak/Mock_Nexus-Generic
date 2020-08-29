@@ -22,10 +22,8 @@ export default async function (req, res) {
 			newUser = true;
 			await insertUser(name, email);
 		}
-		const emailRegistered = await queryDB(`SELECT followers FROM articles WHERE id = $1`, [articleID]);
-		if ((following && !emailRegistered) || (!following && emailRegistered)) {
-			return res.json().end()
-		}
+		const followers = await queryDB(`SELECT followers FROM articles WHERE id = $1`, [articleID]);
+		if ((following && !followers.includes(email)) || (!following && followers.includes(email))) { return res.json().end() }
 
 		await queryDB(
 			`UPDATE users SET following = array_${
