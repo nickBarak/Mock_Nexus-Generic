@@ -27,7 +27,7 @@ function CommentInputs({
 		e.persist();
 		e.preventDefault();
 		let [content, name, email] = ['content', 'name', 'email'].map((el, i) =>
-			sessionStorage.getItem(el) || formEl.children[i].children[1].value
+			sessionStorage.getItem(el) || formEl.children[i].children[1].value.replace(/^ *?\w/g, '').replace(/ *?$/g, '')
 		);
 		if (!content) return;
 		if ((!name && email) || (name && !email)) {
@@ -227,7 +227,6 @@ function CommentInputs({
 									e.keyCode === 13 && Simulate.click(e.target)
 								}
 								onClick={followArticle}
-								onTouchStart={followArticle}
 								style={{
 									display: 'flex',
 									justifyContent: 'center',
