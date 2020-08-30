@@ -6,11 +6,7 @@ import { uuid } from 'uuidv4';
 export default async function (req, res) {
 	let newUser,
 		{ name, email, content, article_id, parent, post_date } = req.body;
-	if (!testEmail(email)) {
-		res.json(1);
-		res.end();
-		return;
-	}
+	if (!testEmail(email)) { return res.json(1) }
 	let hydratedComment = {
 		article_id,
 		content,
@@ -22,11 +18,7 @@ export default async function (req, res) {
 	try {
 		let user = await getUser(email);
 		if (user) {
-			if (user.name !== name) {
-				res.json(2);
-				res.end();
-				return;
-			}
+			if (user.name !== name) { return res.json(2) }
 			await queryDB(
 				'UPDATE users SET comments = array_append(comments, $1) WHERE email = $2',
 				[hydratedComment, email]
@@ -69,13 +61,8 @@ export default async function (req, res) {
 				'UPDATE articles SET comments = array_append(comments, $1) WHERE id = $2',
 				[{ name, email, ...hydratedComment }, article_id]
 			);
-		if (newUser) {
-			res.json(3);
-			res.end();
-			return;
-		}
-		res.json(0);
-		res.end();
+		if (newUser) { return res.json(3) }
+		return res.json(0);
 	} catch (e) {
 		console.log(e);
 	}

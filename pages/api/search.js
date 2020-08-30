@@ -34,7 +34,7 @@ export default async function (req, res) {
 			'SELECT * FROM articles WHERE id = ANY($1)',
 			[authorArticleIDs]
 		);
-		res.json(
+		return res.json(
 			results
 				? authorResults
 					? [...results, ...authorResults]
@@ -42,7 +42,7 @@ export default async function (req, res) {
 				: authorResults
 				? authorResults
 				: []
-		).end();
+		);
 	} catch (e) {
 		console.log(e);
 	}

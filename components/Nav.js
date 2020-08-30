@@ -117,6 +117,7 @@ function Nav() {
                         fetch(client + '/api/search?value=' + e.target.value)
                             .then(res => res.json())
                             .then(rows =>
+                                 console.log(JSON.stringify(rows)) ||
                                 /* First index for sorting by relevance, second index for sorting by date. Need separate values to avoid overwrite and only sort once */
                                 setSearchResults([
                                     rows,

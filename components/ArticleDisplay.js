@@ -10,7 +10,6 @@ function ArticleDisplay({ type, heading, articles, searchData }) {
 				<div
 					className="category-heading"
 					style={{
-						fontSize: '2.5rem',
 						textTransform: 'uppercase',
 						marginTop: '.75rem',
 					}}>

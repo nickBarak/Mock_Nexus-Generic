@@ -19,14 +19,30 @@ function Search() {
     useEffect(_=> {
         if (!mounted.current) { mounted.current = true; return }
         if (sessionStorage.getItem('s__EA__Rc_H_' + router.query.value)) {
-            let { ssSearchResults, ssQueryTime } = JSON.parse(sessionStorage.getItem('s__EA__Rc_H_' + router.query.value));
-            setSearchResults(ssSearchResults);
-            setQueryTime(ssQueryTime);
-            setFooterData({
-                page: 1,
-                highestPage: ssSearchResults[0] ? Math.ceil(ssSearchResults[0].length/15) : 1,
-                route: '/search/'+router.query.value
-            });
+            let ssSearchResults = JSON.parse(sessionStorage.getItem('s__EA__Rc_H_' + router.query.value)).slice(0, 15);
+            setLoadingSearchResults(true);
+            let now = Date.now();
+            fetch(client + '/api/fetch-articles', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ids: ssSearchResults })
+            })
+                .then(res => res.json())
+                .then(rows => {
+                    const rowsByRelevanceAndDate = [
+                        rows,
+                        [...rows].sort(({publish_date: a}, {publish_date: b}) => new Date(b) - new Date(a))
+                    ];
+                    setLoadingSearchResults(false);
+                    setSearchResults(rowsByRelevanceAndDate);
+                    setQueryTime(((Date.now() - now) / 1000).toFixed(2));
+                    setFooterData({
+                        page: 1,
+                        highestPage: Math.ceil(sessionStorage.getItem('s__EA__Rc_H_' + router.query.value).length/15),
+                        route: '/search/'+router.query.value
+                    });
+                })
+                .catch(e => console.log(e) || setSearchError('Error fetching results'));
         } else {
             let now = Date.now();
             setLoadingSearchResults(true);
@@ -37,20 +53,18 @@ function Search() {
                     const rowsByRelevanceAndDate = [
                         rows,
                         [...rows].sort(({publish_date: a}, {publish_date: b}) => new Date(b) - new Date(a))
-                    ],
-                        queryDuration = ((Date.now() - now) / 1000).toFixed(2);
-                    setSearchResults(rowsByRelevanceAndDate);
+                    ];
                     setLoadingSearchResults(false);
-                    setQueryTime(queryDuration);
+                    setSearchResults(rowsByRelevanceAndDate);
+                    setQueryTime(((Date.now() - now) / 1000).toFixed(2));
                     setFooterData({
                         page: 1,
                         highestPage: rows ? Math.ceil(rows.length/15) : 1,
                         route: '/search/'+router.query.value
                     });
-                    sessionStorage.setItem('s__EA__Rc_H_' + router.query.value, JSON.stringify({
-                        ssQueryTime: queryDuration,
-                        ssSearchResults: rowsByRelevanceAndDate
-                    }));
+                    sessionStorage.setItem('s__EA__Rc_H_' + router.query.value, JSON.stringify(
+                        rows.map(({id}) => id)
+                    ));
                 })
                 .catch(e => console.log(e) || setSearchError('Error fetching results'));
         }
@@ -59,13 +73,13 @@ function Search() {
     return (
         <Layout footerData={footerData}>
 			<ArticleDisplay
-				type="author-page"
+				type="search-page"
 				heading={`"${router.query.value ? convertFromPath(router.query.value) : ''}"`}
-                articles={searchResults[sortBy].slice(0, 15)}
+                articles={searchResults[sortBy]}
                 searchData={{
                     loadingSearchResults,
                     queryTime,
-                    resultCount: searchResults[0].length,
+                    resultCount: mounted.current ? sessionStorage.getItem('s__EA__Rc_H_' + router.query.value).length : 0,
                     searchError,
                     setSortBy
                 }}

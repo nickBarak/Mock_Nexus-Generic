@@ -24,15 +24,25 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/about/donate": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/about/donate.js"
-    ],
     "/articles/[id]": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/articles/[id].js"
+    ],
+    "/categories/[category]/[subcategory]": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/categories/[category]/[subcategory].js"
+    ],
+    "/search/[value]": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/search/[value].js"
+    ],
+    "/search/[value]/page/[page]": [
+      "static/chunks/main.js",
+      "static/chunks/webpack.js",
+      "static/chunks/pages/search/[value]/page/[page].js"
     ]
   },
   "ampFirstPages": []

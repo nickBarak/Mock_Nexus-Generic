@@ -300,6 +300,10 @@ a {
   font-family: Times New Roman;
 }
 
+.category-heading {
+  font-size: 2.5rem;
+}
+
 @media screen and (max-width: 1250px) {
   .nav a {
     font-size: .85rem;
@@ -503,6 +507,9 @@ a {
   }
   .article-preview-mobile .article-preview-title {
     font-size: 1.2rem;
+  }
+  .category-heading {
+    font-size: 1.75rem;
   }
 }
 /*# sourceMappingURL=index.css.map */

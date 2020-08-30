@@ -2,6 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/about/donate": "pages/about/donate.js",
-  "/articles/[id]": "pages/articles/[id].js"
+  "/articles/[id]": "pages/articles/[id].js",
+  "/search/[value]": "pages/search/[value].js",
+  "/search/[value]/page/[page]": "pages/search/[value]/page/[page].js",
+  "/categories/[category]/[subcategory]": "pages/categories/[category]/[subcategory].js",
+  "/api/fetch-article-data": "pages/api/fetch-article-data.js"
 }
