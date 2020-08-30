@@ -19,7 +19,6 @@ export default async function (req, res) {
 		return
 	}
 	try {
-		console.log(1);
 		let user = await getUser(email);
 		if (user) {
 			if (user.name !== name) {
@@ -27,8 +26,14 @@ export default async function (req, res) {
 				return
 			}
 		} else {
-			newUser = true;
-			await insertUser(name, email);
+			let existingUsers = await queryDB(`SELECT name FROM users`);
+			if (existingUsers.map(({name}) => name).includes(name)) {
+				res.json(5);
+				return;
+			} else {
+				newUser = true;
+				await insertUser(name, email);
+			}
 		}
 		const [
 			followers,

@@ -76,6 +76,9 @@ function CommentInputs({
 			case 3:
 				msg = 'New user created';
 				break;
+			case 5:
+				msg = 'Name not available';
+				break;
 			default:
 				msg = 'Something went wrong';
 				console.log(status);
@@ -135,6 +138,9 @@ function CommentInputs({
 					break;
 				case 3:
 					msg = 'New user created';
+					break;
+				case 5:
+					msg = 'Name not available';
 			}
 			msg && setMessage(msg);
 			if (!status || status === 3) {

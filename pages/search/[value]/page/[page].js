@@ -12,6 +12,7 @@ function Search() {
 	const [sortBy, setSortBy] = useState(0);
 	const [loadingSearchResults, setLoadingSearchResults] = useState(false);
 	const [queryTime, setQueryTime] = useState(0);
+	const [resultCount, setResultCount] = useState('Unknown');
 	const [searchError, setSearchError] = useState(null);
 	const [footerData, setFooterData] = useState({});
 	const mounted = useRef(false);
@@ -22,16 +23,15 @@ function Search() {
 				mounted.current = true;
 				return;
 			}
-			if (sessionStorage.getItem('s__EA__Rc_H_' + router.query.value.toLowerCase())) {
-				let ssSearchResults = JSON.parse(
-					sessionStorage.getItem('s__EA__Rc_H_' + router.query.value.toLowerCase())
-				).slice((Number(router.query.page) - 1) * 15, Number(router.query.page) * 15);
+			let ssSearchResults = JSON.parse(sessionStorage.getItem('s__EA__Rc_H_' + router.query.value.toLowerCase()));
+			if (ssSearchResults) {
+				setResultCount(ssSearchResults.length);
 				setLoadingSearchResults(true);
 				let now = Date.now();
 				fetch(client + '/api/fetch-articles', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ ids: ssSearchResults })
+					body: JSON.stringify({ ids: ssSearchResults.slice((Number(router.query.page) - 1) * 15, Number(router.query.page) * 15) })
 				})
 					.then(res => res.json())
 					.then(rows => {
@@ -74,6 +74,7 @@ function Search() {
 									new Date(b) - new Date(a)
 							),
 						];
+						setResultCount(rows.length);
 						setSearchResults(rowsByRelevanceAndDate.map(rows => rows.slice((Number(router.query.page) - 1) * 15, Number(router.query.page) * 15)));
 						setLoadingSearchResults(false);
 						setQueryTime(((Date.now() - now) / 1000).toFixed(2));
@@ -110,11 +111,7 @@ function Search() {
 				searchData={{
 					loadingSearchResults,
 					queryTime,
-					resultCount: mounted.current
-						? sessionStorage.getItem(
-								's__EA__Rc_H_' + router.query.value.toLowerCase()
-						  ).length
-						: 'Unknown',
+					resultCount,
 					searchError,
 					setSortBy,
 				}}

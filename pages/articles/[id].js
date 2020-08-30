@@ -6,6 +6,7 @@ import { convertDate } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
 import { useEffect, useState } from 'react';
+import { client } from '../../URLs';
 
 function Article({ article, author, related }) {
 	const [comments, setComments] = useState(article.comments);
@@ -14,7 +15,7 @@ function Article({ article, author, related }) {
 
 	useEffect(_ => {
 		/* Other data pre-rendered, this data dynamic */
-		fetch('/api/fetch-article-data?id=' + article.id)
+		fetch(client + '/api/fetch-article-data?id=' + article.id)
 			.then(res => res.json())
 			.then(({ comments, followers }) => {
 				setComments(comments);

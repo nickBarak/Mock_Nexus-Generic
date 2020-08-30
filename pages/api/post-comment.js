@@ -30,8 +30,14 @@ export default async function (req, res) {
 				[hydratedComment, email]
 			);
 		} else {
-			newUser = true;
-			await insertUser(name, email);
+			let existingUsers = await queryDB(`SELECT name FROM users`);
+			if (existingUsers.map(({name}) => name).includes(name)) {
+				res.json(5);
+				return;
+			} else {
+				newUser = true;
+				await insertUser(name, email);
+			}
 		}
 		if (parent) {
 			let [
