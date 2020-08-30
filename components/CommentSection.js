@@ -3,13 +3,19 @@ import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import CommentInputs from './CommentInputs';
 
-function CommentSection({ comments, articleID, followers, articleTitle, fetchArticleError }) {
+function CommentSection({
+	comments,
+	articleID,
+	followers,
+	articleTitle,
+	fetchArticleError,
+}) {
 	const [commentMessage, setCommentMessage] = useState(fetchArticleError);
 	const [following, setFollowing] = useState(false);
 
 	/* Has user signed in and are they following this article? */
 	useEffect(_ => {
-		JSON.stringify(following);
+		console.log(JSON.stringify(followers));
 		setFollowing(followers.includes(sessionStorage.getItem('email')));
 	}, []);
 
@@ -71,7 +77,7 @@ function CommentSection({ comments, articleID, followers, articleTitle, fetchArt
 									marginRight: '.2rem',
 									fontSize: '1rem',
 								}}>
-								{comments.length}
+								{comments.filter(({email}) => email !== 'deleted').length}
 							</span>
 						</li>
 						<li key="1">
@@ -86,8 +92,8 @@ function CommentSection({ comments, articleID, followers, articleTitle, fetchArt
 									let commentCount = 0;
 									let count = level => {
 										level.forEach(
-											({ replies }) =>
-												commentCount++ < 0 ||
+											({ email, replies }) =>
+												(email !== 'deleted' && commentCount++ < 0) ||
 												(replies.length &&
 													count(replies))
 										);
@@ -150,7 +156,7 @@ function CommentSection({ comments, articleID, followers, articleTitle, fetchArt
 									);
 								};
 								count(comments);
-								return new Set(checked).size;
+								return new Set(checked.filter(email => email !== 'deleted')).size;
 							})()}
 						</span>
 					</span>

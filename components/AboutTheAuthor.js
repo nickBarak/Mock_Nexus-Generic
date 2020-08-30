@@ -5,11 +5,10 @@ function AboutTheAuthor({ author }) {
 		<div className="about-the-author">
 			<picture>
 				<source srcSet={author.portrait} />
-				<source
-					srcSet="/img/nexus-fallback.webp"
-					type="image/webp"
-				/>
-				<Link href={'/authors/' + author.id}><img alt="author" /></Link>
+				<source srcSet="/img/nexus-fallback.webp" type="image/webp" />
+				<Link href={'/authors/' + author.id}>
+					<img alt="author" />
+				</Link>
 			</picture>
 			<div>
 				<div>
@@ -17,7 +16,7 @@ function AboutTheAuthor({ author }) {
 						<a>{author.name}</a>
 					</Link>
 				</div>
-				<div>{author.biography}</div>
+				<div>{author.biography === 'Not available' ? 'Biography not available' : author.biography}</div>
 			</div>
 			<style jsx>{`
 				.about-the-author {

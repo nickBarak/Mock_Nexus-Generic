@@ -23,11 +23,21 @@ function CommentInputs({
 			});
 	}, []);
 
-	async function postComment(e, formEl, setMessage, article_id, parent = null) {
+	async function postComment(
+		e,
+		formEl,
+		setMessage,
+		article_id,
+		parent = null
+	) {
 		e.persist();
 		e.preventDefault();
-		let [content, name, email] = ['content', 'name', 'email'].map((el, i) =>
-			sessionStorage.getItem(el) || formEl.children[i].children[1].value.replace(/^ *?\w/g, '').replace(/ *?$/g, '')
+		let [content, name, email] = ['content', 'name', 'email'].map(
+			(el, i) =>
+				sessionStorage.getItem(el) ||
+				formEl.children[i].children[1].value
+					.replace(/^ *?/g, '')
+					.replace(/ *?$/g, '')
 		);
 		if (!content) return;
 		if ((!name && email) || (name && !email)) {
@@ -66,7 +76,7 @@ function CommentInputs({
 			case 3:
 				msg = 'New user created';
 				break;
-				default:
+			default:
 				msg = 'Something went wrong';
 				console.log(status);
 		}
@@ -84,39 +94,29 @@ function CommentInputs({
 	async function followArticle(e) {
 		e.persist();
 		e.preventDefault();
-		const form =
-			e.currentTarget.parentElement
-				.parentElement.parentElement;
+		const form = e.currentTarget.parentElement.parentElement.parentElement;
 		let email = user
 				? user.email
-				: e.currentTarget.parentElement
-						.parentElement.children[1]
-						.value,
+				: e.currentTarget.parentElement.parentElement.children[1].value,
 			name = user
 				? user.name
-				: e.currentTarget.parentElement
-						.parentElement.parentElement
-						.children[1].children[1]
-						.value;
+				: e.currentTarget.parentElement.parentElement.parentElement
+						.children[1].children[1].value;
 		if (email && name) {
-			let response = await fetch(
-					client + '/api/follow-article',
-					{
-						method: 'POST',
-						headers: {
-							'Content-Type':
-								'application/json',
-						},
-						body: JSON.stringify({
-							name,
-							email,
-							articleID,
-							articleTitle,
-							articleURL: client + '/articles/' + articleID,
-							following,
-						}),
-					}
-				),
+			let response = await fetch(client + '/api/follow-article', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						name,
+						email,
+						articleID,
+						articleTitle,
+						articleURL: client + '/articles/' + articleID,
+						following,
+					}),
+				}),
 				status = await response.json(),
 				msg;
 			switch (status) {
@@ -138,23 +138,13 @@ function CommentInputs({
 			}
 			msg && setMessage(msg);
 			if (!status || status === 3) {
-				if (
-					!sessionStorage.getItem('email')
-				) {
-					sessionStorage.setItem(
-						'email',
-						email
-					);
-					sessionStorage.setItem(
-						'name',
-						name
-					);
+				if (!sessionStorage.getItem('email')) {
+					sessionStorage.setItem('email', email);
+					sessionStorage.setItem('name', name);
 				}
 				alert(
 					`Your email has been ${
-						following
-							? 'unsubscribed from'
-							: 'subscribed to'
+						following ? 'unsubscribed from' : 'subscribed to'
 					} this article\'s comment activity`
 				);
 				form.reset();
@@ -175,8 +165,18 @@ function CommentInputs({
 					marginTop: '1rem',
 					maxWidth: '55rem',
 				}}
-				onSubmit={e => postComment(e, e.currentTarget, setMessage, articleID, parent)}>
-				<div style={{ position: 'relative' }} className="input-large-container">
+				onSubmit={e =>
+					postComment(
+						e,
+						e.currentTarget,
+						setMessage,
+						articleID,
+						parent
+					)
+				}>
+				<div
+					style={{ position: 'relative' }}
+					className="input-large-container">
 					<img
 						src="https://secure.gravatar.com/avatar/?s=40&d=mm&r=g"
 						alt="user"
@@ -265,7 +265,7 @@ function CommentInputs({
 						color: white;
 						cursor: pointer;
 						border: none;
-						z-index: 2
+						z-index: 2;
 					}
 
 					.post-comment-button:hover,
@@ -274,7 +274,7 @@ function CommentInputs({
 					}
 
 					input {
-						padding: 1.7rem .75rem 1.7rem 5rem;
+						padding: 1.7rem 0.75rem 1.7rem 5rem;
 						border: 1px solid #ddd;
 						color: #888;
 						font-family: monospace;

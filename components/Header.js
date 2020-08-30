@@ -69,13 +69,29 @@ function Header() {
 					</Link>
 				</span>
 				<span className="hamburger-nav">
-					<span style={{ position: 'absolute', bottom: '-12px', left: 0, height: '28px', width: '32px', cursor: 'pointer' }} onClick={_=> {
-						setScrollY(window.scrollY);
-						window.scrollTo(0, 0);
-						document.getElementsByClassName('header-mobile')[0].style.position = 'absolute';
-						document.getElementsByClassName('nav-mobile')[0].style.transform = 'translateX(0)';
-						document.getElementById('__next').children[2].children[0].style.display = 'none';
-					}} />
+					<span
+						style={{
+							position: 'absolute',
+							bottom: '-12px',
+							left: 0,
+							height: '28px',
+							width: '32px',
+							cursor: 'pointer',
+						}}
+						onClick={_ => {
+							setScrollY(window.scrollY);
+							window.scrollTo(0, 0);
+							document.getElementsByClassName(
+								'header-mobile'
+							)[0].style.position = 'absolute';
+							document.getElementsByClassName(
+								'nav-mobile'
+							)[0].style.transform = 'translateX(0)';
+							document.getElementById(
+								'__next'
+							).children[2].children[0].style.display = 'none';
+						}}
+					/>
 				</span>
 			</div>
 
@@ -163,8 +179,8 @@ function Header() {
 					background-color: white;
 					top: 0;
 					z-index: 50;
-					margin-bottom: .75rem;
-					padding: 0 .45rem;
+					margin-bottom: 0.75rem;
+					padding: 0 0.45rem;
 				}
 
 				.header-mobile .full-logo {
@@ -179,14 +195,14 @@ function Header() {
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
-					gap: 0 .55rem;
-					margin-top: .65rem;
+					gap: 0 0.55rem;
+					margin-top: 0.65rem;
 				}
 
 				.header-mobile .logo {
 					width: 2.5rem;
 					height: 3rem;
-					transform: translateY(-.155rem);
+					transform: translateY(-0.155rem);
 				}
 
 				.hamburger-nav {

@@ -54,9 +54,7 @@ function Layout({ footerData, children }) {
 						display: 'flex',
 						justifyContent: 'space-between',
 					}}>
-					<div className="main-children">
-						{children}
-					</div>
+					<div className="main-children">{children}</div>
 					<div className="sidebar-container">
 						<Sidebar />
 					</div>

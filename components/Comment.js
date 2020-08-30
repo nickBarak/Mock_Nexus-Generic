@@ -5,7 +5,17 @@ import 'isomorphic-unfetch';
 import { client } from '../URLs';
 
 function Comment({
-	comment: { picture, name, email, content, post_date, id, parent, replies, articleTitle },
+	comment: {
+		picture,
+		name,
+		email,
+		content,
+		post_date,
+		id,
+		parent,
+		replies,
+		articleTitle,
+	},
 	articleID,
 	followers,
 	depth = 0,
@@ -32,7 +42,9 @@ function Comment({
 						marginRight: '1rem',
 					}}>
 					<img
-						className={`${parent ? 'comment-child-img' : 'comment-img'}`}
+						className={`${
+							parent ? 'comment-child-img' : 'comment-img'
+						}`}
 						src={
 							picture ||
 							'https://secure.gravatar.com/avatar/004ce453a2b46792c3e04146555a35b3?s=64&d=mm&r=g'
@@ -84,7 +96,14 @@ function Comment({
 							Reply
 						</button>
 						<span>
-							<span style={{ color: '#999', fontSize: '.75rem', display: 'flex', flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
+							<span
+								style={{
+									color: '#999',
+									fontSize: '.75rem',
+									display: 'flex',
+									flexWrap: 'nowrap',
+									whiteSpace: 'nowrap',
+								}}>
 								{email === currentUserEmail && (
 									<button
 										onClick={e => {
@@ -102,10 +121,12 @@ function Comment({
 														email: currentUserEmail,
 													}),
 												}
-											).then(_=>
-												/* maintain scroll position */
-												document.location.reload()
-											).catch(e => console.log(e));
+											)
+												.then(_ =>
+													/* maintain scroll position */
+													document.location.reload()
+												)
+												.catch(e => console.log(e));
 										}}
 										style={{
 											color: 'white',
@@ -126,7 +147,10 @@ function Comment({
 								)}
 								<i
 									className="far fa-clock"
-									style={{ marginRight: '.325rem', transform: 'translateY(1px)' }}></i>
+									style={{
+										marginRight: '.325rem',
+										transform: 'translateY(1px)',
+									}}></i>
 								{convertDate(post_date)}
 								{/* Toggle showing replies to this comment */}
 								{replies.length ? (

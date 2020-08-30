@@ -18,9 +18,7 @@ function Sidebar() {
 		<>
 			<ul className="sidebar">
 				<li key="0">
-					<div>
-						Ad Space
-					</div>
+					<div>Ad Space</div>
 				</li>
 				<li
 					key="1"
@@ -28,7 +26,11 @@ function Sidebar() {
 						border: '2px solid #555',
 						margin: '.5rem 0 .75rem 0',
 					}}>
-					<img src="/img/covid-chart.png" alt="covid chart" style={{ width: '95%' }} />
+					<img
+						src="/img/covid-chart.png"
+						alt="covid chart"
+						style={{ width: '95%' }}
+					/>
 				</li>
 				<li key="2">
 					<div className="comic-of-the-week-title">
@@ -36,9 +38,14 @@ function Sidebar() {
 					</div>
 					<hr />
 					<br />
-					<Link href={`/articles/8081`}><div className="comic-of-the-week">
-						<img src="/img/comic-of-the-week.webp" alt="comic" />
-					</div></Link>
+					<Link href={`/articles/8081`}>
+						<div className="comic-of-the-week">
+							<img
+								src="/img/comic-of-the-week.webp"
+								alt="comic"
+							/>
+						</div>
+					</Link>
 				</li>
 				<li key="3">
 					{' '}

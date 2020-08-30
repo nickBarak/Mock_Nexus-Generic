@@ -12,9 +12,9 @@ function Article({ article, author, related }) {
 	const [followers, setFollowers] = useState(article.followers);
 	const [fetchArticleError, setFetchArticleError] = useState(null);
 
-	useEffect(_=> {
+	useEffect(_ => {
 		/* Other data pre-rendered, this data dynamic */
-		fetch('/api/fetch-article-data?id='+article.id)
+		fetch('/api/fetch-article-data?id=' + article.id)
 			.then(res => res.json())
 			.then(({ comments, followers }) => {
 				setComments(comments);
@@ -90,13 +90,19 @@ function Article({ article, author, related }) {
 				ul.style.marginTop = '.5rem';
 			}
 		);
-		
-		[document.getElementsByClassName('article-page-content')[0],
-		contentDiv,
-		...contentDiv.getElementsByClassName('wp-caption'),
-		...contentDiv.getElementsByTagName('a'),
-		...contentDiv.getElementsByTagName('img')].forEach(el => { el.style.maxWidth = '100%' });
-		[...contentDiv.getElementsByTagName('img')].forEach(img => { img.style.objectFit = 'cover' });
+
+		[
+			document.getElementsByClassName('article-page-content')[0],
+			contentDiv,
+			...contentDiv.getElementsByClassName('wp-caption'),
+			...contentDiv.getElementsByTagName('a'),
+			...contentDiv.getElementsByTagName('img'),
+		].forEach(el => {
+			el.style.maxWidth = '100%';
+		});
+		[...contentDiv.getElementsByTagName('img')].forEach(img => {
+			img.style.objectFit = 'cover';
+		});
 		[...document.getElementsByClassName('share-icon')].forEach(icon => {
 			let [site] = [...icon.classList].filter(
 					className =>

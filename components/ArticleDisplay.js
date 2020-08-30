@@ -16,26 +16,59 @@ function ArticleDisplay({ type, heading, articles, searchData }) {
 					{heading}
 				</div>
 
-				{searchData &&
-					<div className="search-results-header" style={{ marginTop: '.8rem' }}>
-						<span style={{ fontFamily: 'Arial, sans-serif', fontSize: '.8rem' }}>
-						{/* Show loading, query time or error */}
-						{!searchData.searchError ?
-							!searchData.loadingSearchResults
-								? `${searchData.resultCount} result${searchData.resultCount === 1 ? '' : 's'} (${searchData.queryTime} second${searchData.queryTime === 1 ? '' : 's'})`
-								: 'Loading articles...'
-							: <span style={{ color: 'red', fontWeight: 'bold', fontSize: '1.1rem' }}>{searchData.searchError}</span>}</span>
+				{searchData && (
+					<div
+						className="search-results-header"
+						style={{ marginTop: '.8rem' }}>
+						<span
+							style={{
+								fontFamily: 'Arial, sans-serif',
+								fontSize: '.8rem',
+							}}>
+							{/* Show loading, query time or error */}
+							{!searchData.searchError ? (
+								!searchData.loadingSearchResults ? (
+									`${searchData.resultCount} result${
+										searchData.resultCount === 1 ? '' : 's'
+									} (${searchData.queryTime} second${
+										searchData.queryTime === 1 ? '' : 's'
+									})`
+								) : (
+									'Loading articles...'
+								)
+							) : (
+								<span
+									style={{
+										color: 'red',
+										fontWeight: 'bold',
+										fontSize: '1.1rem',
+									}}>
+									{searchData.searchError}
+								</span>
+							)}
+						</span>
 						<span>
-							<span style={{ fontSize: '.85rem', marginRight: '.25rem' }}>Sort by: </span>
-							<select className="search-results-select" onChange={e => {
-								searchData.setSortBy(e.target.selectedIndex);
-							}} style={{ fontFamily: 'Arial, sans-serif' }}>
+							<span
+								style={{
+									fontSize: '.85rem',
+									marginRight: '.25rem',
+								}}>
+								Sort by:{' '}
+							</span>
+							<select
+								className="search-results-select"
+								onChange={e => {
+									searchData.setSortBy(
+										e.target.selectedIndex
+									);
+								}}
+								style={{ fontFamily: 'Arial, sans-serif' }}>
 								<option key="0">Relevance</option>
 								<option key="1">Date</option>
 							</select>
 						</span>
 					</div>
-				}
+				)}
 
 				<ul>
 					{articles.map((article, i) => (

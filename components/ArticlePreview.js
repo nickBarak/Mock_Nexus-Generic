@@ -6,20 +6,27 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 	return (
 		<>
 			<div className="article-preview">
-				{imageLeft && (<span style={{ overflow: 'hidden' }}>
-					<picture>
-						<source srcSet={article.full_thumbnail} />
-						<source
-							srcSet="/img/nexus-fallback.webp"
-							type="image/webp"
-						/>
-						<Link href={`/articles/${article.id}`}><img alt="thumbnail" /></Link>
-					</picture></span>
+				{imageLeft && (
+					<span style={{ overflow: 'hidden' }}>
+						<picture>
+							<source srcSet={article.full_thumbnail} />
+							<source
+								srcSet="/img/nexus-fallback.webp"
+								type="image/webp"
+							/>
+							<Link href={`/articles/${article.id}`}>
+								<img alt="thumbnail" />
+							</Link>
+						</picture>
+					</span>
 				)}
 				<div className="article-preview-words">
 					<div>
 						<Link href={`/articles/${article.id}`}>
-							<a className={`article-preview-title${labyrinth ? ' labyrinth-title' : ''}`}>
+							<a
+								className={`article-preview-title${
+									labyrinth ? ' labyrinth-title' : ''
+								}`}>
 								{article.title}
 							</a>
 						</Link>
@@ -37,31 +44,40 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						<a className="read-more">read more</a>
 					</Link>
 				</div>
-				{!imageLeft && (<span style={{ overflow: 'hidden' }}>
-					<picture>
-						<source srcSet={article.full_thumbnail} />
-						<source
-							srcSet="/img/nexus-fallback.webp"
-							type="image/webp"
-						/>
-						<Link href={`/articles/${article.id}`}><img alt="thumbnail" /></Link>
-					</picture></span>
+				{!imageLeft && (
+					<span style={{ overflow: 'hidden' }}>
+						<picture>
+							<source srcSet={article.full_thumbnail} />
+							<source
+								srcSet="/img/nexus-fallback.webp"
+								type="image/webp"
+							/>
+							<Link href={`/articles/${article.id}`}>
+								<img alt="thumbnail" />
+							</Link>
+						</picture>
+					</span>
 				)}
 			</div>
 
 			<div className="article-preview-mobile">
-					<picture>
-						<source srcSet={article.mobile_thumbnail}/>
-						<source
-							srcSet="/img/nexus-fallback.webp"
-							type="image/webp"
-						/>
-						<Link href={`/articles/${article.id}`}><img alt="thumbnail" style={{ maxWidth: '100%' }}/></Link>
-					</picture>
+				<picture>
+					<source srcSet={article.mobile_thumbnail} />
+					<source
+						srcSet="/img/nexus-fallback.webp"
+						type="image/webp"
+					/>
+					<Link href={`/articles/${article.id}`}>
+						<img alt="thumbnail" style={{ maxWidth: '100%' }} />
+					</Link>
+				</picture>
 				<div className="article-preview-words">
 					<div>
 						<Link href={`/articles/${article.id}`}>
-							<a className={`article-preview-title${labyrinth ? ' labyrinth-title' : ''}`}>
+							<a
+								className={`article-preview-title${
+									labyrinth ? ' labyrinth-title' : ''
+								}`}>
 								{article.title}
 							</a>
 						</Link>
@@ -97,7 +113,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 				}
 
 				.article-preview-mobile .article-preview-words {
-					margin-top: .4rem;
+					margin-top: 0.4rem;
 					margin-left: 0;
 				}
 
@@ -107,7 +123,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 					height: 2px;
 					background-color: #ddd;
 					position: absolute;
-					bottom: -.65rem;
+					bottom: -0.65rem;
 					left: 0;
 				}
 

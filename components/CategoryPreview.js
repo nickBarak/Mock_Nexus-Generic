@@ -29,14 +29,23 @@ function CategoryPreview({ category: { title, articles } }) {
 						</div>
 						<div className="category-preview-details">
 							<div style={{ display: 'flex' }}>
-								<span className="category-preview-img" style={{ overflow: 'hidden' }}>
+								<span
+									className="category-preview-img"
+									style={{ overflow: 'hidden' }}>
 									<picture>
-										<source srcSet={article.full_thumbnail} />
+										<source
+											srcSet={article.full_thumbnail}
+										/>
 										<source
 											srcSet="/img/nexus-fallback.webp"
 											type="image/webp"
 										/>
-										<Link href={`/articles/${article.id}`}><img className="category-preview-img" alt="thumbnail" /></Link>
+										<Link href={`/articles/${article.id}`}>
+											<img
+												className="category-preview-img"
+												alt="thumbnail"
+											/>
+										</Link>
 									</picture>
 								</span>
 								<div
