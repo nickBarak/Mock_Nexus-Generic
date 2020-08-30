@@ -16,7 +16,7 @@ export default async function (req, res) {
 		} = req.body;
 	if (!testEmail(email)) {
 		res.json(1);
-		return;
+		return
 	}
 	try {
 		console.log(1);
@@ -24,7 +24,7 @@ export default async function (req, res) {
 		if (user) {
 			if (user.name !== name) {
 				res.json(2);
-				return;
+				return
 			}
 		} else {
 			newUser = true;
@@ -39,7 +39,8 @@ export default async function (req, res) {
 			(following && !followers.followers.includes(email)) ||
 			(!following && followers.followers.includes(email))
 		) {
-			return res.json(4);
+			res.json(4);
+			return
 		}
 
 		await queryDB(

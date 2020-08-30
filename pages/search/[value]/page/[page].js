@@ -22,16 +22,16 @@ function Search() {
 				mounted.current = true;
 				return;
 			}
-			if (sessionStorage.getItem('s__EA__Rc_H_' + router.query.value)) {
+			if (sessionStorage.getItem('s__EA__Rc_H_' + router.query.value.toLowerCase())) {
 				let ssSearchResults = JSON.parse(
-					sessionStorage.getItem('s__EA__Rc_H_' + router.query.value)
-				).slice((router.query.page - 1) * 15, router.query.page * 15);
+					sessionStorage.getItem('s__EA__Rc_H_' + router.query.value.toLowerCase())
+				).slice((Number(router.query.page) - 1) * 15, Number(router.query.page) * 15);
 				setLoadingSearchResults(true);
 				let now = Date.now();
 				fetch(client + '/api/fetch-articles', {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify({ ids: ssSearchResults }),
+					body: JSON.stringify({ ids: ssSearchResults })
 				})
 					.then(res => res.json())
 					.then(rows => {
@@ -49,7 +49,7 @@ function Search() {
 							page: Number(router.query.page),
 							highestPage: Math.ceil(
 								sessionStorage.getItem(
-									's__EA__Rc_H_' + router.query.value
+									's__EA__Rc_H_' + router.query.value.toLowerCase()
 								).length / 15
 							),
 							route: '/search/' + router.query.value,
@@ -74,7 +74,7 @@ function Search() {
 									new Date(b) - new Date(a)
 							),
 						];
-						setSearchResults(rowsByRelevanceAndDate);
+						setSearchResults(rowsByRelevanceAndDate.map(rows => rows.slice((Number(router.query.page) - 1) * 15, Number(router.query.page) * 15)));
 						setLoadingSearchResults(false);
 						setQueryTime(((Date.now() - now) / 1000).toFixed(2));
 						setFooterData({
@@ -83,7 +83,7 @@ function Search() {
 							route: '/search/' + router.query.value,
 						});
 						sessionStorage.setItem(
-							's__EA__Rc_H_' + router.query.value,
+							's__EA__Rc_H_' + router.query.value.toLowerCase(),
 							JSON.stringify(rows.map(({ id }) => id))
 						);
 					})
@@ -112,9 +112,9 @@ function Search() {
 					queryTime,
 					resultCount: mounted.current
 						? sessionStorage.getItem(
-								's__EA__Rc_H_' + router.query.value
+								's__EA__Rc_H_' + router.query.value.toLowerCase()
 						  ).length
-						: 0,
+						: 'Unknown',
 					searchError,
 					setSortBy,
 				}}

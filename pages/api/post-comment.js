@@ -7,7 +7,8 @@ export default async function (req, res) {
 	let newUser,
 		{ name, email, content, article_id, parent, post_date } = req.body;
 	if (!testEmail(email)) {
-		return res.json(1);
+		res.json(1);
+		return
 	}
 	let hydratedComment = {
 		article_id,
@@ -21,7 +22,8 @@ export default async function (req, res) {
 		let user = await getUser(email);
 		if (user) {
 			if (user.name !== name) {
-				return res.json(2);
+				res.json(2);
+				return
 			}
 			await queryDB(
 				'UPDATE users SET comments = array_append(comments, $1) WHERE email = $2',
@@ -66,9 +68,11 @@ export default async function (req, res) {
 				[{ name, email, ...hydratedComment }, article_id]
 			);
 		if (newUser) {
-			return res.json(3);
+			res.json(3);
+			return
 		}
-		return res.json(0);
+		res.json(0);
+		return
 	} catch (e) {
 		console.log(e);
 	}

@@ -30,7 +30,7 @@ export default async function (req, res) {
 			userComments.comments,
 			email,
 		]);
-		return res.json(0);
+		res.json(0);
 	} catch (e) {
 		console.log(e);
 	}
