@@ -4,19 +4,29 @@ import Comment from './Comment';
 import CommentInputs from './CommentInputs';
 
 function CommentSection({
-	comments,
 	articleID,
-	followers,
 	articleTitle,
-	fetchArticleError,
+	articleComments,
+	articleFollowers
 }) {
-	const [commentMessage, setCommentMessage] = useState(fetchArticleError);
+	const [commentMessage, setCommentMessage] = useState('');
 	const [following, setFollowing] = useState(false);
+	const [comments, setComments] = useState(articleComments);
+	const [followers, setFollowers] = useState(articleFollowers);
 
 	/* Has user signed in and are they following this article? */
 	useEffect(_ => {
-		console.log(JSON.stringify(followers));
-		setFollowing(followers.includes(sessionStorage.getItem('email')));
+		/* Other data pre-rendered, this data dynamic */
+		fetch(client + '/api/fetch-article-data?id=' + article.id)
+			.then(res => res.json())
+			.then(({ comments, followers }) => {
+				setComments(comments.sort(
+					({ post_date: a }, { post_date: b }) => a - b
+				));
+				setFollowing(followers.includes(sessionStorage.getItem('email')));
+				setFollowers(followers);
+			})
+			.catch(e => setCommentMessage('Error fetching data') || console.log(e));
 	}, []);
 
 	return (

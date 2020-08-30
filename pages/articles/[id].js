@@ -9,21 +9,6 @@ import { useEffect, useState } from 'react';
 import { client } from '../../URLs';
 
 function Article({ article, author, related }) {
-	const [comments, setComments] = useState(article.comments);
-	const [followers, setFollowers] = useState(article.followers);
-	const [fetchArticleError, setFetchArticleError] = useState(null);
-
-	useEffect(_ => {
-		/* Other data pre-rendered, this data dynamic */
-		fetch(client + '/api/fetch-article-data?id=' + article.id)
-			.then(res => res.json())
-			.then(({ comments, followers }) => {
-				setComments(comments);
-				setFollowers(followers);
-				setFetchArticleError(null);
-			})
-			.catch(e => setFetchArticleError(e) || console.log(e));
-	}, []);
 
 	/* Content styles must be added after render as article.content includes the HTML */
 	useEffect(_ => {
@@ -207,12 +192,12 @@ function Article({ article, author, related }) {
 					<AboutTheAuthor author={author} />
 					<Related articles={related} />
 					<CommentSection
-						comments={comments.sort(
+						articleID={article.id}
+						articleTitle={article.title}
+						articleComments={article.comments.sort(
 							({ post_date: a }, { post_date: b }) => a - b
 						)}
-						articleID={article.id}
-						followers={followers}
-						articleTitle={article.title}
+						articleFollowers={article.followers}
 						fetchArticleError={fetchArticleError}
 					/>
 				</div>
