@@ -4,4 +4,3 @@ node_modules
 .next
 /styles/index.sass
 /styles/index.css.map
-package-lock.json

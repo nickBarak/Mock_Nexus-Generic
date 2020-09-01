@@ -193,9 +193,6 @@ function Article({ article, author, related }) {
 					<CommentSection
 						articleID={article.id}
 						articleTitle={article.title}
-						articleComments={article.comments.sort(
-							({ post_date: a }, { post_date: b }) => a - b
-						)}
 						articleFollowers={article.followers}
 					/>
 				</div>

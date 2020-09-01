@@ -7,12 +7,11 @@ import { client } from '../URLs';
 function CommentSection({
 	articleID,
 	articleTitle,
-	articleComments,
 	articleFollowers
 }) {
 	const [commentMessage, setCommentMessage] = useState('');
 	const [following, setFollowing] = useState(false);
-	const [comments, setComments] = useState(articleComments);
+	const [comments, setComments] = useState([]);
 	const [followers, setFollowers] = useState(articleFollowers);
 
 	/* Has user signed in and are they following this article? */
