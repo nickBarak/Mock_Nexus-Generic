@@ -134,10 +134,12 @@ function CommentSection({
 								className="fas fa-bolt"
 								style={{ cursor: 'pointer' }}
 								onClick={_ => {
-									window.scrollTo(
-										window.scrollX,
-										window.scrollY * 1.2
-									);
+									fetch(client + `/api/most-reacted-comment?article=${articleID}`)
+										.then(res => res.json())
+										.then(id => {
+											document.getElementById(id).scrollIntoView();
+											setTimeout(_=> window.scrollTo(0, window.scrollY - 5), 500);
+										});
 								}}></i>
 						</li>
 						<li key="4" style={{ marginLeft: '.65rem' }}>
@@ -145,10 +147,12 @@ function CommentSection({
 								className="fab fa-hotjar"
 								style={{ cursor: 'pointer' }}
 								onClick={_ => {
-									window.scrollTo(
-										window.scrollX,
-										window.scrollY * 1.2
-									);
+									fetch(client + `/api/hottest-comment?article=${articleID}`)
+										.then(res => res.json())
+										.then(id => {
+											document.getElementById(id).scrollIntoView();
+											setTimeout(_=> window.scrollTo(0, window.scrollY - 5), 500);
+										});
 								}}></i>
 						</li>
 					</ul>

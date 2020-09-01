@@ -31,7 +31,7 @@ function Comment({
 
 	return (
 		<>
-			<div className="comment">
+			<div id={id} className="comment">
 				<span
 					style={{
 						maxWidth: '6rem',
