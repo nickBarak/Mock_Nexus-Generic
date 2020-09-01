@@ -1,4 +1,3 @@
-// import uuid from 'uuidv4';
 import { testEmail } from '../../Functions';
 import { queryDB, getUser, insertUser } from '../../db';
 import { uuid } from 'uuidv4';
