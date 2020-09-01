@@ -7,12 +7,11 @@ import { client } from '../URLs';
 function CommentSection({
 	articleID,
 	articleTitle,
-	articleFollowers
 }) {
 	const [commentMessage, setCommentMessage] = useState('');
 	const [following, setFollowing] = useState(false);
 	const [comments, setComments] = useState([]);
-	const [followers, setFollowers] = useState(articleFollowers);
+	const [followers, setFollowers] = useState([]);
 
 	/* Has user signed in and are they following this article? */
 	useEffect(_ => {

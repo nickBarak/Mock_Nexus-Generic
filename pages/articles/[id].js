@@ -193,7 +193,6 @@ function Article({ article, author, related }) {
 					<CommentSection
 						articleID={article.id}
 						articleTitle={article.title}
-						articleFollowers={article.followers}
 					/>
 				</div>
 			</Layout>

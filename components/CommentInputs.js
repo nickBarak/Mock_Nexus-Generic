@@ -123,10 +123,6 @@ function CommentInputs({
 				status = await response.json(),
 				msg;
 			switch (status) {
-				default:
-					console.log(status);
-					msg = 'Something went wrong';
-					break;
 				case 0:
 					setMessage('');
 					break;
@@ -141,6 +137,13 @@ function CommentInputs({
 					break;
 				case 5:
 					msg = 'Name not available';
+					break;
+				case 6:
+					msg = 'You\'re already following this article!';
+					break;
+				default:
+					console.log(status);
+					msg = 'Something went wrong';
 			}
 			msg && setMessage(msg);
 			if (!status || status === 3) {

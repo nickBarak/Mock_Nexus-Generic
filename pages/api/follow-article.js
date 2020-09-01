@@ -40,10 +40,11 @@ export default async function (req, res) {
 		] = await queryDB(`SELECT followers FROM articles WHERE id = $1`, [
 			articleID,
 		]);
-		if (
-			(following && !followers.followers.includes(email)) ||
-			(!following && followers.followers.includes(email))
-		) {
+		if (!following && followers.followers.includes(email)) {
+			res.json(6);
+			return
+		}
+		if (following && !followers.followers.includes(email)) {
 			res.json(4);
 			return
 		}
