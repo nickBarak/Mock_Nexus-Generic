@@ -6,8 +6,12 @@ import { convertDate } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
 import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 function Article({ article, author, related }) {
+	const router = useRouter();
+	if (router.isFallback)
+		return <div>Loading page...</div>
 
 	/* Content styles must be added after render as article.content includes the HTML */
 	useEffect(_ => {
@@ -195,86 +199,16 @@ function Article({ article, author, related }) {
 					/>
 				</div>
 			</Layout>
-
-			<style jsx>{`
-				.article {
-					max-width: calc(100% - 2rem);
-				  }
-				  
-				  .article-page-subcategory {
-					position: relative;
-					font-weight: bold;
-					font-size: 1.2rem;
-					text-transform: uppercase;
-				  }
-				  
-				  .article-page-subcategory::before,
-				  .article-page-subcategory::after {
-					content: '';
-					height: 2px;
-					width: 100%;
-					position: absolute;
-					background-color: #ddd;
-					left: 0;
-				  }
-				  
-				  .article-page-subcategory::before {
-					top: -5px;
-				  }
-				  
-				  .article-page-subcategory::after {
-					bottom: -5px;
-				  }
-				  
-				  .article-page-title {
-					font-size: 2.5rem;
-					font-weight: 600;
-					font-family: Times New Roman;
-					margin-bottom: 0.65rem;
-				  }
-				  
-				  .article-page-author-name {
-					color: black;
-				  }
-				  
-				  .article-page-author-name:hover {
-					color: var(--link-hover);
-				  }
-				  
-				  .article-page-details {
-					margin: 2.5rem 0 3.5rem 0;
-					position: relative;
-				  }
-				  
-				  .article-page-details::after {
-					content: '';
-					height: 1px;
-					width: 100%;
-					background-color: #eee;
-					position: absolute;
-					bottom: -7.5%;
-					left: 0;
-				  }
-				  
-				  .article-page-details > div:nth-child(2),
-				  .article-page-author-name {
-					font-family: Times New Roman;
-					font-size: 1.1rem;
-				  }
-				  
-				  .article-page-content {
-					margin: 0 0.5rem;
-				  }
-			`}</style>
 		</>
 	);
 }
 
 export async function getStaticPaths() {
-	let ids = await queryDB('SELECT id FROM articles'),
-		paths = ids.map(id => ({ params: { id: String(id.id) } }));
+	/* Pre-rendering all pages would exceed maximum bundle size for Heroku */
+	let ids = await queryDB('SELECT id FROM articles ORDER BY publish_date'),
+		paths = ids.slice(500, ids.length).map(id => ({ params: { id: String(id.id) } }));
 
-	return { paths, fallback: false };
+	return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params: { id } }) {

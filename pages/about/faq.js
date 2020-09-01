@@ -1,5 +1,4 @@
 import Layout from '../../layouts';
-import Link from 'next/link';
 import About from '../../components/About';
 
 function FAQ() {

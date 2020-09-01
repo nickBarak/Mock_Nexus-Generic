@@ -2,7 +2,6 @@ import { queryDB } from '../../../db';
 import ArticlePreview from '../../../components/ArticlePreview';
 import Link from 'next/link';
 import Footer from '../../../components/Footer';
-import Head from 'next/head';
 import { uuid } from 'uuidv4';
 
 export async function getStaticProps() {
