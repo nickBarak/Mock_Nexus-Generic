@@ -1,10 +1,7 @@
 import { testEmail } from '../../Functions';
 import { queryDB, insertUser, getUser } from '../../db';
 import nodemailer from 'nodemailer';
-if (process.NODE_ENV !== 'production') {
-    import { config } from 'dotenv';
-    config();
-}
+if (process.NODE_ENV !== 'production') import('dotenv').then(({ config }) => config());
 
 export default async function (req, res) {
 	let newUser,

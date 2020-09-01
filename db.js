@@ -1,8 +1,6 @@
 import { Pool } from 'pg';
-if (process.NODE_ENV !== 'production') {
-    import { config } from 'dotenv';
-    config();
-}
+if (process.NODE_ENV !== 'production') import('dotenv').then(({ config }) => config());
+
 
 if (!pool) {
     var pool = new Pool({
