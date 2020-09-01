@@ -1,6 +1,6 @@
-.gitignore
 node_modules
+.gitignore
 .env
 .next
 /styles/index.sass
-/styles/index.css.map
+/styles/index.css.mapgo

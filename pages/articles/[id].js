@@ -5,7 +5,7 @@ import CommentSection from '../../components/CommentSection';
 import { convertDate } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function Article({ article, author, related }) {
 
