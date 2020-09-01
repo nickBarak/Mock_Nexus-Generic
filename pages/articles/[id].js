@@ -6,7 +6,6 @@ import { convertDate } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
 import { useEffect, useState } from 'react';
-import { client } from '../../URLs';
 
 function Article({ article, author, related }) {
 
@@ -198,7 +197,6 @@ function Article({ article, author, related }) {
 							({ post_date: a }, { post_date: b }) => a - b
 						)}
 						articleFollowers={article.followers}
-						fetchArticleError={fetchArticleError}
 					/>
 				</div>
 			</Layout>

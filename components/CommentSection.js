@@ -2,6 +2,7 @@ import 'isomorphic-unfetch';
 import { useState, useEffect } from 'react';
 import Comment from './Comment';
 import CommentInputs from './CommentInputs';
+import { client } from '../URLs';
 
 function CommentSection({
 	articleID,
@@ -17,7 +18,7 @@ function CommentSection({
 	/* Has user signed in and are they following this article? */
 	useEffect(_ => {
 		/* Other data pre-rendered, this data dynamic */
-		fetch(client + '/api/fetch-article-data?id=' + article.id)
+		fetch(client + '/api/fetch-article-data?id=' + articleID)
 			.then(res => res.json())
 			.then(({ comments, followers }) => {
 				setComments(comments.sort(
