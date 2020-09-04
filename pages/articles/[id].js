@@ -27,11 +27,13 @@ function Article({ article, author, related }) {
 		contentDiv.innerHTML = contentDiv.innerHTML.replace(' class="', ' className="');
 
 		function lipsumify(node) {
-			if (node.hasChildNodes()) {
-				node.childNodes.forEach(lipsumify);
-			}
-			else if (node.nodeType === Node.TEXT_NODE) {
-				node.textContent = lipsum.slice(lipsumCount.current, lipsumCount.current += node.textContent);
+			if (node.hasChildNodes()) node.childNodes.forEach(lipsumify);
+			else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 1 && node.textContent.trim() !== 'Share this:') {
+				node.textContent = !/[\. ,]/.exec(lipsum[lipsumCount.current])
+					? lipsum.slice(lipsumCount.current, lipsumCount.current += node.textContent.trim().length)
+					: !/[\. ,]/.exec(lipsum[lipsumCount.current+1])
+						? lipsum.slice(lipsumCount.current+1, lipsumCount.current += node.textContent.trim().length+1)
+						: lipsum.slice(lipsumCount.current+2, lipsumCount.current += node.textContent.trim().length+2);
 			}
 		}
 		lipsumify(contentDiv);
@@ -99,9 +101,11 @@ function Article({ article, author, related }) {
 		);
 
 		[...contentDiv.getElementsByTagName('img')].forEach(img => {
-			img.srcset = !faultyPicsumIDs.includes(Math.min(1000, (article.id % 1000)+imgID.current++))
-			? `https://picsum.photos/id/${Math.min(1000, (article.id % 1000) + imgID.current++)}/200/300`
-			: 'https://picsum.photos/200';
+			let over1000 = ((article.id % 1000) + imgID.current) > 1000 ? 1 : -1;
+			let photoID = (article.id % 1000) + imgID.current++ * over1000;
+			img.srcset = !faultyPicsumIDs.includes(photoID)
+				? `https://picsum.photos/id/${photoID}/200/300`
+				: `https://picsum.photos/200/300`;
 			img.style.objectFit = 'cover';
 		});
 		[
