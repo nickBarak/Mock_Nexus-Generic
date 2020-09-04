@@ -26,10 +26,14 @@ function Article({ article, author, related }) {
 
 		contentDiv.innerHTML = contentDiv.innerHTML.replace(' class="', ' className="');
 
-		[ ...contentDiv.getElementsByTagName('p'), ...contentDiv.getElementsByTagName('span') ].forEach(node => {
-			lipsumCount.current += node.innerText.length;
-			node.innerText = lipsum.slice(lipsumCount.current - node.innerText.length, lipsumCount.current);
-		});
+		(node => {
+			if (node.hasChildNodes()) {
+				node.childNodes.forEach(getText);
+			}
+			else if (node.nodeType === Node.TEXT_NODE) {
+				node.textContent = lipsum.slice(lipsumCount.current, lipsumCount.current += node.textContent);
+			}
+		})(contentDiv);
 		
 		[
 			...contentDiv.getElementsByTagName('p'),
