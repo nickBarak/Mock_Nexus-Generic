@@ -26,14 +26,15 @@ function Article({ article, author, related }) {
 
 		contentDiv.innerHTML = contentDiv.innerHTML.replace(' class="', ' className="');
 
-		(node => {
+		function lipsumify(node) {
 			if (node.hasChildNodes()) {
-				node.childNodes.forEach(getText);
+				node.childNodes.forEach(lipsumify);
 			}
 			else if (node.nodeType === Node.TEXT_NODE) {
 				node.textContent = lipsum.slice(lipsumCount.current, lipsumCount.current += node.textContent);
 			}
-		})(contentDiv);
+		}
+		lipsumify(contentDiv);
 		
 		[
 			...contentDiv.getElementsByTagName('p'),
