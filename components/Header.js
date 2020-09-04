@@ -103,7 +103,6 @@ function Header() {
 				.logo {
 					width: 5.5rem;
 					height: 6.5rem;
-					transform: translateY(1.55rem);
 				}
 
 				.full-logo {
@@ -202,7 +201,7 @@ function Header() {
 				.header-mobile .logo {
 					width: 2.5rem;
 					height: 3rem;
-					transform: translateY(-0.155rem);
+					transform: translateY(-.3rem);
 				}
 
 				.hamburger-nav {

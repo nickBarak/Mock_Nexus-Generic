@@ -31,7 +31,7 @@ export async function getStaticProps({ params: { id, page } }) {
 	return {
 		props: JSON.parse(
 			JSON.stringify({
-				author: author.name,
+				author: `Sample Author ${author.id}`,
 				articles,
 				footerData: {
 					page: Number(page),

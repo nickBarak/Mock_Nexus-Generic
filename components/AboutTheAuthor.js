@@ -1,10 +1,11 @@
 import Link from 'next/link';
+import lipsum from '../data/lipsum';
 
 function AboutTheAuthor({ author }) {
 	return (
 		<div className="about-the-author">
 			<picture>
-				<source srcSet={author.portrait} />
+				<source srcSet={'/img/nexus-logo.png'} />
 				<source srcSet="/img/nexus-fallback.webp" type="image/webp" />
 				<Link href={'/authors/' + author.id}>
 					<img alt="author" />
@@ -13,10 +14,10 @@ function AboutTheAuthor({ author }) {
 			<div>
 				<div>
 					<Link href={`/authors/${author.id}`}>
-						<a>{author.name}</a>
+						<a>{`Sample Author ${author.id}`}</a>
 					</Link>
 				</div>
-				<div>{author.biography === 'Not available' ? 'Biography not available' : author.biography}</div>
+				<div>{author.biography === 'Not available' ? 'Biography not available' : lipsum.slice(0, author.biography.length)}</div>
 			</div>
 			<style jsx>{`
 				.about-the-author {

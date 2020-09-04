@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
 import { uuid } from 'uuidv4';
+import lipsum from '../data/lipsum';
+import faultyPicsumIDs from '../data/faultyPicsumIDs';
 
 /* Displays 4 articles, first is emphasized */
 function Headlines({ articles }) {
@@ -11,7 +13,10 @@ function Headlines({ articles }) {
 					<li key={uuid()}>
 						<Link href={`/articles/${articles[0].id}`}>
 							<img
-								src={articles[0].full_thumbnail}
+								src={!faultyPicsumIDs.includes(articles[0].id % 1000)
+									? `https://picsum.photos/id/${articles[0].id % 1000}/450/300`
+									: `/img/nexus-logo.png`
+								}
 								alt="headline"
 							/>
 						</Link>
@@ -23,19 +28,23 @@ function Headlines({ articles }) {
 						</div>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="article-preview-title">
-								{articles[0].title}
+							{!/[\. ,]/.exec(lipsum[articles[0].id%800])
+									? lipsum[articles[0].id%800].toUpperCase() + lipsum.slice(articles[0].id % 800+1, articles[0].id % 800 + articles[0].title.length+1)
+									: !/[\. ,]/.exec(lipsum[articles[0].id%800+1])
+										? lipsum[articles[0].id%800+1].toUpperCase() + lipsum.slice(articles[0].id % 800+2, articles[0].id % 800 + articles[0].title.length+2)
+										: lipsum[articles[0].id%800+2].toUpperCase() + lipsum.slice(articles[0].id % 800+3, articles[0].id % 800 + articles[0].title.length+3)}
 							</a>
 						</Link>
 						<div className="date-and-author">
 							by{' '}
 							<Link href={`/authors/${articles[0].author.id}`}>
 								<a className="article-preview-author">
-									{articles[0].author.name}
+									{`Sample Author ${articles[0].author.id}`}
 								</a>
 							</Link>
 						</div>
 						<div className="article-preview-description">
-							{articles[0].description}
+							{lipsum.slice(0, articles[0].description.length)}
 						</div>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="read-more">read more</a>
@@ -53,7 +62,11 @@ function Headlines({ articles }) {
 									</div>
 									<Link href={`/articles/${article.id}`}>
 										<a className="article-preview-title">
-											{article.title}
+										{!/[\. ,]/.exec(lipsum[articles[0].id%800])
+									? lipsum[articles[0].id%800].toUpperCase() + lipsum.slice(articles[0].id % 800+1, articles[0].id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[articles[0].id%800+1])
+										? lipsum[articles[0].id%800+1].toUpperCase() + lipsum.slice(articles[0].id % 800+2, articles[0].id % 800 + article.title.length+2)
+										: lipsum[articles[0].id%800+2].toUpperCase() + lipsum.slice(articles[0].id % 800+3, articles[0].id % 800 + article.title.length+3)}
 										</a>
 									</Link>
 									<div className="date-and-author">
@@ -61,7 +74,7 @@ function Headlines({ articles }) {
 										<Link
 											href={`/authors/${article.author.id}`}>
 											<a className="article-preview-author">
-												{article.author.name}
+												{`Sample Author ${article.author.id}`}
 											</a>
 										</Link>
 									</div>
@@ -77,26 +90,33 @@ function Headlines({ articles }) {
 					<li key={uuid()}>
 						<Link href={`/articles/${articles[0].id}`}>
 							<img
-								src={articles[0].mobile_thumbnail}
+								src={!faultyPicsumIDs.includes(articles[0].id % 1000)
+									? `https://picsum.photos/id/${articles[0].id % 1000}/200`
+									: `/img/nexus-logo.png`
+								}
 								alt="headline"
 								style={{ width: '99%', marginBottom: '.5rem' }}
 							/>
 						</Link>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="article-preview-title">
-								{articles[0].title}
+							{!/[\. ,]/.exec(lipsum[articles[0].id%800])
+									? lipsum[articles[0].id%800].toUpperCase() + lipsum.slice(articles[0].id % 800+1, articles[0].id % 800 + articles[0].title.length+1)
+									: !/[\. ,]/.exec(lipsum[articles[0].id%800+1])
+										? lipsum[articles[0].id%800+1] + lipsum.slice(articles[0].id % 800+2, articles[0].id % 800 + articles[0].title.length+2)
+										: lipsum[articles[0].id%800+2] + lipsum.slice(articles[0].id % 800+3, articles[0].id % 800 + articles[0].title.length+3)}
 							</a>
 						</Link>
 						<div className="date-and-author">
 							{convertDate(articles[0].publish_date)} by{' '}
 							<Link href={`/authors/${articles[0].author.id}`}>
 								<a className="article-preview-author">
-									{articles[0].author.name}
+									{`Sample Author ${articles[0].author.id}`}
 								</a>
 							</Link>
 						</div>
 						<div className="article-preview-description">
-							{articles[0].description}
+							{lipsum.slice(0, articles[0].description)}
 						</div>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="read-more">read more</a>
@@ -106,7 +126,11 @@ function Headlines({ articles }) {
 						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">
-									{article.title}
+								{!/[\. ,]/.exec(lipsum[article.id%800])
+									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[article.id%800+1])
+										? lipsum[article.id%800+1] + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+										: lipsum[article.id%800+2] + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
 								</a>
 							</Link>
 							<div className="date-and-author">
@@ -114,13 +138,13 @@ function Headlines({ articles }) {
 								<Link
 									href={`/authors/${article.author.id}`}>
 									<a className="article-preview-author">
-										{article.author.name}
+										{`Sample Author ${article.author.id}`}
 									</a>
 								</Link>
 							</div>
 							<div className="category-preview-details">
 								<div className="article-preview-description">
-									{article.description}
+									{lipsum.slice(0, article.description.length)}
 								</div>
 								<Link href={`/articles/${article.id}`}>
 									<a className="read-more">read more</a>

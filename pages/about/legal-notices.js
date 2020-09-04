@@ -1,20 +1,23 @@
 import Layout from '../../layouts';
 import About from '../../components/About';
+import lipsum from '../../data/lipsum';
 
 function LegalNotices() {
 	return (
 		<Layout>
 			<About heading="Legal Notices">
 				<div>
-					Copyright 2000-2015. All rights reserved. All content,
+					{lipsum.slice(0, `Copyright 2000-2015. All rights reserved. All content,
 					including articles, photographs, graphics and design, is
-					owned by the{' '}
-					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span> at
+					owned by the`.length+100)}{' '}
+					<span style={{ fontStyle: 'italic' }}>Mock Nexus</span> {lipsum.slice(`Copyright 2000-2015. All rights reserved. All content,
+					including articles, photographs, graphics and design, is
+					owned by the`.length+100, `at
 					the University of California, Santa Barbara. No part of
 					these documents may be reproduced, in part or in full, in
 					print format or digital format, without express written
-					permission from the{' '}
-					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span>.
+					permission from the`.length+100)}{' '}
+					<span style={{ fontStyle: 'italic' }}>Mock Nexus</span>.
 				</div>
 			</About>
 		</Layout>

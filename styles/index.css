@@ -1,7 +1,7 @@
 html {
   scroll-behavior: smooth;
-  --theme-blue: #003660;
-  --theme-gold: #ffc82d;
+  --theme-blue: rgb(0, 54, 96);
+  --theme-gold: rgb(255, 200, 45);
   --link-hover: #0088CC;
 }
 
@@ -44,6 +44,11 @@ a {
 
 .main-children {
   width: calc(100% - 18.25rem);
+}
+
+.header .logo {
+  -webkit-transform: translateY(1rem);
+          transform: translateY(1rem);
 }
 
 .headlines img {
@@ -380,8 +385,6 @@ a {
   .header .logo {
     width: 5rem;
     height: 6rem;
-    -webkit-transform: translateY(1.75rem);
-            transform: translateY(1.75rem);
   }
   .headlines img {
     height: 47.5%;

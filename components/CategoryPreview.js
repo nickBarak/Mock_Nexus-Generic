@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { convertDate, convertToPath } from '../Functions';
 import { uuid } from 'uuidv4';
+import lipsum from '../data/lipsum';
+import faultyPicsumIDs from '../data/faultyPicsumIDs';
 
 /* Displays 3 most recent articles in category */
 function CategoryPreview({ category: { title, articles } }) {
@@ -15,7 +17,11 @@ function CategoryPreview({ category: { title, articles } }) {
 						<div style={{ fontWeight: 600, fontSize: '1.2rem' }}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">
-									{article.title}
+								{!/[\. ,]/.exec(lipsum[article.id%800])
+									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[article.id%800+1])
+										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
 								</a>
 							</Link>
 						</div>
@@ -23,7 +29,7 @@ function CategoryPreview({ category: { title, articles } }) {
 							{convertDate(article.publish_date)} by{' '}
 							<Link href={`/authors/${article.author.id}`}>
 								<a className="article-preview-author">
-									{article.author.name}
+									{`Sample Author ${article.author.id}`}
 								</a>
 							</Link>
 						</div>
@@ -34,11 +40,14 @@ function CategoryPreview({ category: { title, articles } }) {
 									style={{ overflow: 'hidden' }}>
 									<picture>
 										<source
-											srcSet={article.full_thumbnail}
+											srcSet={!faultyPicsumIDs.includes(article.id % 1000)
+												? `https://picsum.photos/id/${article.id % 1000}/200`
+												: `/img/nexus-logo.png`
+											}
 										/>
 										<source
-											srcSet="/img/nexus-fallback.webp"
-											type="image/webp"
+											srcSet="/img/nexus-logo.png"
+											type="image/png"
 										/>
 										<Link href={`/articles/${article.id}`}>
 											<img
@@ -55,7 +64,7 @@ function CategoryPreview({ category: { title, articles } }) {
 										marginLeft: '.4rem',
 										fontSize: '.9rem',
 									}}>
-									<span>{article.description}</span>
+									<span>{lipsum.slice(0, article.description.length)}</span>
 									<Link href={`/articles/${article.id}`}>
 										<a className="read-more">read more</a>
 									</Link>

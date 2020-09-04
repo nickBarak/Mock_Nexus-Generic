@@ -1,77 +1,81 @@
 import Layout from '../../layouts';
 import Link from 'next/link';
 import About from '../../components/About';
+import lipsum from '../../data/lipsum';
+import { useRef } from 'react';
 
 function Advertising() {
+	const lipsumCount = useRef(0);
+
 	return (
 		<Layout>
 			<About heading="Advertising">
 				<div>
-					Thank you for your interest in advertising with the{' '}
-					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span>. As
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Thank you for your interest in advertising with the`.length)}{' '}
+					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span>. {lipsum.slice(lipsumCount.current, lipsumCount.current += `As
 					you’ll see, it pays to reach out to UCSB students, and no
 					matter your budget, our student sales representatives can
-					put together an effective advertising strategy for you.
+					put together an effective advertising strategy for you`.length)}.
 					<br />
 					<br />
-					Every day, the{' '}
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Every day, the`.length)}{' '}
 					<span style={{ fontStyle: 'italic' }}>
 						Daily Nexus
 					</span>{' '}
-					reaches UCSB’s 22,218 students — plus more than 6,000
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `reaches UCSB’s 22,218 students — plus more than 6,000
 					full-time faculty and staff. Our competitive advertising
-					rates make the{' '}
-					<span style={{ fontStyle: 'italic' }}>Nexus</span> your best
+					rates make the`.length)}{' '}
+					<span style={{ fontStyle: 'italic' }}>Nexus</span> {lipsum.slice(lipsumCount.current, lipsumCount.current += `your best
 					value to reach the Central Coast’s most desirable consumer
-					audience.
+					audience`.length)}.
 					<br />
 					<br />
-					Did you know that a 2008 survey of{' '}
-					<span style={{ fontStyle: 'italic' }}>Nexus</span> readers
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Did you know that a 2008 survey of`.length)}{' '}
+					<span style={{ fontStyle: 'italic' }}>Nexus</span> {lipsum.slice(lipsumCount.current, lipsumCount.current += `readers
 					shows that 60 percent of undergraduates have personal
 					expense incomes of at least $300 a month — and UCSB students
 					spend their disposable funds in ways that will benefit your
-					business:
+					business`.length)}:
 					<ul style={{ margin: '1rem 0 1rem 2rem' }}>
 						<li key="0" style={{ listStyleType: 'disc' }}>
-							94% go out to a restaurant at least once a month,
+							94% {lipsum.slice(lipsumCount.current, lipsumCount.current += `go out to a restaurant at least once a month,
 							and two-thirds spend at least $300 a year dining
-							out.
+							out`.length)}.
 						</li>
 						<li key="1" style={{ listStyleType: 'disc' }}>
-							85% plan to buy a computer, digital camera, stereo
+							85% {lipsum.slice(lipsumCount.current, lipsumCount.current += `plan to buy a computer, digital camera, stereo
 							system, iPod, MP3 player, or other electronic item
-							in the next 12 months.
+							in the next 12 months`.length)}.
 						</li>
 						<li key="2" style={{ listStyleType: 'disc' }}>
-							79% spend money on spas, beauty treatments or other
-							personal care each month.
+							79% {lipsum.slice(lipsumCount.current, lipsumCount.current += `spend money on spas, beauty treatments or other
+							personal care each month`.length)}.
 						</li>
 						<li key="3" style={{ listStyleType: 'disc' }}>
-							75% buy clothes at least once a month.
+							75% {lipsum.slice(lipsumCount.current, lipsumCount.current += `buy clothes at least once a month`.length)}.
 						</li>
 						<li key="4" style={{ listStyleType: 'disc' }}>
-							63% spend money in bars or night clubs in a typical
-							month.
+							63% {lipsum.slice(lipsumCount.current, lipsumCount.current += `spend money in bars or night clubs in a typical
+							month`.length)}.
 						</li>
 					</ul>
 				</div>
 				<div>
-					No artwork? No problem. Our designers are happy to work with
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `No artwork? No problem. Our designers are happy to work with
 					you to create custom print and online advertisements. For
-					all advertising inquiries, call (805) 893-3828.
+					all advertising inquiries, call (805) 893-3828`.length)}.
 					<br />
 					<br />
-					Please see our “Rates and Services” and “Classified Ads”
-					pages for more information, or click{' '}
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Please see our “Rates and Services” and “Classified Ads”
+					pages for more information, or click`.length)}{' '}
 					<Link href="">
 						<a style={{ color: 'var(--link-hover)' }}>here</a>
 					</Link>{' '}
-					to download a printable PDF of our Rate Card.
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `to download a printable PDF of our Rate Card`.length)}.
 					<br />
 					<br />
 				</div>
-				<img
+				{/* <img
 					src="https://i2.wp.com/dailynexus.com/wp-content/uploads/2019/10/Rate-Card-2019-2020-1_Page_1-792x1024.jpg?resize=792%2C1024"
 					alt="advertising"
 				/>
@@ -86,7 +90,7 @@ function Advertising() {
 				<img
 					src="https://i2.wp.com/dailynexus.com/wp-content/uploads/2019/10/Rate-Card-2019-2020-1_Page_4-792x1024.jpg?resize=792%2C1024"
 					alt="advertising"
-				/>
+				/> */}
 				<ul>
 					<li>
 						<div

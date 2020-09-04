@@ -1,8 +1,12 @@
 import Layout from '../../layouts';
 import Link from 'next/link';
 import About from '../../components/About';
+import lipsum from '../../data/lipsum';
+import { useRef } from 'react';
 
 function Donate() {
+	const lipsumCount = useRef(0);
+	
 	return (
 		<Layout>
 			<About heading="Donate">
@@ -15,7 +19,7 @@ function Donate() {
 							justifyContent: 'center',
 						}}>
 						<img
-							src="https://i1.wp.com/dailynexus.com/wp-content/uploads/2016/02/Office-Awards_by-Lorenzo-Basilio-1-1024x681.jpg?resize=800%2C532"
+							src="https://picsum.photos/id/4/800/500"
 							alt="donate"
 						/>
 						<span className="donate-banner">
@@ -25,47 +29,47 @@ function Donate() {
 				</Link>
 				<div>
 					<br />
-					The <span style={{ fontStyle: 'italic' }}>Daily Nexus</span>
-					, the historic and direct descendant of UCSB student news
+					The <span style={{ fontStyle: 'italic' }}>Mock Nexus</span>
+					, {lipsum.slice(lipsumCount.current, lipsumCount.current += `the historic and direct descendant of UCSB student news
 					enterprises dating back nearly 100 years needs donations of
 					any size in order to keep publishing, in print and on the
-					web.
+					web`.length)}.
 					<br />
 					<br />
-					Like every other college newspaper, the{' '}
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Like every other college newspaper, the`.length)}{' '}
 					<span style={{ fontStyle: 'italic' }}>Nexus</span> is
-					fighting to survive in the new media era. UCSB student
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `fighting to survive in the new media era. UCSB student
 					journalists, who spend countless hours digging out stories
 					about the inner workings of the University and the
 					activities and culture of Isla Vista, have recently expanded
 					and upgraded their newsroom’s web site and online reporting
 					working to tell the story of UCSB on multiple platforms.
 					Just last year, we launched the Labyrinth, a new
-					data-journalism section.
+					data-journalism section`.length)}.
 					<br />
 					<br />
-					The staff won national recognition for its minute-by-minute
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `The staff won national recognition for its minute-by-minute
 					coverage of the tragedy of the killing spree that struck IV
 					in 2014, just one example of the kind of its award-winning
 					reporting, which connects the entire campus community.
 					Journalists have also worked around the clock over the many
-					natural disasters that plagued the area in recent years.
+					natural disasters that plagued the area in recent years`.length)}.
 					<br />
 					<br />
 					<span style={{ fontStyle: 'italic' }}>Nexus</span>{' '}
-					journalists receive no core funding from the University. Nor
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `journalists receive no core funding from the University. Nor
 					do they have the luxury of an academic journalism department
 					to support their efforts. Its staff needs money for student
 					salaries and professional development training, in addition
 					to new equipment to gather, create and distribute its news,
 					feature, opinion and sports content in the varied ways that
 					its audience expects – through web, print, podcast and video
-					presentations.
+					presentations`.length)}.
 					<br />
 					<br />
 				</div>
 				<img
-					src="https://i1.wp.com/dailynexus.com/wp-content/uploads/2015/01/Nexus-Office-9-e1424291680657.jpg?resize=700%2C466"
+					src="https://picsum.photos/id/50/800/500"
 					alt="donate"
 				/>
 				<div
@@ -74,18 +78,18 @@ function Donate() {
 						fontWeight: 'bold',
 						margin: '3.5rem 0 1.25rem 0',
 					}}>
-					The <span style={{ fontStyle: 'italic' }}>Daily Nexus</span>{' '}
-					is the only independent news organization at UCSB.
+					The <span style={{ fontStyle: 'italic' }}>Mock Nexus</span>{' '}
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `is the only independent news organization at UCSB`.length)}.
 				</div>
 				<div>
-					Without its presence on campus, the campus and Santa Barbara
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Without its presence on campus, the campus and Santa Barbara
 					will lose a major and essential resource for unbiased,
-					agenda-free reporting.
+					agenda-free reporting`.length)}.
 					<br />
 					<br />
-					Please give to keep the{' '}
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Please give to keep the`.length)}{' '}
 					<span style={{ fontStyle: 'italic' }}>Nexus</span> alive,
-					and always independent.
+					{lipsum.slice(lipsumCount.current, lipsumCount.current += `and always independent`.length)}.
 				</div>
 				<article>
 					<section key="0">
@@ -93,9 +97,9 @@ function Donate() {
 						<div>
 							The{' '}
 							<span style={{ fontStyle: 'italic' }}>
-								Daily Nexus
+								Mock Nexus
 							</span>{' '}
-							is the student-run press of the University of
+							{lipsum.slice(lipsumCount.current, lipsumCount.current += `is the student-run press of the University of
 							California, Santa Barbara campus, and as such, we,
 							the editors, place the interests and needs of the
 							campus community above all else, and seek to provide
@@ -111,30 +115,30 @@ function Donate() {
 							technological demands of the 21st century, we strive
 							to produce accurate and engaging online content in a
 							fashion that allows for more reach, engagement, and
-							accessibility to student readers.
+							accessibility to student readers`.length)}.
 						</div>
 					</section>
 					<section key="1">
 						<div>HISTORY</div>
 						<div>
-							Since the 1930s, the{' '}
+							{lipsum.slice(lipsumCount.current, lipsumCount.current += `Since the 1930s, the`.length)}{' '}
 							<span style={{ fontStyle: 'italic' }}>Nexus</span> –
-							under various other names – has been keeping tabs on
+							{lipsum.slice(lipsumCount.current, lipsumCount.current += `under various other names – has been keeping tabs on
 							UC Santa Barbara and the surrounding communities,
 							breaking several noteworthy stories such as the 1986
 							expose of Chancellor Robert Huttenback for his
 							misappropriation of UC funds, to up-to-date,
 							thorough coverage of the May 23, 2014 Isla Vista
 							shootings, which gained the publication mentions in
-							national and international publications. The{' '}
+							national and international publications. The`.length)}{' '}
 							<span style={{ fontStyle: 'italic' }}>
-								Daily Nexus
+								Mock Nexus
 							</span>
-							‘ name was coined by the paper’s 1970 to 1971
+							‘ {lipsum.slice(lipsumCount.current, lipsumCount.current += `name was coined by the paper’s 1970 to 1971
 							editorial board in the wake of the 1970 Bank of
 							America burning in Isla Vista, attributed from
 							Robert Maynard Hutchins’ quote: “A free press is the
-							nexus of any democracy.”
+							nexus of any democracy.”`.length)}
 						</div>
 					</section>
 					<section key="2">
@@ -142,26 +146,26 @@ function Donate() {
 						<div>
 							The{' '}
 							<span style={{ fontStyle: 'italic' }}>Nexus</span>{' '}
-							provides timely, relevant and essential editorial
+							{lipsum.slice(lipsumCount.current, lipsumCount.current += `provides timely, relevant and essential editorial
 							and feature coverage to students as well as readers
 							throughout the UCSB community and Santa Barbara
 							County with fairness and accuracy, whether they are
-							the views of the many or those of the few.
+							the views of the many or those of the few`.length)}.
 							<br />
 							<br />
-							We open our editorial pages to all opinions and make
+							{lipsum.slice(lipsumCount.current, lipsumCount.current += `We open our editorial pages to all opinions and make
 							our views clear only in the editorial pages, from
 							which editorial decisions are based only on
-							substantiated facts.
+							substantiated facts`.length)}.
 							<br />
 							<br />
-							We defend the rights of any member of the university
+							{lipsum.slice(lipsumCount.current, lipsumCount.current += `We defend the rights of any member of the university
 							communities if those rights are abridged, and
 							present all sides of the case. Because publishing a
 							student newspaper is our duty, we carry out that
 							duty following standards of professionalism as
 							outlined in the American Society of Newspaper
-							Editors’ Statement of Principles.
+							Editors’ Statement of Principles`.length)}.
 						</div>
 						<br />
 						<Link href="https://giving.ucsb.edu/Funds/Give?id=67">
@@ -179,37 +183,37 @@ function Donate() {
 						<div>CONTACT INFORMATION</div>
 						<ul>
 							<li key="0">
-								Editor-in-chief e-mail: eic@dailynexus.com
+								Editor-in-chief e-mail: eic@mocknexus.com
 							</li>
 							<li key="0">
 								Website:{' '}
 								<Link href="/">
 									<a style={{ color: 'var(--link-hover)' }}>
-										www.dailynexus.com
+										www.mocknexus.com
 									</a>
 								</Link>
 							</li>
 							<li key="0">
 								Facebook:{' '}
-								<Link href="https://www.facebook.com/dailynexus">
+								<Link href="https://www.facebook.com/mocknexus">
 									<a style={{ color: 'var(--link-hover)' }}>
-										https://www.facebook.com/dailynexus
+										https://www.facebook.com/mocknexus
 									</a>
 								</Link>
 							</li>
 							<li key="0">
 								Twitter:{' '}
-								<Link href="https://www.twitter.com/dailynexus">
+								<Link href="https://www.twitter.com/mocknexus">
 									<a style={{ color: 'var(--link-hover)' }}>
-										https://www.twitter.com/dailynexus
+										https://www.twitter.com/mocknexus
 									</a>
 								</Link>
 							</li>
 							<li key="0">
 								Instagram:{' '}
-								<Link href="https://www.instagram.com/dailynexus">
+								<Link href="https://www.instagram.com/mocknexus">
 									<a style={{ color: 'var(--link-hover)' }}>
-										https://www.instagram.com/dailynexus
+										https://www.instagram.com/mocknexus
 									</a>
 								</Link>
 							</li>

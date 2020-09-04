@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
 import { uuid } from 'uuidv4';
+import lipsum from '../data/lipsum';
 
 function Related({ articles }) {
 	return (
@@ -13,7 +14,11 @@ function Related({ articles }) {
 					{articles.map((article, i) => (
 						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
-								<a>{article.title}</a>
+								<a>{!/[\. ,]/.exec(lipsum[article.id%800])
+									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[article.id%800+1])
+										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}</a>
 							</Link>
 							<div>{convertDate(article.publish_date)}</div>
 							<div>In "{article.category}"</div>

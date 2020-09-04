@@ -63,9 +63,9 @@ function MobileNav({ scrollY }) {
 							title: 'About',
 							subcategories: [
 								{ Advertising: 'advertising' },
-								{ Classifieds: 'classified-ads' },
 								{ Donate: 'donate' },
 								{ FAQ: 'faq' },
+								{ 'Legal Notices': 'legal-notices' },
 								{ 'Staff/Contact': 'staff-contact' },
 							],
 						},

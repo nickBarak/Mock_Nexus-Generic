@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 import { client } from '../URLs';
 import { uuid } from 'uuidv4';
 import categories from '../data/categories';
+import faultyPicsumIDs from '../data/faultyPicsumIDs';
+import lipsum from '../data/lipsum';
 
 function Nav() {
 	const [searchResults, setSearchResults] = useState([[], []]);
@@ -74,9 +76,9 @@ function Nav() {
 						title: 'About',
 						subcategories: [
 							{ Advertising: 'advertising' },
-							{ Classifieds: 'classified-ads' },
 							{ Donate: 'donate' },
 							{ FAQ: 'faq' },
+							{ 'Legal Notices': 'legal-notices' },
 							{ 'Staff/Contact': 'staff-contact' },
 						],
 					},
@@ -365,7 +367,11 @@ function Nav() {
 												fontSize: '1rem',
 												fontFamily: 'Arial, sans-serif',
 											}}>
-											{result.title}
+											{!/[\. ,]/.exec(lipsum[result.id%800])
+												? lipsum[result.id%800].toUpperCase() + lipsum.slice(result.id % 800+1, result.id % 800 + result.title.length+1)
+												: !/[\. ,]/.exec(lipsum[result.id%800+1])
+													? lipsum[result.id%800+1].toUpperCase() + lipsum.slice(result.id % 800+2, result.id % 800 + result.title.length+2)
+													: lipsum[result.id%800+2].toUpperCase() + lipsum.slice(result.id % 800+3, result.id % 800 + result.title.length+3)}
 										</a>
 									</Link>
 								</div>
@@ -382,14 +388,16 @@ function Nav() {
 											<picture>
 												<source
 													srcSet={
-														result.mobile_thumbnail
+														!faultyPicsumIDs.includes(result.id % 1000)
+															? `https://picsum.photos/id/${result.id % 1000}/200`
+															: `/img/nexus-logo.png`
 													}
 												/>
 												<source
 													srcSet={
-														'/img/nexus-fallback.webp'
+														'/img/nexus-logo.png'
 													}
-													type="image/webp"
+													type="image/png"
 												/>
 												<img alt="thumbnail" />
 											</picture>

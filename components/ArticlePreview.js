@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { convertDate } from '../Functions';
+import lipsum from '../data/lipsum';
+import faultyPicsumIDs from '../data/faultyPicsumIDs';
 
 /* Displays image on variable side */
 function ArticlePreview({ article, imageLeft, labyrinth }) {
@@ -9,10 +11,13 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 				{imageLeft && (
 					<span style={{ overflow: 'hidden' }}>
 						<picture>
-							<source srcSet={article.full_thumbnail} />
+							<source srcSet={!faultyPicsumIDs.includes(article.id % 1000)
+									? `https://picsum.photos/id/${article.id % 1000}/200`
+									: `/img/nexus-logo.png`
+								} />
 							<source
-								srcSet="/img/nexus-fallback.webp"
-								type="image/webp"
+								srcSet="/img/nexus-logo.png"
+								type="image/png"
 							/>
 							<Link href={`/articles/${article.id}`}>
 								<img alt="thumbnail" />
@@ -27,7 +32,11 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 								className={`article-preview-title${
 									labyrinth ? ' labyrinth-title' : ''
 								}`}>
-								{article.title}
+								{!/[\. ,]/.exec(lipsum[article.id%800])
+									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[article.id%800+1])
+										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
 							</a>
 						</Link>
 					</div>
@@ -35,11 +44,11 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						{convertDate(article.publish_date)} by{' '}
 						<Link href={`/authors/${article.author.id}`}>
 							<a className="article-preview-author">
-								{article.author.name}
+								{`Sample Author ${article.author.id}`}
 							</a>
 						</Link>
 					</div>
-					<div>{article.description}</div>
+					<div>{lipsum.slice(0, article.description.length)}</div>
 					<Link href={`/articles/${article.id}`}>
 						<a className="read-more">read more</a>
 					</Link>
@@ -47,10 +56,13 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 				{!imageLeft && (
 					<span style={{ overflow: 'hidden' }}>
 						<picture>
-							<source srcSet={article.full_thumbnail} />
+							<source srcSet={!faultyPicsumIDs.includes(article.id % 1000)
+									? `https://picsum.photos/id/${article.id % 1000}/200`
+									: `/img/nexus-logo.png`
+								} />
 							<source
-								srcSet="/img/nexus-fallback.webp"
-								type="image/webp"
+								srcSet="/img/nexus-logo.png"
+								type="image/png"
 							/>
 							<Link href={`/articles/${article.id}`}>
 								<img alt="thumbnail" />
@@ -62,10 +74,13 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 
 			<div className="article-preview-mobile">
 				<picture>
-					<source srcSet={article.mobile_thumbnail} />
+					<source srcSet={!faultyPicsumIDs.includes(article.id % 1000)
+									? `https://picsum.photos/id/${article.id % 1000}/200`
+									: `/img/nexus-logo.png`
+								} />
 					<source
-						srcSet="/img/nexus-fallback.webp"
-						type="image/webp"
+						srcSet="/img/nexus-logo.png"
+						type="image/png"
 					/>
 					<Link href={`/articles/${article.id}`}>
 						<img alt="thumbnail" style={{ maxWidth: '100%' }} />
@@ -78,7 +93,11 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 								className={`article-preview-title${
 									labyrinth ? ' labyrinth-title' : ''
 								}`}>
-								{article.title}
+								{!/[\. ,]/.exec(lipsum[article.id%800])
+									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[article.id%800+1])
+										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
 							</a>
 						</Link>
 					</div>
@@ -86,7 +105,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						{convertDate(article.publish_date)} by{' '}
 						<Link href={`/authors/${article.author.id}`}>
 							<a className="article-preview-author">
-								{article.author.name}
+								{`Sample Author ${article.author.id}`}
 							</a>
 						</Link>
 					</div>

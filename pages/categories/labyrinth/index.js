@@ -31,11 +31,15 @@ export async function getStaticProps() {
 function Labyrinth({ articles, footerData }) {
 	return (
 		<>
-			<img
+			{/* <img
+				className="labyrinth-logo"
 				src="https://dailynexus.com/wp-content/themes/dailynexus/graphics/labyrinthmasthead.png"
 				alt="labyrinth"
-				style={{ width: '100%', height: '20rem', objectFit: 'fill', backgroundColor: 'beige' }}
-			/>
+				style={{ width: '100%', height: '20rem', objectFit: 'fill', backgroundColor: 'beige', position: 'relative' }}
+			/> */}
+			<div style={{ width: '100%', height: '20rem', backgroundColor: 'beige', fontSize: '2.3rem', fontWeight: 'bold', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<span style={{ fontFamily: 'Times New Roman, serif', color: '#393939', textAlign: 'center', height: 'auto', pointerEvents: 'none' }}>THE LABYRINTH</span>
+			</div>
 			<div
 				className="labyrinth-nav"
 				style={{
@@ -53,11 +57,9 @@ function Labyrinth({ articles, footerData }) {
 					</Link>
 				</span>
 				<span>
-					<Link href="https://dailynexus.com/2018-04-25/resolutions-on-the-table/">
-						<a style={{ color: 'black', cursor: 'pointer' }}>
-							A.S. Senate Bill Tracker
-						</a>
-					</Link>
+					<span style={{ color: 'black', cursor: 'pointer' }} onClick={_=> alert('Image being taken to the Associated Students Senate page of bills')}>
+						A.S. Senate Bill Tracker
+					</span>
 					<Link href="/about">
 						<a
 							style={{
@@ -94,6 +96,17 @@ function Labyrinth({ articles, footerData }) {
 					position: absolute;
 					top: -5px;
 					left: 0;
+				}
+
+				.labyrinth-logo::after {
+					content: 'The Labyrinth';
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					background-color: beige;
+					z-index: 2;
 				}
 			`}</style>
 		</>

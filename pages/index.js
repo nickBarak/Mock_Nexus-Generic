@@ -5,12 +5,13 @@ import Layout from '../layouts';
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { uuid } from 'uuidv4';
+import lipsum from '../data/lipsum';
 
 function App({ categories, headlines }) {
 	useEffect(_ => {
 		if (!sessionStorage.getItem('noticeSeen')) {
 			alert(
-				'NOTICE:\n\nThis site is an imitation of that of the university newspaper at the University of California, Santa Barbara - the Daily Nexus - and exists solely to demonstrate the abilities of the creator with regard to software development. Express written permission is being sought to host this mock site during the interview process and the site will be removed thereafter. Please support the Daily Nexus and the creators of the original site by visiting www.dailynexus.com.'
+				'NOTICE:\n\nThis site is an imitation of that of the university newspaper at the University of California, Santa Barbara - the Daily Nexus - and exists solely to demonstrate the abilities of the creator with regard to software development. Please support the Daily Nexus and the creators of the original site by visiting www.dailynexus.com.'
 			);
 			sessionStorage.setItem('noticeSeen', true);
 		}
@@ -23,8 +24,8 @@ function App({ categories, headlines }) {
 					<Link href="/articles/1843">
 						<a className="banner">
 							<span>
-								LIVE: Updates on Coronavirus in Santa Barbara
-								County, on UCSB Operations
+								LIVE: {lipsum.slice(58, 58 + `Updates on Coronavirus in Santa Barbara
+								County, on UCSB Operations`.length)}
 							</span>
 							<span className="banner-read-more">
 								click to read more

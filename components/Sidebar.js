@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import { uuid } from 'uuidv4';
+import lipsum from '../data/lipsum';
+import { useRef } from 'react';
 
-const newsletterURL =
-	'https://dailynexus.us19.list-manage.com/subscribe?u=c7afb6c46dbbdcd7bb0bd8919&id=7220084bdc';
+// const newsletterURL =
+	// 'https://dailynexus.us19.list-manage.com/subscribe?u=c7afb6c46dbbdcd7bb0bd8919&id=7220084bdc';
 const facebookURL = 'https://www.facebook.com/dailynexus/';
-const archivesURL = 'https://dailynexus.com/archives/';
+// const archivesURL = 'https://dailynexus.com/archives/';
 
 const twitterURLS = {
 	main:
@@ -14,6 +16,8 @@ const twitterURLS = {
 };
 
 function Sidebar() {
+	const lipsumCount = useRef(0);
+
 	return (
 		<>
 			<ul className="sidebar">
@@ -41,7 +45,7 @@ function Sidebar() {
 					<Link href={`/articles/8081`}>
 						<div className="comic-of-the-week">
 							<img
-								src="/img/comic-of-the-week.webp"
+								src={`https://picsum.photos/id/${8081 % 1000}/200/300`}
 								alt="comic"
 							/>
 						</div>
@@ -49,11 +53,9 @@ function Sidebar() {
 				</li>
 				<li key="3">
 					{' '}
-					<Link href={newsletterURL}>
-						<button className="newsletter-button">
-							Subscribe to Our Newsletter
-						</button>
-					</Link>{' '}
+						<button className="newsletter-button" onClick={_=> alert('Imagine being taken to the Newsletter Sign-up page')}>
+							Subscribe to our Newsletter
+						</button>{' '}
 				</li>
 				{/* Sometimes doesn't show for unknown reason */}
 				<li key="4">
@@ -96,11 +98,9 @@ function Sidebar() {
 				</li>
 				<li key="6">
 					{' '}
-					<Link href={archivesURL}>
-						<a>
-							<img src="/img/print-edition.png" alt="archives" />
-						</a>
-					</Link>
+					<div style={{ textAlign: 'center', fontWeight: '900', fontSize: '2.15rem' }}>PRINT EDITION</div>
+					<div style={{ textAlign: 'center', fontSize: '1.05rem', fontWeight: 'bold', lineHeight: '1.75rem', letterSpacing: '3px', borderBottom: '3px solid black' }}>ONLINE</div>
+					<img src="https://img.favpng.com/2/2/14/computer-icons-magazine-newspaper-book-png-favpng-1iv9BKujQHtXQRGqfz7QwEZLD_t.jpg" alt="archives" onClick={_=> alert('Image being taken to the print archives')} style={{ cursor: 'pointer' }} />
 				</li>
 				<li key="7">
 					<div
@@ -108,7 +108,7 @@ function Sidebar() {
 							textAlign: 'center',
 							fontWeight: 'bold',
 							fontSize: '1.55rem',
-							marginTop: '3rem',
+							marginTop: '1.5rem',
 							marginBottom: '.6rem',
 						}}>
 						WEEKLY HOROSCOPES
@@ -121,11 +121,9 @@ function Sidebar() {
 							fontWeight: 'bold',
 						}}>
 						by{' '}
-						<Link href="https://twitter.com/dailynexopinion">
-							<a style={{ color: 'var(--link-hover)' }}>
-								@dailynexopinion
-							</a>
-						</Link>
+							<span style={{ color: 'var(--link-hover)', cursor: 'pointer' }} onClick={_=> alert('Imagine being taken to the Twitter page of the Opinion department')}>
+								@mocknexopinion
+							</span>
 					</div>
 					<br />
 					<hr />
@@ -137,7 +135,7 @@ function Sidebar() {
 							fontSize: '1.35rem',
 							fontWeight: 'bold',
 						}}>
-						The Signs as Summer Desserts
+						The Signs as Dummy Text
 					</div>
 					<br />
 					<hr />
@@ -147,68 +145,68 @@ function Sidebar() {
 							{
 								Aries: [
 									'March 21 - April 19',
-									'Yerba mate chocolate truffles',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Yerba mate chocolate truffles'.length),
 								],
 							},
 							{
 								Taurus: [
 									'April 20 - May 20',
-									'triple chocolate cake',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'triple chocolate cake'.length),
 								],
 							},
 							{
 								Gemini: [
 									'May 21 - June 20',
-									'Fireball pumpkin pie',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Fireball pumpkin pie'.length),
 								],
 							},
 							{
 								Cancer: [
 									'June 21 - July 22',
-									'Bucket of ice water',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Bucket of ice water'.length),
 								],
 							},
 							{ Leo: ['July 23 - August 22', "S'mores"] },
 							{
 								Virgo: [
 									'August 23 - September 22',
-									'Vodka mocha bundt cake',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Vodka mocha bundt cake'.length),
 								],
 							},
 							{
 								Libra: [
 									'September 23 - October 22',
-									'Chocolate-covered almonds',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Chocolate-covered almonds'.length),
 								],
 							},
 							{
 								Scorpio: [
 									'October 23 - November 21',
-									'Frozen yogurt with Hot Cheeto topping',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Frozen yogurt with Hot Cheeto topping'.length),
 								],
 							},
 							{
 								Sagittarius: [
 									'November 22 - December 21',
-									'Jar of mayonnaise',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Jar of mayonnaise'.length),
 								],
 							},
 							{
 								Capricorn: [
 									'December 22 - January 19',
-									'Rum cake',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Rum cake'.length),
 								],
 							},
 							{
 								Aquarius: [
 									'January 20 - February 18',
-									'Oatmeal raisin cookies',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Oatmeal raisin cookies'.length),
 								],
 							},
 							{
 								Pisces: [
 									'February 19 - March 20',
-									'Raspberry cheesecake',
+									lipsum.slice(lipsumCount.current, lipsumCount.current += 'Raspberry cheesecake'.length),
 								],
 							},
 						].map((sign, i) => {
@@ -291,7 +289,7 @@ function Sidebar() {
 					right: 0;
 					bottom: 0;
 					left: 0;
-					content: 'College Nostalgia';
+					content: 'College Memories';
 					color: white;
 					background-color: rgba(0, 0, 0, 0.5);
 					display: flex;

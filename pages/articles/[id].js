@@ -5,19 +5,34 @@ import CommentSection from '../../components/CommentSection';
 import { convertDate } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import lipsum from '../../data/lipsum';
+import faultyPicsumIDs from '../../data/faultyPicsumIDs';
 
 function Article({ article, author, related }) {
 	const router = useRouter();
 	if (router.isFallback)
 		return <div>Loading page...</div>
 
+	const imgID = useRef(0);
+	const lipsumCount = useRef(0);
+
 	/* Content styles must be added after render as article.content includes the HTML */
 	useEffect(_ => {
 		let contentDiv = document.getElementsByClassName(
 			'single-post-content'
 		)[0];
+
+		contentDiv.innerHTML = contentDiv.innerHTML.replace(' class="', ' className="');
+
+		[ ...contentDiv.getElementsByTagName('p') ].forEach(p =>
+			[ p, ...p.getElementsByTagName('span') ].forEach(span => {
+				lipsumCount.current += span.innerText.length;
+				span.innerText = lipsum.slice(lipsumCount.current - span.innerText.length, lipsumCount.current);
+			})
+		);
+
 		[
 			...contentDiv.getElementsByTagName('p'),
 			...contentDiv.getElementsByTagName('span'),
@@ -80,6 +95,12 @@ function Article({ article, author, related }) {
 			}
 		);
 
+		[...contentDiv.getElementsByTagName('img')].forEach(img => {
+			img.srcset = !faultyPicsumIDs.includes(Math.min(1000, (article.id % 1000)+imgID.current++))
+			? `https://picsum.photos/id/${Math.min(1000, (article.id % 1000) + imgID.current++)}/200/300`
+			: 'https://picsum.photos/200';
+			img.style.objectFit = 'cover';
+		});
 		[
 			document.getElementsByClassName('article-page-content')[0],
 			contentDiv,
@@ -88,9 +109,6 @@ function Article({ article, author, related }) {
 			...contentDiv.getElementsByTagName('img'),
 		].forEach(el => {
 			el.style.maxWidth = '100%';
-		});
-		[...contentDiv.getElementsByTagName('img')].forEach(img => {
-			img.style.objectFit = 'cover';
 		});
 		[...document.getElementsByClassName('share-icon')].forEach(icon => {
 			let [site] = [...icon.classList].filter(
@@ -150,13 +168,18 @@ function Article({ article, author, related }) {
 	return (
 		<>
 			<Layout>
+				<img></img>
 				<div className="article">
 					<div className="article-page-subcategory">
 						{article.subcategory}
 					</div>
 					<div className="article-page-details">
 						<div className="article-page-title">
-							{article.title}
+						{!/[\. ,]/.exec(lipsum[article.id%800])
+							? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+							: !/[\. ,]/.exec(lipsum[article.id%800+1])
+								? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+								: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
 						</div>
 						<div>
 							{(_ => {
@@ -181,7 +204,7 @@ function Article({ article, author, related }) {
 							by{' '}
 							<Link href={`/authors/${author.id}`}>
 								<a className="article-page-author-name">
-									{author.name}
+									{`Sample Author ${author.id}`}
 								</a>
 							</Link>
 						</div>
