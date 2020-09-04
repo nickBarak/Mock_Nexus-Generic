@@ -26,13 +26,11 @@ function Article({ article, author, related }) {
 
 		contentDiv.innerHTML = contentDiv.innerHTML.replace(' class="', ' className="');
 
-		[ ...contentDiv.getElementsByTagName('p') ].forEach(p =>
-			[ p, ...p.getElementsByTagName('span') ].forEach(span => {
-				lipsumCount.current += span.innerText.length;
-				span.innerText = lipsum.slice(lipsumCount.current - span.innerText.length, lipsumCount.current);
-			})
-		);
-
+		[ ...contentDiv.getElementsByTagName('p'), ...contentDiv.getElementsByTagName('span') ].forEach(node => {
+			lipsumCount.current += node.innerText.length;
+			node.innerText = lipsum.slice(lipsumCount.current - node.innerText.length, lipsumCount.current);
+		});
+		
 		[
 			...contentDiv.getElementsByTagName('p'),
 			...contentDiv.getElementsByTagName('span'),
