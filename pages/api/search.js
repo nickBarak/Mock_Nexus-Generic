@@ -21,18 +21,26 @@ export default async function (req, res) {
                     followers
                 FROM articles) x
                 WHERE
-                    LOWER(title) LIKE LOWER('%${req.query.value}%')
-                    OR LOWER(description) LIKE LOWER('%${req.query.value}%')
-                    OR LOWER(category) LIKE LOWER('%${req.query.value}%')
-                    OR LOWER(subcategory) LIKE LOWER('%${req.query.value}%')
-                    OR LOWER(content) LIKE LOWER('%${req.query.value}%')`
+                    LOWER(title) LIKE LOWER('% ${req.query.value}%')
+                    OR LOWER(title) LIKE LOWER('${req.query.value} %')
+                    OR LOWER(title) LIKE LOWER('% ${req.query.value}')
+                    OR LOWER(description) LIKE LOWER('% ${req.query.value} %')
+                    OR LOWER(description) LIKE LOWER('${req.query.value} %')
+                    OR LOWER(description) LIKE LOWER('% ${req.query.value}')
+                    OR LOWER(category) = LOWER('${req.query.value}')
+                    OR LOWER(subcategory) = LOWER('${req.query.value}')
+                    OR LOWER(content) LIKE LOWER('% ${req.query.value} %')`
 		);
 		const authorArticleIDs = await queryDB(
-			`SELECT articles FROM authors WHERE LOWER(name) LIKE LOWER('%${req.query.value}%')`
+			`SELECT articles FROM authors
+			WHERE
+				LOWER(name) LIKE LOWER('% ${req.query.value} %')
+				OR LOWER(name) LIKE LOWER('${req.query.value} %')
+				OR LOWER(name) LIKE LOWER('% ${req.query.value}')`
 		);
 		const authorResults = await queryDB(
 			'SELECT * FROM articles WHERE id = ANY($1)',
-			[authorArticleIDs]
+			[authorArticleIDs.reduce((acc, cur) => [...acc, ...cur.articles], [])]
 		);
 		res.json(
 			results
