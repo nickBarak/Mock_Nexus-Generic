@@ -45,3 +45,11 @@ export function copyToClipboard(text) {
     el.select();
     document.execCommand('copy');
 }
+
+export function formatSentence(text) {
+    return (!/[\. ,]/.exec(text) || !text[1])
+        ? text[0].toUpperCase() + ((text[1]) ? text[1].toLowerCase() + text.slice(2, text.length) : '')
+        : (!/[\. ,]/.exec(text[1]) || !text[2])
+            ? text[1].toUpperCase() + ((text[2]) ? text[2].toLowerCase() + text.slice(text[3], text.length) : '')
+            : text[2].toUpperCase() + ((text[3]) ? text[3].toLowerCase() + text.slice(text[4], text.length) : '')
+}

@@ -210,9 +210,6 @@ function Nav() {
 										.then(res => res.json())
 										.then(
 											rows =>
-												console.log(
-													JSON.stringify(rows)
-												) ||
 												/* First index for sorting by relevance, second index for sorting by date. Need separate values to avoid overwrite and only sort once */
 												setSearchResults([
 													rows,
@@ -241,6 +238,28 @@ function Nav() {
 												setSearchError(
 													'Error fetching results'
 												)
+										);
+
+									/* Second call for lengthier queries */
+									fetch(
+										client +
+											'/api/search-extended?value=' +
+											e.target.value
+									)
+										.then(res => res.json())
+										.then(
+											rows =>
+												setSearchResults([
+													[...searchResults[0], ...rows],
+													[...searchResults[1], ...rows].sort(
+														(
+															{ publish_date: a },
+															{ publish_date: b }
+														) =>
+															new Date(b) -
+															new Date(a)
+													)
+												])
 										);
 
 									/* Lower background opacity, raise modal opacity, prevent scrolling background while allowing scrolling of modal. Bottom ad remains visible (if it was) */
@@ -367,11 +386,7 @@ function Nav() {
 												fontSize: '1rem',
 												fontFamily: 'Arial, sans-serif',
 											}}>
-											{!/[\. ,]/.exec(lipsum[result.id%800])
-												? lipsum[result.id%800].toUpperCase() + lipsum.slice(result.id % 800+1, result.id % 800 + result.title.length+1)
-												: !/[\. ,]/.exec(lipsum[result.id%800+1])
-													? lipsum[result.id%800+1].toUpperCase() + lipsum.slice(result.id % 800+2, result.id % 800 + result.title.length+2)
-													: lipsum[result.id%800+2].toUpperCase() + lipsum.slice(result.id % 800+3, result.id % 800 + result.title.length+3)}
+											{formatSentence(lipsum.slice(result.id % 800, result.title.length))}
 										</a>
 									</Link>
 								</div>

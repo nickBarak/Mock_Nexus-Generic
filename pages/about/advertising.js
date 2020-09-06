@@ -3,6 +3,7 @@ import Link from 'next/link';
 import About from '../../components/About';
 import lipsum from '../../data/lipsum';
 import { useRef } from 'react';
+import { formatSentence } from '../../Functions';
 
 function Advertising() {
 	const lipsumCount = useRef(0);
@@ -11,31 +12,31 @@ function Advertising() {
 		<Layout>
 			<About heading="Advertising">
 				<div>
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Thank you for your interest in advertising with the`.length)}{' '}
-					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span>. {lipsum.slice(lipsumCount.current, lipsumCount.current += `As
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `Thank you for your interest in advertising with the`.length))}{' '}
+					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span>. {formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `As
 					you’ll see, it pays to reach out to UCSB students, and no
 					matter your budget, our student sales representatives can
-					put together an effective advertising strategy for you`.length)}.
+					put together an effective advertising strategy for you`.length))}.
 					<br />
 					<br />
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Every day, the`.length)}{' '}
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `Every day, the`.length))}{' '}
 					<span style={{ fontStyle: 'italic' }}>
 						Daily Nexus
 					</span>{' '}
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `reaches UCSB’s 22,218 students — plus more than 6,000
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `reaches UCSB’s 22,218 students — plus more than 6,000
 					full-time faculty and staff. Our competitive advertising
-					rates make the`.length)}{' '}
-					<span style={{ fontStyle: 'italic' }}>Nexus</span> {lipsum.slice(lipsumCount.current, lipsumCount.current += `your best
+					rates make the`.length))}{' '}
+					<span style={{ fontStyle: 'italic' }}>Nexus</span> {formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `your best
 					value to reach the Central Coast’s most desirable consumer
-					audience`.length)}.
+					audience`.length))}.
 					<br />
 					<br />
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Did you know that a 2008 survey of`.length)}{' '}
-					<span style={{ fontStyle: 'italic' }}>Nexus</span> {lipsum.slice(lipsumCount.current, lipsumCount.current += `readers
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `Did you know that a 2008 survey of`.length))}{' '}
+					<span style={{ fontStyle: 'italic' }}>Nexus</span> {formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `readers
 					shows that 60 percent of undergraduates have personal
 					expense incomes of at least $300 a month — and UCSB students
 					spend their disposable funds in ways that will benefit your
-					business`.length)}:
+					business`.length))}:
 					<ul style={{ margin: '1rem 0 1rem 2rem' }}>
 						<li key="0" style={{ listStyleType: 'disc' }}>
 							94% {lipsum.slice(lipsumCount.current, lipsumCount.current += `go out to a restaurant at least once a month,
@@ -61,17 +62,17 @@ function Advertising() {
 					</ul>
 				</div>
 				<div>
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `No artwork? No problem. Our designers are happy to work with
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `No artwork? No problem. Our designers are happy to work with
 					you to create custom print and online advertisements. For
-					all advertising inquiries, call (805) 893-3828`.length)}.
+					all advertising inquiries, call (805) 893-3828`.length))}.
 					<br />
 					<br />
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `Please see our “Rates and Services” and “Classified Ads”
-					pages for more information, or click`.length)}{' '}
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `Please see our “Rates and Services” and “Classified Ads”
+					pages for more information, or click`.length))}{' '}
 					<Link href="">
 						<a style={{ color: 'var(--link-hover)' }}>here</a>
 					</Link>{' '}
-					{lipsum.slice(lipsumCount.current, lipsumCount.current += `to download a printable PDF of our Rate Card`.length)}.
+					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `to download a printable PDF of our Rate Card`.length))}.
 					<br />
 					<br />
 				</div>

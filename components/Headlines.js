@@ -62,11 +62,11 @@ function Headlines({ articles }) {
 									</div>
 									<Link href={`/articles/${article.id}`}>
 										<a className="article-preview-title">
-										{!/[\. ,]/.exec(lipsum[articles[0].id%800])
-									? lipsum[articles[0].id%800].toUpperCase() + lipsum.slice(articles[0].id % 800+1, articles[0].id % 800 + article.title.length+1)
-									: !/[\. ,]/.exec(lipsum[articles[0].id%800+1])
-										? lipsum[articles[0].id%800+1].toUpperCase() + lipsum.slice(articles[0].id % 800+2, articles[0].id % 800 + article.title.length+2)
-										: lipsum[articles[0].id%800+2].toUpperCase() + lipsum.slice(articles[0].id % 800+3, articles[0].id % 800 + article.title.length+3)}
+										{!/[\. ,]/.exec(lipsum[article.id%800])
+									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
+									: !/[\. ,]/.exec(lipsum[article.id%800+1])
+										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
+										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
 										</a>
 									</Link>
 									<div className="date-and-author">

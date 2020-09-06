@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import lipsum from '../data/lipsum';
+import { formatSentence } from '../Functions';
 
 function AboutTheAuthor({ author }) {
 	return (
@@ -17,7 +18,12 @@ function AboutTheAuthor({ author }) {
 						<a>{`Sample Author ${author.id}`}</a>
 					</Link>
 				</div>
-				<div>{author.biography === 'Not available' ? 'Biography not available' : lipsum.slice(0, author.biography.length)}</div>
+				<div>
+					{author.biography === 'Not available'
+						? 'Biography not available'
+						: formatSentence(lipsum.slice(author.id % 800, author.biography.length))
+					}
+				</div>
 			</div>
 			<style jsx>{`
 				.about-the-author {

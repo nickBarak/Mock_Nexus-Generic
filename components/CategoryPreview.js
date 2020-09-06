@@ -17,11 +17,7 @@ function CategoryPreview({ category: { title, articles } }) {
 						<div style={{ fontWeight: 600, fontSize: '1.2rem' }}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">
-								{!/[\. ,]/.exec(lipsum[article.id%800])
-									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
-									: !/[\. ,]/.exec(lipsum[article.id%800+1])
-										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
-										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
+								{formatSentence(lipsum.slice(article.id % 800, article.title.length))}
 								</a>
 							</Link>
 						</div>
@@ -64,7 +60,9 @@ function CategoryPreview({ category: { title, articles } }) {
 										marginLeft: '.4rem',
 										fontSize: '.9rem',
 									}}>
-									<span>{lipsum.slice(0, article.description.length)}</span>
+									<span>
+									{formatSentence(lipsum.slice(article.id % 800, article.description.length))}
+									</span>
 									<Link href={`/articles/${article.id}`}>
 										<a className="read-more">read more</a>
 									</Link>

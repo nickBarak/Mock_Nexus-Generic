@@ -10,15 +10,9 @@ export default async function (req, res) {
                     category,
                     subcategory,
                     publish_date,
-                    full_thumbnail,
-                    mobile_thumbnail,
                     description,
                     content,
-                    src_url,
-                    author,
-                    related,
-                    comments,
-                    followers
+                    author
                 FROM articles) x
                 WHERE
                     LOWER(title) LIKE LOWER('% ${req.query.value}%')
@@ -28,29 +22,9 @@ export default async function (req, res) {
                     OR LOWER(description) LIKE LOWER('${req.query.value} %')
                     OR LOWER(description) LIKE LOWER('% ${req.query.value}')
                     OR LOWER(category) = LOWER('${req.query.value}')
-                    OR LOWER(subcategory) = LOWER('${req.query.value}')
-                    OR LOWER(content) LIKE LOWER('% ${req.query.value} %')`
+                    OR LOWER(subcategory) = LOWER('${req.query.value}')`
 		);
-		const authorArticleIDs = await queryDB(
-			`SELECT articles FROM authors
-			WHERE
-				LOWER(name) LIKE LOWER('% ${req.query.value} %')
-				OR LOWER(name) LIKE LOWER('${req.query.value} %')
-				OR LOWER(name) LIKE LOWER('% ${req.query.value}')`
-		);
-		const authorResults = await queryDB(
-			'SELECT * FROM articles WHERE id = ANY($1)',
-			[authorArticleIDs.reduce((acc, cur) => [...acc, ...cur.articles], [])]
-		);
-		res.json(
-			results
-				? authorResults
-					? [...results, ...authorResults]
-					: results
-				: authorResults
-				? authorResults
-				: []
-		);
+		res.json( results || [] );
 	} catch (e) {
 		console.log(e);
 	}

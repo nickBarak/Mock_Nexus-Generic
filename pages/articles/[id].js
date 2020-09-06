@@ -24,8 +24,6 @@ function Article({ article, author, related }) {
 			'single-post-content'
 		)[0];
 
-		contentDiv.innerHTML = contentDiv.innerHTML.replace(' class="', ' className="');
-
 		function lipsumify(node) {
 			if (node.hasChildNodes()) node.childNodes.forEach(lipsumify);
 			else if (node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 1 && node.textContent.trim() !== 'Share this:') {

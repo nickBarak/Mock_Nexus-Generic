@@ -14,11 +14,7 @@ function Related({ articles }) {
 					{articles.map((article, i) => (
 						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
-								<a>{!/[\. ,]/.exec(lipsum[article.id%800])
-									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
-									: !/[\. ,]/.exec(lipsum[article.id%800+1])
-										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
-										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}</a>
+								<a>{formatSentence(lipsum.slice(article.id % 800, article.title.length))}</a>
 							</Link>
 							<div>{convertDate(article.publish_date)}</div>
 							<div>In "{article.category}"</div>

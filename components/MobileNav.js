@@ -234,7 +234,7 @@ function MobileNav({ scrollY }) {
 					left: 0;
 					right: 1.75rem;
 					transform: translateX(-120%);
-					transition: transform 180ms ease-out;
+					transition: transform 210ms ease-out;
 					z-index: 20;
 				}
 
