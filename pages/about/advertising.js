@@ -13,7 +13,7 @@ function Advertising() {
 			<About heading="Advertising">
 				<div>
 					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `Thank you for your interest in advertising with the`.length))}{' '}
-					<span style={{ fontStyle: 'italic' }}>Daily Nexus</span>. {formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `As
+					<span style={{ fontStyle: 'italic' }}>Mock Nexus</span>. {formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `As
 					you’ll see, it pays to reach out to UCSB students, and no
 					matter your budget, our student sales representatives can
 					put together an effective advertising strategy for you`.length))}.
@@ -21,7 +21,7 @@ function Advertising() {
 					<br />
 					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `Every day, the`.length))}{' '}
 					<span style={{ fontStyle: 'italic' }}>
-						Daily Nexus
+						Mock Nexus
 					</span>{' '}
 					{formatSentence(lipsum.slice(lipsumCount.current, lipsumCount.current += `reaches UCSB’s 22,218 students — plus more than 6,000
 					full-time faculty and staff. Our competitive advertising
