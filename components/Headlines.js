@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { convertDate } from '../Functions';
+import { convertDate, formatSentence } from '../Functions';
 import { uuid } from 'uuidv4';
 import lipsum from '../data/lipsum';
 import faultyPicsumIDs from '../data/faultyPicsumIDs';
@@ -28,11 +28,7 @@ function Headlines({ articles }) {
 						</div>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="article-preview-title">
-							{!/[\. ,]/.exec(lipsum[articles[0].id%800])
-									? lipsum[articles[0].id%800].toUpperCase() + lipsum.slice(articles[0].id % 800+1, articles[0].id % 800 + articles[0].title.length+1)
-									: !/[\. ,]/.exec(lipsum[articles[0].id%800+1])
-										? lipsum[articles[0].id%800+1].toUpperCase() + lipsum.slice(articles[0].id % 800+2, articles[0].id % 800 + articles[0].title.length+2)
-										: lipsum[articles[0].id%800+2].toUpperCase() + lipsum.slice(articles[0].id % 800+3, articles[0].id % 800 + articles[0].title.length+3)}
+							{formatSentence(articles[0].id % 800, articles[0].id % 800 + articles[0].title.length)}
 							</a>
 						</Link>
 						<div className="date-and-author">
@@ -62,11 +58,7 @@ function Headlines({ articles }) {
 									</div>
 									<Link href={`/articles/${article.id}`}>
 										<a className="article-preview-title">
-										{!/[\. ,]/.exec(lipsum[article.id%800])
-									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
-									: !/[\. ,]/.exec(lipsum[article.id%800+1])
-										? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
-										: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
+										{formatSentence(article.id % 800, article.id % 800 + article.title.length)}
 										</a>
 									</Link>
 									<div className="date-and-author">
@@ -100,11 +92,7 @@ function Headlines({ articles }) {
 						</Link>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="article-preview-title">
-							{!/[\. ,]/.exec(lipsum[articles[0].id%800])
-									? lipsum[articles[0].id%800].toUpperCase() + lipsum.slice(articles[0].id % 800+1, articles[0].id % 800 + articles[0].title.length+1)
-									: !/[\. ,]/.exec(lipsum[articles[0].id%800+1])
-										? lipsum[articles[0].id%800+1] + lipsum.slice(articles[0].id % 800+2, articles[0].id % 800 + articles[0].title.length+2)
-										: lipsum[articles[0].id%800+2] + lipsum.slice(articles[0].id % 800+3, articles[0].id % 800 + articles[0].title.length+3)}
+							{formatSentence(articles[0].id % 800, articles[0].id % 800 + articles[0].title.length)}
 							</a>
 						</Link>
 						<div className="date-and-author">
@@ -126,11 +114,7 @@ function Headlines({ articles }) {
 						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">
-								{!/[\. ,]/.exec(lipsum[article.id%800])
-									? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
-									: !/[\. ,]/.exec(lipsum[article.id%800+1])
-										? lipsum[article.id%800+1] + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
-										: lipsum[article.id%800+2] + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
+								{formatSentence(article.id % 800, article.id % 800 + article.title.length)}
 								</a>
 							</Link>
 							<div className="date-and-author">

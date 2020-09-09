@@ -138,7 +138,8 @@ function CommentSection({
 										.then(res => res.json())
 										.then(id => {
 											document.getElementById(id).scrollIntoView();
-											setTimeout(_=> window.scrollTo(0, window.scrollY - 5), 500);
+											setTimeout(_=> window.scrollTo(0, window.scrollY - (window.innerWidth > 650
+												? 5 : 60)), 500);
 										});
 								}}></i>
 						</li>
@@ -151,7 +152,8 @@ function CommentSection({
 										.then(res => res.json())
 										.then(id => {
 											document.getElementById(id).scrollIntoView();
-											setTimeout(_=> window.scrollTo(0, window.scrollY - 5), 500);
+											setTimeout(_=> window.scrollTo(0, window.scrollY - (window.innerWidth > 650
+												? 5 : 60)), 500);
 										});
 								}}></i>
 						</li>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { convertDate } from '../Functions';
+import { convertDate, formatSentence } from '../Functions';
 import { uuid } from 'uuidv4';
 import lipsum from '../data/lipsum';
 
@@ -14,7 +14,7 @@ function Related({ articles }) {
 					{articles.map((article, i) => (
 						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
-								<a>{formatSentence(lipsum.slice(article.id % 800, article.title.length))}</a>
+								<a>{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}</a>
 							</Link>
 							<div>{convertDate(article.publish_date)}</div>
 							<div>In "{article.category}"</div>

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { convertDate, convertToPath } from '../Functions';
+import { convertDate, convertToPath, formatSentence } from '../Functions';
 import { uuid } from 'uuidv4';
 import lipsum from '../data/lipsum';
 import faultyPicsumIDs from '../data/faultyPicsumIDs';
@@ -17,7 +17,7 @@ function CategoryPreview({ category: { title, articles } }) {
 						<div style={{ fontWeight: 600, fontSize: '1.2rem' }}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">
-								{formatSentence(lipsum.slice(article.id % 800, article.title.length))}
+								{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}
 								</a>
 							</Link>
 						</div>
@@ -61,7 +61,7 @@ function CategoryPreview({ category: { title, articles } }) {
 										fontSize: '.9rem',
 									}}>
 									<span>
-									{formatSentence(lipsum.slice(article.id % 800, article.description.length))}
+									{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.description.length))}
 									</span>
 									<Link href={`/articles/${article.id}`}>
 										<a className="read-more">read more</a>

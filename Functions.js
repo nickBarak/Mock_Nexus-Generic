@@ -47,6 +47,8 @@ export function copyToClipboard(text) {
 }
 
 export function formatSentence(text) {
+    if (!text) return '';
+    text = text.toString();
     return (!/[\. ,]/.exec(text) || !text[1])
         ? text[0].toUpperCase() + ((text[1]) ? text[1].toLowerCase() + text.slice(2, text.length) : '')
         : (!/[\. ,]/.exec(text[1]) || !text[2])

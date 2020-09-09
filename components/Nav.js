@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { convertToPath, convertDate } from '../Functions';
+import { convertToPath, convertDate, formatSentence } from '../Functions';
 import 'isomorphic-unfetch';
 import { useState, useEffect, useRef } from 'react';
 import { client } from '../URLs';

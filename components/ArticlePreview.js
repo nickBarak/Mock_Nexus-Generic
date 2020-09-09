@@ -32,7 +32,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 								className={`article-preview-title${
 									labyrinth ? ' labyrinth-title' : ''
 								}`}>
-								{formatSentence(lipsum.slice(article.id % 800, article.title.length))}
+								{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}
 							</a>
 						</Link>
 					</div>
@@ -45,7 +45,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 						</Link>
 					</div>
 					<div>
-						{formatSentence(lipsum.slice(author.id % 800, author.biography.length))}
+						{formatSentence(lipsum.slice(article.author.id % 800, article.author.id % 800 + article.description.length))}
 					</div>
 					<Link href={`/articles/${article.id}`}>
 						<a className="read-more">read more</a>
@@ -91,7 +91,7 @@ function ArticlePreview({ article, imageLeft, labyrinth }) {
 								className={`article-preview-title${
 									labyrinth ? ' labyrinth-title' : ''
 								}`}>
-								{formatSentence(lipsum.slice(article.id % 800, article.title.length))}
+								{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}
 							</a>
 						</Link>
 					</div>
