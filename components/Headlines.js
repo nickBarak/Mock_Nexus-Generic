@@ -28,7 +28,7 @@ function Headlines({ articles }) {
 						</div>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="article-preview-title">
-							{formatSentence(articles[0].id % 800, articles[0].id % 800 + articles[0].title.length)}
+							{formatSentence(lipsum.slice(articles[0].id % 800, articles[0].id % 800 + articles[0].title.length))}
 							</a>
 						</Link>
 						<div className="date-and-author">
@@ -58,7 +58,7 @@ function Headlines({ articles }) {
 									</div>
 									<Link href={`/articles/${article.id}`}>
 										<a className="article-preview-title">
-										{formatSentence(article.id % 800, article.id % 800 + article.title.length)}
+										{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}
 										</a>
 									</Link>
 									<div className="date-and-author">
@@ -92,7 +92,7 @@ function Headlines({ articles }) {
 						</Link>
 						<Link href={`/articles/${articles[0].id}`}>
 							<a className="article-preview-title">
-							{formatSentence(articles[0].id % 800, articles[0].id % 800 + articles[0].title.length)}
+							{formatSentence(lipsum.slice(articles[0].id % 800, articles[0].id % 800 + articles[0].title.length))}
 							</a>
 						</Link>
 						<div className="date-and-author">
@@ -114,7 +114,7 @@ function Headlines({ articles }) {
 						<li key={uuid()}>
 							<Link href={`/articles/${article.id}`}>
 								<a className="article-preview-title">
-								{formatSentence(article.id % 800, article.id % 800 + article.title.length)}
+								{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}
 								</a>
 							</Link>
 							<div className="date-and-author">
