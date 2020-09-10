@@ -19,7 +19,7 @@ function AboutTheAuthor({ author }) {
 					</Link>
 				</div>
 				<div>
-					{author.biography === 'Not available'
+					{(author.biography === 'Not available' || !author.biography)
 						? 'Biography not available'
 						: formatSentence(lipsum.slice(author.id % 800, author.biography.length))
 					}
