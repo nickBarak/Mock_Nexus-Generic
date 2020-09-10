@@ -2,7 +2,7 @@ import Link from 'next/link';
 import AboutTheAuthor from '../../components/AboutTheAuthor';
 import Related from '../../components/Related';
 import CommentSection from '../../components/CommentSection';
-import { convertDate } from '../../Functions';
+import { convertDate, formatSentence } from '../../Functions';
 import { queryDB } from '../../db';
 import Layout from '../../layouts';
 import { useRef, useEffect } from 'react';
@@ -180,11 +180,7 @@ function Article({ article, author, related }) {
 					</div>
 					<div className="article-page-details">
 						<div className="article-page-title">
-						{!/[\. ,]/.exec(lipsum[article.id%800])
-							? lipsum[article.id%800].toUpperCase() + lipsum.slice(article.id % 800+1, article.id % 800 + article.title.length+1)
-							: !/[\. ,]/.exec(lipsum[article.id%800+1])
-								? lipsum[article.id%800+1].toUpperCase() + lipsum.slice(article.id % 800+2, article.id % 800 + article.title.length+2)
-								: lipsum[article.id%800+2].toUpperCase() + lipsum.slice(article.id % 800+3, article.id % 800 + article.title.length+3)}
+						{formatSentence(lipsum.slice(article.id % 800, article.id % 800 + article.title.length))}
 						</div>
 						<div>
 							{(_ => {
