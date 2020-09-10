@@ -386,7 +386,7 @@ function Nav() {
 												fontSize: '1rem',
 												fontFamily: 'Arial, sans-serif',
 											}}>
-											{formatSentence(lipsum.slice(result.id % 800, result.title.length))}
+											{formatSentence(lipsum.slice(result.id % 800, result.id % 800 + result.title.length))}
 										</a>
 									</Link>
 								</div>
@@ -433,7 +433,7 @@ function Nav() {
 											...{' '}
 										</span>
 										{result.description &&
-											result.description.slice(0, 300) +
+											formatSentence(lipsum.slice(result.id % 800, result.id % 800 + Math.min(result.description.length, 300))) +
 												(result.description.length > 300
 													? '...'
 													: '')}
